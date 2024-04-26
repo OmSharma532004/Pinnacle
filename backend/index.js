@@ -4,12 +4,16 @@ const PORT = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 const { MongoClient } = require('mongodb');
 const dotenv=require('dotenv');
+const cors=require('cors');
 dotenv.config();
 
 
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+
+// Middleware to enable CORS
+app.use(cors());
 
 // Example route
 app.get('/', (req, res) => {

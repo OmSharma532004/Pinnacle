@@ -15,7 +15,7 @@ const Home=(()=>{
 {/* Section1 */}
 <div className=' bg-white flex flex-col w-full min-h-screen items-center justify-center'>
   <div className=' p-4 mt-2 mb-[100px]'>
-   <img className=' animate-spin-slow' src={top} width={100} alt='logo' />
+   <img className=' animate-spin' src={top} width={100} alt='logo' />
       </div>
       <div className=' font-mono text-4xl mb-7'>HELLO & WELCOME TO</div>
       <div className=' flex-col flex items-center justify-center'>

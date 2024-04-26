@@ -7,6 +7,8 @@ import Home from './pages/Home'
 import Navbar from './components/Navbar'
 import Login from './pages/login'
 import Signup from './pages/signin'
+import EnterOtp from './pages/enterOtp'
+import Dashboard from './pages/dashboard'
 
 function App() {
 
@@ -19,6 +21,8 @@ function App() {
 <Route path='/' element={<Home/>} />
 <Route path='/login' element={<Login/>} />
 <Route path='/signup' element={<Signup/>} />
+<Route path='/otp' element={<EnterOtp/>} />
+<Route path='/dashboard' element={<Dashboard/>} />
 <Route path='*' element={<div className=' flex flex-col items-center bg-gray-700 text-white justify-center h-screen w-screen'>
 <h1 className=' text-3xl '>404</h1>
 <h2 className=' text-4xl'>Page not found</h2>

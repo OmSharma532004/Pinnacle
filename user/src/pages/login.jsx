@@ -4,13 +4,41 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const login=async()=>{
+    const res= await fetch('http://localhost:3000/api/signin',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+            email,password
+        })
+    });
+    const data= await res.json();
+    if(data.status===400 || !data){
+        alert('Invalid Login')
+    }
+    else{
+        alert('Login Successful')
+        setEmail('');
+        setPassword('');
+        console.log(data)
+        localStorage.setItem('token',data.token)
+        localStorage.setItem('user',JSON.stringify(data.user))
+        window.location.href='/dashboard'
+
+}
+}
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(email,password);
+    login();
     // Handle login logic here
   };
 
   return (
-  <div className=' bg-gray-600 w-screen  flex flex-col items-center justify-center min-h-screen'>
+  <div className=' bg-black w-screen overflow-y-hidden  flex flex-col items-center justify-center min-h-screen'>
       <div className=" flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
