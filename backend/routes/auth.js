@@ -7,6 +7,7 @@ const { signup, signin ,sendotp} = require('../controllers/auth'); // Import sig
 // Signup route
 router.post('/signup', signup);
 
+
 // Signin route
 router.post('/signin', signin);
 //sendotp

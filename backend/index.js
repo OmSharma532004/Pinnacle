@@ -31,6 +31,12 @@ const authRoutes = require('./routes/auth');
 // Use routes
 app.use('/api', authRoutes);
 
+// Import routes
+const materialAdditionRoutes = require('./routes/MaterialAddition');
+
+// Use routes
+app.use('/api', materialAdditionRoutes);
+
 
 
 // Start the server
