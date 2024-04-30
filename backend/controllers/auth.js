@@ -13,8 +13,8 @@ const OTP = require('../models/OTP');
 
   module.exports.signup= async(req,res)=>{
     try{
-        const {Name,email,password,phoneNo,address,otp}=req.body;
-        if(!Name || !email || !password || !phoneNo || !address){
+        const {Name,email,password,phoneNo,otp}=req.body;
+        if(!Name || !email || !password || !phoneNo ){
             return res.status(400).json({
                 success:false,
                 message:"Please enter all fields"
@@ -52,8 +52,7 @@ const OTP = require('../models/OTP');
             Name,
             email,
             password:hashedPassword,
-            phoneNo,
-            address
+            phoneNo
         });
         await user.save();
         return res.status(200).json({

@@ -1,10 +1,23 @@
 import React, { useEffect, useState } from 'react';
-
+import toast from 'react-hot-toast';
 const Add = () => {
     const [category, setCategory] = useState('');
+    const [existingCategories, setExistingCategories] = useState([]);
+    const handleCategorySearch = (e) => {
+        const query = e.target.value;
+        setCategory(query);
+        const filtered = categories.categories.filter((category) =>
+          category.name.toLowerCase().includes(query.toLowerCase())
+        );
+        setExistingCategories(filtered.map((category) => category.name));
+
+      };
+      const [selectedCategory, setSelectedCategory] = useState(''); 
+      
     const [item, setItem] = useState(
        { name: '',
         price: '',
+        city:'',
         description: '',
         category: '',}
     );
@@ -17,7 +30,14 @@ const Add = () => {
     const [categories, setCategories] = useState([]);
 
   
+    const [filteredCategories, setFilteredCategories] = useState([]);
 
+    const handleSearch = (searchQuery) => {
+        const filtered = categories.categories.filter((category) =>
+          category.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setFilteredCategories(filtered);
+      };
     const fetchAddCategory = async (category) => {
         try{
             const response = await fetch('http://localhost:3000/api/category/add', {
@@ -29,10 +49,10 @@ const Add = () => {
         });
         const data = await response.json();
        if(response.ok){
-           alert('Category added successfully');
+            toast.success('Category added successfully');
          }
          else{
-            alert('Error adding category');
+            toast.error('Error adding category');
          }
         console.log(data);
         }
@@ -60,6 +80,7 @@ const Add = () => {
                 console.log('Error fetching categories');
             }
             console.log(data);
+            
 
         }
         catch(error){
@@ -78,10 +99,10 @@ const Add = () => {
         });
         const data = await response.json();
         if(response.ok){
-            alert('Item added successfully');
+            toast.success('Item added successfully');
         }
         else{
-            alert('Error adding item');
+            toast.error('Error adding item');
         }
         console.log(data);
         }
@@ -105,27 +126,45 @@ const Add = () => {
             <div className="mb-6">
                 <h2 className="text-xl font-bold mb-2">Add Category</h2>
                 <input
-                    type="text"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
-                    placeholder="Enter category name"
-                />
-                <button
-                    onClick={handleAddCategory}
-                    className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-                >
-                    Add Category
-                </button>
+      type="text"
+      value={category}
+      onChange={handleCategorySearch}
+      className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+      placeholder="Enter category name"
+    />
+    <button onClick={handleAddCategory} className="bg-blue-500 text-white py-2 px-4 rounded-md ml-2">
+      Add Category
+    </button>
+    {
+        console.log('Existing categories:', existingCategories) 
+    }
+    {existingCategories.length > 0 && (
+      <div className="mt-2">
+        <p className="font-bold">Categories Already created:</p>
+        <ul>
+          {existingCategories.map((result) => (
+            <li key={result}>{result}</li>
+          ))}
+        </ul>
+      </div>
+    )}
             </div>
             <div>
                 <h2 className="text-xl font-bold mb-2">Add Item to Category</h2>
+
                 <input
                     type="text"
                     value={item.name}
                     onChange={(e) => setItem({ ...item, name: e.target.value })}
                     className="w-full border border-gray-300 rounded-md py-2 px-3 mb-2 focus:outline-none focus:border-blue-500"
                     placeholder="Enter item name"
+                />
+                <input
+                    type="text"
+                    value={item.city}
+                    onChange={(e) => setItem({ ...item, city: e.target.value })}
+                    className="w-full border border-gray-300 rounded-md py-2 px-3 mb-2 focus:outline-none focus:border-blue-500"
+                    placeholder="Enter city"
                 />
                 <input
                     type="number"
@@ -140,26 +179,36 @@ const Add = () => {
                     className="w-full border border-gray-300 rounded-md py-2 px-3 mb-2 focus:outline-none focus:border-blue-500"
                     placeholder="Enter item description"
                 ></textarea>
-                <select
-                    value={item.category}
-                    onChange={(e) => setItem({ ...item, category: e.target.value })}
-                 
-                    className="w-full border border-gray-300 rounded-md py-2 px-3 mb-2 focus:outline-none focus:border-blue-500"
-                >
-                  {
-                    
-                   categories.categories?(<>
-                   {
-                          categories.categories.map((category) => (
-                            <option key={category._id} value={category._id}>
-                                {category.name}
-                            </option>
-                        ))
-                   }
-                   </>):(<></>)
-              
-                  }
-                </select>
+               <div>
+    <input
+      type="text"
+      value={selectedCategory}
+      placeholder="Search category"
+      onChange={(e) => {
+        handleSearch(e.target.value);
+        setSelectedCategory(e.target.value);
+      }}
+      className="w-full border border-gray-300 rounded-md py-2 px-3 mb-2 focus:outline-none focus:border-blue-500"
+    />
+    {filteredCategories.length > 0 ? (
+      <div className="border border-gray-300 rounded-md py-2 px-3 mb-2">
+      {filteredCategories.map((category) => (
+        <div
+          key={category._id}
+          onClick={() => {
+            setItem({ ...item, category: category._id });
+            setSelectedCategory(category.name)
+          }}
+          className="cursor-pointer hover:bg-gray-200 py-1 px-2"
+        >
+          {category.name}
+        </div>
+      ))}
+    </div>
+    ) : (
+      <p>No matching categories found.</p>
+    )}
+  </div>
                 <button
                     onClick={handleAddItem}
                     className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"

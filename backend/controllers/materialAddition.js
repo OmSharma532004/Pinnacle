@@ -27,11 +27,20 @@ module.exports.addCategory = async (req, res) => {
 // add item
 module.exports.addItem = async (req, res) => {
     try {
-        const { name, price, description, category } = req.body;
+        const { name, price, description, category, city } = req.body;
+
+        // Check if an item with the same name and city already exists
+        const existingItem = await Items.findOne({
+            'nameAndCity.city': city,
+            'nameAndCity.name': name,
+        });
+
+        if (existingItem) {
+            return res.status(400).json({ error: 'Item with the same name and city already exists' });
+        }
 
         // Check if the category ID is a valid ObjectId
         const categoryId = new ObjectId(category);
-        // No need to check validity separately as ObjectId constructor ensures validity
 
         // Check if the category exists
         const existingCategory = await Category.findById(categoryId);
@@ -41,7 +50,7 @@ module.exports.addItem = async (req, res) => {
 
         // Create the item object
         const itemObj = new Items({
-            name,
+            nameAndCity: { city, name },
             price,
             description,
             category: categoryId, // Assign the ObjectId directly
@@ -57,9 +66,9 @@ module.exports.addItem = async (req, res) => {
             ),
         ]);
 
-        return res.status(201).json({ item: itemObj, success: true});
+        return res.status(201).json({ item: itemObj, success: true });
     } catch (error) {
-        return res.status(400).json({ error: error.message,success: false});
+        return res.status(400).json({ error: error.message, success: false });
     }
 };
 

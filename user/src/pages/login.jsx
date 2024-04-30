@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { toast } from "react-hot-toast"
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,19 +15,19 @@ const Login = () => {
         })
     });
     const data= await res.json();
-    if(data.status===400 || !data){
-        alert('Invalid Login')
-    }
-    else{
-        alert('Login Successful')
+    if(res.ok){
+
+      toast.success("Login Successful!")
         setEmail('');
         setPassword('');
         console.log(data)
         localStorage.setItem('token',data.token)
         localStorage.setItem('user',JSON.stringify(data.user))
         window.location.href='/dashboard'
+    }else{
+      toast.error("Invalid Credentials!")
+    }
 
-}
 }
 
   const handleSubmit = (e) => {
@@ -38,14 +38,15 @@ const Login = () => {
   };
 
   return (
-  <div className=' bg-black w-screen overflow-y-hidden  flex flex-col items-center justify-center min-h-screen'>
+  <div className=' bg-black w-screen overflow-y-hidden gap-4  flex flex-col items-center justify-center min-h-screen'>
+      <h1 className='text-3xl font-bold  text-white'>Welcome to Pinnacle </h1>
       <div className=" flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
+          <div className="rounded-md flex flex-col gap-4 shadow-sm -space-y-px">
             <div>
               <label htmlFor="email" className="sr-only">Email address</label>
               <input

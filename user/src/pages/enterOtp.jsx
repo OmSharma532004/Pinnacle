@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSignupData } from "../reducer/slices/authSlice";
+import toast from "react-hot-toast";
 const EnterOtp = () => {
     const dispatch = useDispatch();
     const {signupData}= useSelector(state=>state.auth);
@@ -33,10 +34,12 @@ const EnterOtp = () => {
             });
             const data= await response.json();
             if(data.success){
-                alert('User registered successfully')
+                toast.success('User registered successfully')
+                console.log(data);
+                window.location.href='/login'
             }
             else{
-                alert('User could not be registered')
+                toast.error('Error registering user')
                 console.log(data);
 
 

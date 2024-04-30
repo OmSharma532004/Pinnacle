@@ -20,10 +20,6 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    address: {
-        type: String,
-        required: true
-    },
     approvedHouses: {
         //object with ref property
         type:  mongoose.Schema.Types.ObjectId,

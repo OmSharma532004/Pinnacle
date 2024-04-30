@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { setSignupData } from '../reducer/slices/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
 
 const Signup = () => {
     const dispatch = useDispatch();
@@ -12,18 +13,19 @@ const Signup = () => {
     password:'',
     confirmPassword:'',
     phoneNo:'',
-    address:''
+  
 
   })
 
 
 
 const register= async()=>{
-    const {Name,email,password,phoneNo,address,confirmPassword}=formData;
+    const {Name,email,password,phoneNo,confirmPassword}=formData;
     if(password!==confirmPassword){
         alert('Passwords do not match')
     }
     else{
+      const toastId=toast.loading('Please wait...');
         dispatch(setSignupData(formData));
         //send otp api
         const otp= await fetch('http://localhost:3000/api/sendOTP',{
@@ -36,13 +38,17 @@ const register= async()=>{
             })
         });
         const data= await otp.json();
-        if(data.success){
-            navigate('/otp')
-        }
-        else{
-            alert('OTP could not be sent')
+      if(otp.ok){
+        navigate('/otp');
+        console.log(data)
+        toast.success('OTP sent successfully')
+        //remove toast .loading
+        toast.dismiss(toastId);
 
-    }
+      }else{
+        toast.error('Error sending OTP')
+
+      }
     }
 }
 
@@ -57,14 +63,16 @@ const register= async()=>{
   };
 
   return (
-   <div className=' flex flex-col justify-center items-center min-h-screen w-screen bg-black '>
+   <div className=' flex flex-col gap-4 justify-center items-center min-h-screen w-screen bg-black '>
+     <h1 className='text-3xl font-bold  text-white'>Welcome to Pinnacle </h1>
      <div className=" flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Create your account</h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="rounded-md shadow-sm -space-y-px">
+          <div className="rounded-md flex flex-col gap-4 shadow-sm -space-y-px">
             <div>
               <label htmlFor="name" className="sr-only">Name</label>
               <input
@@ -137,9 +145,9 @@ const register= async()=>{
 
 
                 </div>
-                <div>
+                {/* <div>
                 <label htmlFor="address" className="sr-only">Address</label>
-                <input
+               <textarea
                 id="address"
                 name="address"
                 type="text"
@@ -149,7 +157,7 @@ const register= async()=>{
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:"
                 onChange={(e) => setFormData({...formData,address:e.target.value})}
                 />
-                </div>
+                </div> */}
 
           <div>
             <button
