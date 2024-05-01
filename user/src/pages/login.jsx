@@ -36,6 +36,9 @@ const Login = () => {
     login();
     // Handle login logic here
   };
+  const googleAuth = () => {
+    window.open('http://localhost:3000/api/google/callback', '_self');
+  };
 
   return (
   <div className=' bg-black w-screen overflow-y-hidden gap-4  flex flex-col items-center justify-center min-h-screen'>
@@ -84,6 +87,7 @@ const Login = () => {
               Sign in
             </button>
           </div>
+          <button className=' bg-white  p-4 text-black rounded-lg' onClick={googleAuth}>Sign in with google <img src='../assets/google.webp' width={50} /></button>
         </form>
       </div>
     </div>

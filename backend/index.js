@@ -7,18 +7,35 @@ const dotenv=require('dotenv');
 const cors=require('cors');
 dotenv.config();
 
+const passportSetup = require('./passport.js');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
 
+app.use(
+  cookieSession({
+    name:'session',
+    keys:['cyberwolve'],
+    maxAge:24*60*60*100,
+  })
+);
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 
 // Middleware to enable CORS
-app.use(cors());
+app.use(cors({
+  origin:'http://localhost:5173',
+  methods:'GET,POST,PUT,DELETE',
+  credentials:true,
+}));
 
 // Example route
 app.get('/', (req, res) => {
   res.send('Hello from Express!');
 });
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 const uri = process.env.MONGODB_URL;  
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
