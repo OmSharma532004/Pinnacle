@@ -198,6 +198,7 @@ const Add = () => {
           onClick={() => {
             setItem({ ...item, category: category._id });
             setSelectedCategory(category.name)
+            setFilteredCategories([]);
           }}
           className="cursor-pointer hover:bg-gray-200 py-1 px-2"
         >
@@ -206,7 +207,7 @@ const Add = () => {
       ))}
     </div>
     ) : (
-      <p>No matching categories found.</p>
+<></>
     )}
   </div>
                 <button
