@@ -8,7 +8,7 @@ const Navbar = () => {
     const token = auth.token;
     console.log(token);
     return (
-        <nav className= " bg-zinc-700  text-white text-xl w-screen p-4  ">
+        <nav className= " bg-gray-200  text-black border-b-4 text-xl w-screen p-4  ">
       <ul className="flex justify-between">
       <Link to={"/"}>   <li className="t hover:text-yellow-400">Home</li></Link>
                <span className=' flex flex-row items-center justify-center gap-4'>

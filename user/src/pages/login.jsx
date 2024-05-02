@@ -87,7 +87,7 @@ const Login = () => {
               Sign in
             </button>
           </div>
-          <button className=' bg-white  p-4 text-black rounded-lg' onClick={googleAuth}>Sign in with google <img src='../assets/google.webp' width={50} /></button>
+          <button className=' bg-gray-100 flex items-center justify-center gap-4  p-4 text-black rounded-lg' onClick={googleAuth}><p>Sign in with google</p> <img src='../assets/google.webp' width={50} /></button>
         </form>
       </div>
     </div>

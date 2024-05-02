@@ -10,7 +10,7 @@ import Navbar from "../components/Navbar";
 const Home=(()=>{
     return(
 
-        <div className=" bg-white flex flex-col w-sreen items-center justify-center">
+        <div className=" bg-gray-200 flex flex-col w-sreen items-center justify-center">
         
 {/* Section1 */}
 <div className=' bg-white flex flex-col w-full min-h-screen items-center justify-center'>

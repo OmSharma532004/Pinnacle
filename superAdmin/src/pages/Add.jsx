@@ -120,7 +120,7 @@ const Add = () => {
     };
 
     return (
-       <div className=' flex flex-col items-center justify-center w-screen h-screen bg-black'>
+       <div className=' flex flex-col items-center justify-center w-screen min-h-screen p-8 bg-gray-100'>
          <div className="max-w-lg mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
             <h1 className="text-2xl font-bold mb-4">Add Items</h1>
             <div className="mb-6">
@@ -159,13 +159,21 @@ const Add = () => {
                     className="w-full border border-gray-300 rounded-md py-2 px-3 mb-2 focus:outline-none focus:border-blue-500"
                     placeholder="Enter item name"
                 />
-                <input
-                    type="text"
-                    value={item.city}
-                    onChange={(e) => setItem({ ...item, city: e.target.value })}
-                    className="w-full border border-gray-300 rounded-md py-2 px-3 mb-2 focus:outline-none focus:border-blue-500"
-                    placeholder="Enter city"
-                />
+                {/* some cities already there and select among them */}
+                <select 
+                className=' m-4 w-[400px]'
+                onChange={(e) => setItem({ ...item, city: e.target.value })}
+                >
+
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Kolkata">Kolkata</option>
+
+                </select>
+
                 <input
                     type="number"
                     value={item.price}
