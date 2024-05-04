@@ -2,11 +2,25 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 //useSelector
 import { useSelector } from 'react-redux';
+import { GoogleLogout } from 'react-google-login';
 
 const Navbar = () => {
+
+    const logoutOnSuccess = () => {
+        console.log('logout success');
+    }
+
+    const handleGoogleLogout = () => {
+      
+     
+    }
     const auth = useSelector(state => state.auth);
     const token = auth.token;
-    console.log(token);
+    const user = auth.user;
+    console.log(user);
+    
+   
+   
     return (
         <nav className= " bg-gray-200  text-black border-b-4 text-xl w-screen p-4  ">
       <ul className="flex justify-between">
@@ -24,7 +38,15 @@ const Navbar = () => {
                     localStorage.clear();
                     window.location.reload();
                     window.location.href='/login';
-                }} className="  hover:text-yellow-400">Logout</li>
+                    handleGoogleLogout();
+                }} className="   hover:text-yellow-400">
+                  <GoogleLogout
+            clientId="646102159744-39spi62n4lc3orsasooie7je0uka1hc9.apps.googleusercontent.com"
+            buttonText="Logout"
+            onLogoutSuccess={logoutOnSuccess}
+            
+        />
+                </li>
                 </>
 
                }

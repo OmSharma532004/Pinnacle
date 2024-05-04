@@ -17,15 +17,18 @@ const Add = () => {
     const [item, setItem] = useState(
        { name: '',
         price: '',
-        city:'',
+        cityId:'',
         description: '',
         category: '',}
     );
-
+const [cities, setCities] = useState([]);
    useEffect(() => {
 
     getAllCategories();
+    getAllCities();
     console.log('Categories:', categories);
+    console.log('Cities:', cities);
+    
     }, []);
     const [categories, setCategories] = useState([]);
 
@@ -119,10 +122,97 @@ const Add = () => {
         console.log('Adding item:', item, 'to category:', category);
     };
 
+    const getAllCities = async () => {
+        try{
+            const response = await fetch('http://localhost:3000/api/cities');
+            const data = await response.json();
+            if(response.ok){
+                console.log('Cities:', data);
+                setCities(data.cities); 
+            }
+            else{
+                console.log('Error fetching cities');
+            }
+            console.log(data);
+
+            
+
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+    const fetchAddCity = async (city) => {
+        try{
+            const response = await fetch('http://localhost:3000/api/city/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({name: city }),
+        });
+        const data = await response.json();
+        if(response.ok){
+            toast.success('City added successfully');
+        }
+        else{
+            toast.error('Error adding city');
+        }
+        console.log(data);
+        }
+        catch(error){
+            alert('Error adding city');
+            console.log(error);
+        }
+    }
+    const handleAddCity = (e) => {
+        // Add logic to handle adding a new city
+        console.log('Adding city:', e.target.value );
+        fetchAddCity(e.target.value);
+    };
+   const [existingCities, setExistingCities] = useState([]);
+    const handleCitySearch = (e) => {
+        const query = e.target.value;
+        console.log('City search:', query);
+        const filtered = cities.filter((city) =>
+          city.name.toLowerCase().includes(query.toLowerCase())
+        );
+        setExistingCities(filtered.map((city) => city.name));
+
+      };
+
     return (
        <div className=' flex flex-col items-center justify-center w-screen min-h-screen p-8 bg-gray-100'>
          <div className="max-w-lg mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
             <h1 className="text-2xl font-bold mb-4">Add Items</h1>
+
+            <div>
+                <h2 className="text-xl font-bold mb-2">Add City</h2>
+                <input
+      type="text"
+      
+      onChange={handleCitySearch}
+      className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
+      placeholder="Enter city name"
+    />
+    <button onClick={handleAddCity} className="bg-blue-500 text-white py-2 px-4 rounded-md ml-2">
+      Add City
+    </button>
+    {
+      existingCities.length > 0 && (
+        <div className="mt-2">
+          <p className="font-bold">Cities Already created:</p>
+          <ul>
+            {existingCities.map((result) => (
+              <li key={result}>{result}</li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+    
+    
+            </div>
             <div className="mb-6">
                 <h2 className="text-xl font-bold mb-2">Add Category</h2>
                 <input
@@ -162,15 +252,17 @@ const Add = () => {
                 {/* some cities already there and select among them */}
                 <select 
                 className=' m-4 w-[400px]'
-                onChange={(e) => setItem({ ...item, city: e.target.value })}
+                onChange={(e) => setItem({ ...item, cityId: e.target.value })}
                 >
-
-                <option value="Mumbai">Mumbai</option>
-                <option value="Delhi">Delhi</option>
-                <option value="Bangalore">Bangalore</option>
-                <option value="Hyderabad">Hyderabad</option>
-                <option value="Chennai">Chennai</option>
-                <option value="Kolkata">Kolkata</option>
+                    <option value=''>Select city</option>
+                    
+                    {
+                    cities.length > 0 &&
+                    cities.map((city) => (
+                        <option key={city._id} value={city._id}>{city.name}</option>
+                    ))
+}
+              
 
                 </select>
 

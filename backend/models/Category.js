@@ -1,22 +1,11 @@
-// category of raw material schema
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const CategorySchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    Items: {
-        type: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'Items'
-            }
-        ],
-    }
+const categorySchema = new Schema({
+  name: { type: String, required: true },
+  items: [{ type: Schema.Types.ObjectId, ref: 'Item' }]
 });
 
-const Category = mongoose.model('Category', CategorySchema);
+const Category = mongoose.model('Category', categorySchema);
 
 module.exports = Category;

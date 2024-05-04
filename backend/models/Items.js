@@ -1,41 +1,13 @@
-// item schema with category, price ,desription and name
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const ItemSchema = new mongoose.Schema({
-    nameAndCity: {
-        
-        type: 
-            {
-                city: {
-                    type: String,
-                    required: true
-                },
-                
-                name: 
-                {
-                    type: String,
-                    required: true
-                }
-            }
-       ,
-        required: true,
-        unique: true
-    },
-    price:{
-        type: Number,
-    
-        required: true,
-        unique: true
-    },
-    description: {
-        type: String,
-        required: true
-    },
-    category: {
-        type: String,
-        required: true
-    }
+const itemSchema = new Schema({
+  name: { type: String, required: true},
+  description: { type: String, required: true },
+  prices: [{ cityId: { type: Schema.Types.ObjectId, ref: 'City' }, price: Number }],
+  categoryId: { type: Schema.Types.ObjectId, ref: 'Category' }
 });
 
-const Items = mongoose.model('Items', ItemSchema);
-module.exports = Items;
+const Item = mongoose.model('Item', itemSchema);
+
+module.exports = Item;

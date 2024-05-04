@@ -17,6 +17,7 @@ const Navbar = () => {
                 <>
               <Link to={"/add"}>   <li className=" hover:text-yellow-400">Raw material</li></Link>
               <Link to={"/estimate"}>   <li className=" hover:text-yellow-400">Estimate</li></Link>
+              <Link to={"/estimate2"}>   <li className=" hover:text-yellow-400">Estimate2</li></Link>
        
                 </>
                 :

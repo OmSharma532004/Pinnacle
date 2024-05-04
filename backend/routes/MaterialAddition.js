@@ -2,10 +2,17 @@
 const express = require('express');
 const router = express.Router();
 
-const { addCategory, addItem, getCategories, getItems, getItemsByCategory, getCategoryById } = require('../controllers/materialAddition');
+const { addCategory, addItem, getCategories, getItems, getItemsByCategory, getCategoryById, addCity,getCities } = require('../controllers/materialAddition');
 
 // Add category
 router.post('/category/add', addCategory);
+
+//add city
+router.post('/city/add', addCity);
+
+//get cities
+router.get('/cities', getCities);
+
 
 // Add item
 router.post('/item/add', addItem);
