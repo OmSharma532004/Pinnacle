@@ -1,5 +1,8 @@
+
 import React, { useEffect, useState } from 'react';
+import uploadCSV from './upload';
 import toast from 'react-hot-toast';
+import CSVUpload from './upload';
 const Add = () => {
     const [category, setCategory] = useState('');
     const [existingCategories, setExistingCategories] = useState([]);
@@ -165,12 +168,13 @@ const [cities, setCities] = useState([]);
             console.log(error);
         }
     }
+    const [city, setCity] = useState('');
     const handleAddCity = (e) => {
-        // Add logic to handle adding a new city
-        console.log('Adding city:', e.target.value );
-        fetchAddCity(e.target.value);
+        console.log('Adding city:', city );
+        fetchAddCity(city);
     };
    const [existingCities, setExistingCities] = useState([]);
+ 
     const handleCitySearch = (e) => {
         const query = e.target.value;
         console.log('City search:', query);
@@ -190,8 +194,11 @@ const [cities, setCities] = useState([]);
                 <h2 className="text-xl font-bold mb-2">Add City</h2>
                 <input
       type="text"
-      
-      onChange={handleCitySearch}
+      onChange={(e)=>{
+        handleCitySearch(e);
+        setCity(e.target.value);
+        
+      }}
       className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500"
       placeholder="Enter city name"
     />
@@ -316,7 +323,9 @@ const [cities, setCities] = useState([]);
                 >
                     Add Item
                 </button>
+              <CSVUpload/>
             </div>
+         
         </div>
        </div>
     );

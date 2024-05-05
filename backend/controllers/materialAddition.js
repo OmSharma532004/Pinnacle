@@ -6,7 +6,79 @@ const Item = require('../models/Items');
 const mongoose = require('mongoose');
 const { ObjectId } = require('mongodb');
 const City = require('../models/City');
+const Papa = require('papaparse');
 
+
+//addItem Through CSV FIle
+module.exports.addItemThroughCSV = async (req, res) => {
+    if (!req.files || !req.files.file) {
+        return res.status(400).send('No file uploaded');
+    }
+
+    const file = req.files.file;
+    const csvData = file.data.toString();
+
+    Papa.parse(csvData, {
+        header: true,
+        skipEmptyLines: true,
+        complete: async (results) => {
+            const items = results.data;
+            try {
+                await processItems(items);
+                res.send('All items processed successfully');
+            } catch (error) {
+                console.error('Failed to process items:', error);
+                res.status(500).send('Server error during item processing');
+            }
+        }
+    });
+};
+
+async function processItems(items) {
+    const cityNames = [...new Set(items.map(item => item.cityName))];
+    const categoryNames = [...new Set(items.map(item => item.categoryName))];
+    
+    const cities = await City.find({ name: { $in: cityNames } });
+    const categories = await Category.find({ name: { $in: categoryNames } });
+
+    for (const item of items) {
+        const city = cities.find(c => c.name === item.cityName);
+        const category = categories.find(c => c.name === item.categoryName);
+
+        if (!city || !category) {
+            console.log(`City or category not found for item: ${item.name}`);
+            continue;
+        }
+
+        // Check if the category is already linked to the city
+        if (!city.categories.includes(category._id)) {
+            city.categories.push(category._id);
+            await city.save();
+        }
+
+        let existingItem = await Item.findOne({ name: item.name, "prices.cityId": city._id });
+        if (existingItem) {
+            console.log(`Item already exists with name: ${item.name} in city: ${item.cityName}`);
+            continue;
+        }
+
+        // Create or update the item
+        await Item.updateOne(
+            { name: item.name },
+            { 
+                $setOnInsert: { name: item.name, description: item.description, categoryId: category._id },
+                $push: { prices: { cityId: city._id, price: Number(item.price) } }
+            },
+            { upsert: true }
+        );
+
+        // Add item ID to the category's items list if new
+        await Category.updateOne(
+            { _id: category._id },
+            { $addToSet: { items: existingItem ? existingItem._id : new mongoose.Types.ObjectId() } }
+        );
+    }
+}
 //add city
 module.exports.addCity= async (req, res) =>{
     const { name } = req.body;

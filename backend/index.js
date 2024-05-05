@@ -4,13 +4,15 @@ const PORT = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 const { MongoClient } = require('mongodb');
 const dotenv=require('dotenv');
+const fileUpload = require('express-fileupload');
 const cors=require('cors');
+
 dotenv.config();
 
 const passportSetup = require('./passport.js');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
-
+app.use(fileUpload());
 app.use(
   cookieSession({
     name:'session',

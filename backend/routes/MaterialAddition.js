@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { addCategory, addItem, getCategories, getItems, getItemsByCategory, getCategoryById, addCity,getCities } = require('../controllers/materialAddition');
+const { addCategory, addItem, getCategories, getItems, getItemsByCategory, getCategoryById, addCity,getCities, addItemThroughCSV } = require('../controllers/materialAddition');
 
 // Add category
 router.post('/category/add', addCategory);
@@ -12,6 +12,8 @@ router.post('/city/add', addCity);
 
 //get cities
 router.get('/cities', getCities);
+
+router.post('/uploadCSV',addItemThroughCSV);
 
 
 // Add item
