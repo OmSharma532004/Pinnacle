@@ -8,16 +8,16 @@ const Navbar = () => {
     const token = auth.token;
     console.log(token);
     return (
-        <nav className= "  bg-white text-black text-xl w-screen p-4  ">
+        <nav className= "  bg-yellow-300 text-black text-xl w-screen p-4  ">
       <ul className="flex justify-between">
-      <Link to={"/"}>   <li className="t hover:text-yellow-400">Home</li></Link>
+      <Link to={"/"}>   <li className="t hover:text-red-600">Home</li></Link>
                <span className=' flex flex-row items-center justify-center gap-4'>
                {
                 token==null ?
                 <>
-              <Link to={"/add"}>   <li className=" hover:text-yellow-400">Raw material</li></Link>
-              <Link to={"/estimate"}>   <li className=" hover:text-yellow-400">Estimate</li></Link>
-              <Link to={"/estimate2"}>   <li className=" hover:text-yellow-400">Estimate2</li></Link>
+              <Link to={"/add"}>   <li className=" hover:text-red-600">Raw material</li></Link>
+              <Link to={"/estimate"}>   <li className=" hover:text-red-600">Estimate</li></Link>
+              <Link to={"/estimate2"}>   <li className=" hover:text-red-600">Estimate2</li></Link>
        
                 </>
                 :

@@ -32,6 +32,7 @@ function CSVUpload() {
             } else {
                 throw new Error('Failed to upload file');
             }
+            alert('File uploaded successfully');
         } catch (error) {
             alert(error.message);
             console.error('Error:', error);
@@ -43,7 +44,7 @@ function CSVUpload() {
             <h1>Upload CSV File</h1>
             <form onSubmit={handleSubmit}>
                 <input type="file" onChange={handleFileChange} accept=".csv" />
-                <button type="submit">Upload CSV</button>
+                <button className='bg-black text-white  p-4 rounded-xl' type="submit">Upload CSV</button>
             </form>
         </div>
     );

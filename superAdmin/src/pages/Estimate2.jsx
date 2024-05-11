@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import CategoryCard from './CategoryCard';
 import ItemDialog from './ItemDialog';
+import AnimatedCard from '../components/Estimate/animatedCard';
+
+const colorPalette = ["#3b327f", "#d6cdce", "#8c54fb", "#7758b4", "#664ca7", "#141c5c", "#0c1653", "#9b9dbc", "#6b6d9b"];
+
 
 const categories = {
     Cement: {
@@ -69,86 +73,116 @@ const categories = {
     
   };
   
-
   const Estimate2 = () => {
     const [selectedItems, setSelectedItems] = useState({});
     const [finalCost, setFinalCost] = useState(0);
-    const [dialogOpen, setDialogOpen] = useState(false);
-    const [currentCategory, setCurrentCategory] = useState(null);
-    const [dimensions, setDimensions] = useState(90);
-    const [plot, setPlot] = useState({
-        size: 947.22,
-        Design:"3BHK",
-    });
-    const [estimate, setEstimate] = useState(4000000);
-    useEffect(() => {
-      const total = Object.values(selectedItems).reduce((sum, item) => sum + (item.price || 0), 0);
-      setFinalCost(total);
-    }, [selectedItems]);
-  
+    const [currentCategory, setCurrentCategory] = useState(categories.Cement);
+
+    const calculateFinalCost = (items) => {
+        return Object.values(items).reduce((sum, item) => sum + (item.price || 0), 0);
+    };
+
     const handleCardClick = (category) => {
-      setCurrentCategory(category);
-      setDialogOpen(true);
+        setCurrentCategory(category);
     };
-  
-    const handleItemSelect = (item) => {
-      setSelectedItems(prev => ({ ...prev, [currentCategory.id]: item }));
-      setDialogOpen(false); // Close the dialog upon selection
+
+    const handleAddToCart = (item) => {
+        setSelectedItems(prevItems => {
+            const updatedItems = { ...prevItems, [currentCategory.id]: item };
+            const newFinalCost = calculateFinalCost(updatedItems);
+            setFinalCost(newFinalCost);
+            return updatedItems;
+        });
     };
-  
-    return (
-      <div className="flex flex-col items-center justify-center bg-gray-100 w-full min-h-screen py-10">
-        <div className="container max-w-6xl mx-auto px-4">
-            <div className=' mb-[100px]'>
-            <h1 className=" text-5xl border-b-2 pb-4 font-semibold">
-              Estimate
-            </h1>
-            <div className=" gap-[50px] flex items-center justify-center mt-[100px]">
-              <div className=" p-2 font-extralight border-2 text-black bg-white  w-[200px] ">
-                <h1 className=" text-sm">Plot Dimensions</h1>
-                <p>{dimensions}</p>
-              </div>
-              <div className=" p-2 font-extralight border-2 text-black bg-white  w-[200px] ">
-                <h1 className=" text-sm">Plot Details</h1>
-                <p>
-                  {plot.size}, {plot.Design}
-                </p>
-              </div>
-              <div className=" p-2 font-extralight border-2 text-black bg-white  w-[200px] ">
-                <h1 className=" text-sm">Estimate</h1>
-                <p>{finalCost}</p>
-              </div>
-            </div>
-            </div>
-          <h1 className="text-5xl font-bold text-black mb-[50px] text-center">Construction Cost Estimator</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            {Object.values(categories).map(category => (
-              <CategoryCard
-                key={category.id}
-                category={category}
-                onClick={() => handleCardClick(category)}
-                selectedItem={selectedItems[category.id]?.name || 'Select'}
-                price={selectedItems[category.id]?.price}
-                color={category.color}
-              />
-            ))}
-          </div>
-          {currentCategory && (
-            <ItemDialog
-              isOpen={dialogOpen}
-              onClose={() => setDialogOpen(false)}
-              items={currentCategory.items}
-              onItemSelect={handleItemSelect}
-              color={currentCategory.color}
-            />
-          )}
-          <div className="flex flex-col lg:flex-row justify-between items-center bg-white shadow-xl rounded-xl p-8 mt-8">
-            <h2 className="text-4xl font-semibold text-dark-blue">Total Estimated Cost:</h2>
-            <div className="text-4xl font-bold text-vibrant-purple mt-4 lg:mt-0">${finalCost}</div>
-          </div>
-        </div>
-      </div>
-    );
+    const handleAddOrRemoveFromCart = (item) => {
+      setSelectedItems(prevItems => {
+          if (prevItems[currentCategory.id]?.id === item.id) {
+              // If the item is already selected, remove it from the cart
+              const updatedItems = { ...prevItems };
+              delete updatedItems[currentCategory.id];
+              const newFinalCost = calculateFinalCost(updatedItems);
+              setFinalCost(newFinalCost);
+              return updatedItems;
+          } else {
+              // Add the new item or replace the existing one in the same category
+              const updatedItems = { ...prevItems, [currentCategory.id]: item };
+              const newFinalCost = calculateFinalCost(updatedItems);
+              setFinalCost(newFinalCost);
+              return updatedItems;
+          }
+      });
   };
+
+    const handleRemoveFromCart = (categoryId) => {
+        setSelectedItems(prevItems => {
+            const updatedItems = { ...prevItems };
+            delete updatedItems[categoryId];
+            const newFinalCost = calculateFinalCost(updatedItems);
+            setFinalCost(newFinalCost);
+            return updatedItems;
+        });
+    };
+
+    return (
+      <div className="flex w-screen min-h-screen bg-gradient-to-br from-gray-100 to-gray-200">
+          {/* Left Section: Categories and Items */}
+          <div className="w-[70%] p-8">
+              <div className="text-center mb-12">
+                  <h1 className="text-4xl font-bold text-gray-800">Construction Cost Estimator</h1>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                  {Object.values(categories).map((category, index) => (
+                      <CategoryCard
+                          key={category.id}
+                          category={category}
+                          onClick={() => handleCardClick(category)}
+                          selectedItem={selectedItems[category.id]?.name || 'Select'}
+                          color={colorPalette[index % colorPalette.length]}
+                          price={selectedItems[category.id]?.price || 0}
+                      />
+                  ))}
+              </div>
+
+              {/* Item Display for Current Category */}
+              {currentCategory && (
+                  <div className="mt-8 p-4 rounded-lg shadow-md bg-white">
+                      <h2 className="w-full font-semibold text-lg mb-4 text-gray-700">{currentCategory.id} Items:</h2>
+                      <div className="flex items-center justify-center gap-4">
+                          {currentCategory.items.map(item => (
+                              <AnimatedCard
+                                  key={item.id}
+                                  item={item}
+                                  isSelected={selectedItems[currentCategory.id]?.id === item.id}
+                                  onAddOrRemove={handleAddOrRemoveFromCart}
+                              />
+                          ))}
+                      </div>
+                  </div>
+              )}
+          </div>
+
+          {/* Right Section: Cart */}
+          <div className="w-[30%] p-8 bg-white rounded-l-lg shadow-lg">
+              <h2 className="font-semibold text-xl mb-4 text-gray-800">Cart</h2>
+              <ul>
+                  {Object.entries(selectedItems).map(([categoryId, item]) => (
+                      <li key={categoryId} className="p-2 border rounded my-2 flex justify-between items-center">
+                          {item.name} - ₹{item.price}
+                          <button
+                              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+                              onClick={() => handleRemoveFromCart(categoryId)}
+                          >
+                              Remove
+                          </button>
+                      </li>
+                  ))}
+              </ul>
+              <div className="mt-4 p-2 bg-white rounded shadow">
+                  <h3 className="font-bold text-lg">Total Cost: ₹{finalCost}</h3>
+              </div>
+          </div>
+      </div>
+  );
+};
 
 export default Estimate2;

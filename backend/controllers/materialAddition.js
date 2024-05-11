@@ -66,7 +66,7 @@ async function processItems(items) {
         await Item.updateOne(
             { name: item.name },
             { 
-                $setOnInsert: { name: item.name, description: item.description, categoryId: category._id },
+                $setOnInsert: { name: item.name, description: item.description, categoryName: category._id },
                 $push: { prices: { cityId: city._id, price: Number(item.price) } }
             },
             { upsert: true }
