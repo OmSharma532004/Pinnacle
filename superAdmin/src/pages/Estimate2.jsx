@@ -77,10 +77,110 @@ const categories = {
     const [selectedItems, setSelectedItems] = useState({});
     const [finalCost, setFinalCost] = useState(0);
     const [currentCategory, setCurrentCategory] = useState(categories.Cement);
+    const [cities, setCities] = useState([]);
+    const [selectedCity, setSelectedCity] = useState(cities[0]);
+    const [allCategories,setAllCategories]=useState([]);
 
     const calculateFinalCost = (items) => {
         return Object.values(items).reduce((sum, item) => sum + (item.price || 0), 0);
     };
+    useEffect(() => {
+        fetchAllCities();
+        console.log(cities);
+    }, []);
+
+    useEffect(() => {
+
+        if (selectedCity) {
+            getAllCategories(selectedCity);
+        }
+        console.log(allCategories);
+        
+    }, [selectedCity]);
+
+    const fetchAllCities = async () => {
+
+        try {
+            const response = await fetch('http://localhost:3000/api/cities');
+            if (response.ok) {
+
+                const result = await response.json();
+                console.log(result);
+                setCities(result.cities);
+            } else {
+
+                throw new Error('Failed to fetch cities');
+            }
+        } catch (error) {
+
+            console.error('Error:', error);
+        }
+    };
+
+    const getAllCategories = async () => {
+      try {
+          const response = await fetch(`http://localhost:3000/api/getMaterial/${selectedCity}`);
+          if (response.ok) {
+              const result = await response.json();
+              console.log(result);
+
+              // Convert data from the backend into the specified format
+              const convertedCategories = {};
+              result.data.forEach(categoryData => {
+                  const { category, itemInThatCity } = categoryData;
+
+                  const items = itemInThatCity.map((item, index) => ({
+                      id: `${index + 1}`,
+                      name: item.name,
+                      price: item.price,
+                      brand: item.name.split(' ')[0]
+                  }));
+
+                  let color = '';
+                  switch (category) {
+                      case 'Cement':
+                          color = 'bg-bright-purple';
+                          break;
+                      case 'Steel':
+                          color = 'bg-dark-purple';
+                          break;
+                      case 'Wood':
+                          color = 'bg-green-500';
+                          break;
+                      case 'Paint':
+                          color = 'bg-blue-500';
+                          break;
+                      case 'Wire':
+                          color = 'bg-red-500';
+                          break;
+                      case 'Switch':
+                          color = 'bg-green-500';
+                          break;
+                      case 'UPS_Wiring':
+                          color = 'bg-blue-500';
+                          break;
+                      default:
+                          color = 'bg-gray-500';
+                          break;
+                  }
+
+                  convertedCategories[category] = {
+                      id: category.toLowerCase().replace(/\s/g, '_'),
+                      items: items,
+                      color: color
+                  };
+              });
+
+              // Set the converted categories to state
+              setAllCategories(convertedCategories);
+          } else {
+              throw new Error('Failed to fetch categories');
+          }
+      } catch (error) {
+          console.error('Error:', error);
+      }
+  };
+
 
     const handleCardClick = (category) => {
         setCurrentCategory(category);
@@ -126,21 +226,38 @@ const categories = {
     return (
       <div className="flex w-screen min-h-screen bg-gradient-to-br from-gray-100 to-gray-200">
           {/* Left Section: Categories and Items */}
+          <div>
+              <div className="flex items-center justify-between p-4 bg-white rounded-r-lg shadow-lg">
+                  
+                  <select
+                      className="p-2 border rounded"
+                      value={selectedCity}
+                      onChange={(e) => setSelectedCity(e.target.value)}
+                  >
+                    {
+                      cities.map((city) => (
+                          <option key={city.id} value={city.id}>{city.name}</option>
+                      ))
+                    }
+                      
+                  </select>
+
+                  </div>
+          </div>
           <div className="w-[70%] p-8">
               <div className="text-center mb-12">
                   <h1 className="text-4xl font-bold text-gray-800">Construction Cost Estimator</h1>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                  {Object.values(categories).map((category, index) => (
-                      <CategoryCard
-                          key={category.id}
-                          category={category}
-                          onClick={() => handleCardClick(category)}
-                          selectedItem={selectedItems[category.id]?.name || 'Select'}
-                          color={colorPalette[index % colorPalette.length]}
-                          price={selectedItems[category.id]?.price || 0}
-                      />
-                  ))}
+              {Object.values(allCategories).map((category, index) => (
+                  <CategoryCard
+                      key={category.id}
+                      category={category}
+                      onClick={() => handleCardClick(category)}
+                      selectedItem={selectedItems[category.id]?.name}
+                      price={selectedItems[category.id]?.price}
+                  />  
+))}
               </div>
 
               {/* Item Display for Current Category */}

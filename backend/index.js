@@ -43,12 +43,14 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // Import routes
 const authRoutes = require('./routes/auth');
-
+const getMaterialRoutes = require('./routes/getMaterial');
 // Use routes
 app.use('/api', authRoutes);
+app.use('/api', getMaterialRoutes);
 
 // Import routes
 const materialAdditionRoutes = require('./routes/MaterialAddition');
+const { getMaterial } = require('./controllers/getMaterial.js');
 
 // Use routes
 app.use('/api', materialAdditionRoutes);
