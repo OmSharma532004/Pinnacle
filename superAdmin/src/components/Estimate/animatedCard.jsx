@@ -11,11 +11,11 @@ const AnimatedCard = ({ item, isSelected, onAddOrRemove }) => {
         reset: isSelected
     });
     return (
-        <animated.div style={props} className="p-4 border rounded-lg m-2 flex flex-col items-center justify-between w-60">
+        <animated.div style={props} className="p-4 border rounded-lg m-2 flex flex-col bg-yellow-200 text-red-700 hover:bg-yellow-300 font-bold items-center justify-between w-60">
             <h3 className="text-md font-semibold">{item.name}</h3>
             <p className="text-lg">₹{item.price}</p>
             <button
-                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 mt-2"
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-yellow-500 mt-2"
                 onClick={() => onAddOrRemove(item)}
             >
                 {isSelected ? 'Remove' : 'Select'}

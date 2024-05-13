@@ -11,6 +11,7 @@ import Estimate from './pages/Estimate'
 import Structure from './pages/Structure'
 import Estimate2 from './pages/Estimate2'
 import CSVUpload from './pages/upload'
+import ConstructionCostEstimator from './pages/Estimate3'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +26,7 @@ function App() {
     <Route path="/estimate" element={<Estimate />} />
     {/* <Route path="/structure" element={<Structure />} /> */}
     <Route path="/estimate2" element={<Estimate2 />} />
+    <Route path="/estimate3" element={<ConstructionCostEstimator />} />
     <Route path="/upload" element={<CSVUpload />} />
     <Route path='*' element={<div className='  flex flex-col items-center bg-gray-700 text-white justify-center h-screen w-screen'>
 <h1 className=' animate-pulse text-3xl '>404</h1>

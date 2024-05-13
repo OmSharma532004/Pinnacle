@@ -76,17 +76,24 @@ const categories = {
   const Estimate2 = () => {
     const [selectedItems, setSelectedItems] = useState({});
     const [finalCost, setFinalCost] = useState(0);
-    const [currentCategory, setCurrentCategory] = useState(categories.Cement);
+    const [allCategories,setAllCategories]=useState([]);
+    const [currentCategory, setCurrentCategory] = useState(allCategories[0]);
     const [cities, setCities] = useState([]);
     const [selectedCity, setSelectedCity] = useState(cities[0]);
-    const [allCategories,setAllCategories]=useState([]);
+    const [show,setShow]=useState(false);
+    const [showDrawer, setShowDrawer] = useState(false);
+   
 
     const calculateFinalCost = (items) => {
         return Object.values(items).reduce((sum, item) => sum + (item.price || 0), 0);
     };
+    const toggleDrawer = () => {
+      setShowDrawer(!showDrawer);
+  };
     useEffect(() => {
         fetchAllCities();
         console.log(cities);
+        getAllCategories(cities[0 ]);
     }, []);
 
     useEffect(() => {
@@ -95,6 +102,8 @@ const categories = {
             getAllCategories(selectedCity);
         }
         console.log(allCategories);
+
+        setCurrentCategory(allCategories.Cement);
         
     }, [selectedCity]);
 
@@ -173,6 +182,7 @@ const categories = {
 
               // Set the converted categories to state
               setAllCategories(convertedCategories);
+              setCurrentCategory(convertedCategories.Cement);
           } else {
               throw new Error('Failed to fetch categories');
           }
@@ -194,24 +204,7 @@ const categories = {
             return updatedItems;
         });
     };
-    const handleAddOrRemoveFromCart = (item) => {
-      setSelectedItems(prevItems => {
-          if (prevItems[currentCategory.id]?.id === item.id) {
-              // If the item is already selected, remove it from the cart
-              const updatedItems = { ...prevItems };
-              delete updatedItems[currentCategory.id];
-              const newFinalCost = calculateFinalCost(updatedItems);
-              setFinalCost(newFinalCost);
-              return updatedItems;
-          } else {
-              // Add the new item or replace the existing one in the same category
-              const updatedItems = { ...prevItems, [currentCategory.id]: item };
-              const newFinalCost = calculateFinalCost(updatedItems);
-              setFinalCost(newFinalCost);
-              return updatedItems;
-          }
-      });
-  };
+   
 
     const handleRemoveFromCart = (categoryId) => {
         setSelectedItems(prevItems => {
@@ -222,31 +215,30 @@ const categories = {
             return updatedItems;
         });
     };
+  
 
     return (
-      <div className="flex w-screen min-h-screen bg-gradient-to-br from-gray-100 to-gray-200">
-          {/* Left Section: Categories and Items */}
-          <div>
-              <div className="flex items-center justify-between p-4 bg-white rounded-r-lg shadow-lg">
-                  
-                  <select
-                      className="p-2 border rounded"
-                      value={selectedCity}
-                      onChange={(e) => setSelectedCity(e.target.value)}
-                  >
-                    {
-                      cities.map((city) => (
-                          <option key={city.id} value={city.id}>{city.name}</option>
-                      ))
-                    }
-                      
-                  </select>
-
-                  </div>
-          </div>
-          <div className="w-[70%] p-8">
+      <div className="flex flex-col items-center min-h-screen justify-center bg-yellow-50">
+       
+    
+       <div className="flex-col w-full min-h-screen bg-gradient-to-br from-yellow-100 to-yellow-200">
+            <div className="  p-8">
               <div className="text-center mb-12">
-                  <h1 className="text-4xl font-bold text-gray-800">Construction Cost Estimator</h1>
+                <h1 className="text-4xl font-bold text-yellow-800">Construction Cost Estimator</h1>
+                <div className="w-full p-4 flex items-center justify-center mx-auto ">
+          <select
+            className="p-2 border border-yellow-300 text-center w-[600px] shadow-xl h-[40px] bg-yellow-300 rounded text-yellow-900"
+            value={selectedCity}
+            onChange={(e) => {
+              setSelectedCity(e.target.value);
+              setShow(true);
+            }}
+          >
+            {cities.map(city => (
+              <option className='' key={city.id} value={city.id}>{city.name}</option>
+            ))}
+          </select>
+        </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {Object.values(allCategories).map((category, index) => (
@@ -259,10 +251,9 @@ const categories = {
                   />  
 ))}
               </div>
-
-              {/* Item Display for Current Category */}
+    
               {currentCategory && (
-                  <div className="mt-8 p-4 rounded-lg shadow-md bg-white">
+                  <div className="mt-8 p-4 rounded-lg shadow-md  bg-yellow-400">
                       <h2 className="w-full font-semibold text-lg mb-4 text-gray-700">{currentCategory.id} Items:</h2>
                       <div className="flex items-center justify-center gap-4">
                           {currentCategory.items.map(item => (
@@ -270,36 +261,46 @@ const categories = {
                                   key={item.id}
                                   item={item}
                                   isSelected={selectedItems[currentCategory.id]?.id === item.id}
-                                  onAddOrRemove={handleAddOrRemoveFromCart}
+                                  onAddOrRemove={handleAddToCart}
                               />
                           ))}
                       </div>
                   </div>
               )}
-          </div>
-
-          {/* Right Section: Cart */}
-          <div className="w-[30%] p-8 bg-white rounded-l-lg shadow-lg">
-              <h2 className="font-semibold text-xl mb-4 text-gray-800">Cart</h2>
-              <ul>
-                  {Object.entries(selectedItems).map(([categoryId, item]) => (
-                      <li key={categoryId} className="p-2 border rounded my-2 flex justify-between items-center">
-                          {item.name} - ₹{item.price}
-                          <button
-                              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
-                              onClick={() => handleRemoveFromCart(categoryId)}
-                          >
-                              Remove
-                          </button>
-                      </li>
-                  ))}
-              </ul>
-              <div className="mt-4 p-2 bg-white rounded shadow">
-                  <h3 className="font-bold text-lg">Total Cost: ₹{finalCost}</h3>
-              </div>
+            </div>
+    
+           
+            <button onClick={toggleDrawer} className="fixed flex justify-between items-center bottom-5 w-[1000px] right-[200px] h-[100px] rounded-xl bg-yellow-300 hover:bg-yellow-500 text-2xl text-red-500 hover:text-white font-bold py-2 px-8 ">
+                   <p>
+                   Cart
+                   </p>
+                   <p className=' '>  ₹{finalCost}</p>
+                </button>
+                <div className={`fixed inset-x-0 bottom-0 p-4 bg-white transform transition-transform duration-300 ${showDrawer ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+    <h2 className="text-xl font-bold">Selected Items</h2>
+    <ul>
+        {Object.entries(selectedItems).map(([categoryId, item]) => (
+            <li key={categoryId} className="p-2 border border-yellow-300 rounded my-2 flex justify-between items-center bg-yellow-100">
+                {item.name} - ₹{item.price}
+                <button
+                  className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                  onClick={() => handleRemoveFromCart(categoryId)}
+                >
+                  Remove
+                </button>
+            </li>
+        ))}
+    </ul>
+    <p>Total Cost: ₹{finalCost}</p>
+    <button onClick={toggleDrawer} className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+        Close
+    </button>
+</div>
+           
           </div>
       </div>
-  );
+    );
+    
 };
 
 export default Estimate2;
