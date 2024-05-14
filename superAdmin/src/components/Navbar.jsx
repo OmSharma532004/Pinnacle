@@ -16,8 +16,8 @@ const Navbar = () => {
                 token==null ?
                 <>
               <Link to={"/add"}>   <li className=" hover:text-red-600">Raw material</li></Link>
-              <Link to={"/estimate"}>   <li className=" hover:text-red-600">Estimate</li></Link>
-              <Link to={"/estimate2"}>   <li className=" hover:text-red-600">Estimate2</li></Link>
+         
+              <Link to={"/estimate2"}>   <li className=" hover:text-red-600">Estimate</li></Link>
        
                 </>
                 :

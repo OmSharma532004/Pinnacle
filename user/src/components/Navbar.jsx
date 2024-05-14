@@ -22,7 +22,7 @@ const Navbar = () => {
    
    
     return (
-        <nav className= " bg-gray-200  text-black border-b-4 text-xl w-screen p-4  ">
+        <nav className= " bg-purple-600  text-white border-b-4 text-xl w-screen p-4  ">
       <ul className="flex justify-between">
       <Link to={"/"}>   <li className="t hover:text-yellow-400">Home</li></Link>
                <span className=' flex flex-row items-center justify-center gap-4'>
@@ -34,6 +34,7 @@ const Navbar = () => {
                 </>
                 :
                 <>
+                <Link to={"/dashboard"}>   <li className=" hover:text-yellow-400">Dashboard</li></Link>
                  <li onClick={()=>{
                     localStorage.clear();
                     window.location.reload();

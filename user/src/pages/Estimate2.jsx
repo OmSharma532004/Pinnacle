@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import CategoryCard from './CategoryCard';
-import ItemDialog from './ItemDialog';
+
 import AnimatedCard from '../components/Estimate/animatedCard';
 
 const colorPalette = ["#3b327f", "#d6cdce", "#8c54fb", "#7758b4", "#664ca7", "#141c5c", "#0c1653", "#9b9dbc", "#6b6d9b"];
@@ -153,13 +152,13 @@ const colorPalette = ["#3b327f", "#d6cdce", "#8c54fb", "#7758b4", "#664ca7", "#1
   
 
     return (
-      <div className="flex flex-col  items-center overflow-auto h-screen justify-center bg-purple-950 text-white">
+      <div className="flex flex-col  items-center min-w-full overflow-auto h-screen justify-center bg-purple-950 text-white">
           <div className="w-full p-8">
               <div className="text-center mb-12">
                   <h1 className="text-4xl font-bold text-yellow-400">Construction Cost Estimator</h1>
                   <div className="p-4 flex justify-center">
                       <select
-                          className="p-2 border border-yellow-500 bg-yellow-400 text-black h-[50px] text-center rounded shadow-lg w-2/4 text-center"
+                          className="p-2 border border-yellow-500 bg-yellow-400 text-black h-[50px]  rounded shadow-lg w-2/4 text-center"
                           value={selectedCity}
                           onChange={(e) => {
                               setSelectedCity(e.target.value);
@@ -218,14 +217,14 @@ const colorPalette = ["#3b327f", "#d6cdce", "#8c54fb", "#7758b4", "#664ca7", "#1
           </button>
           {showDrawer && (
               <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4">
-                  <div className="bg-white p-4 rounded-lg shadow-xl text-gray-800">
+                  <div className="bg-purple-500 p-4 rounded-lg shadow-xl font-extrabold text-white">
                       <h2 className="text-xl font-bold mb-4">Selected Items</h2>
                       <ul>
                           {Object.entries(selectedItems).map(([categoryId, item]) => (
-                              <li key={categoryId} className="p-2 border border-yellow-300 rounded my-2 flex justify-between items-center">
+                              <li key={categoryId} className="p-2 border text-red-600 font-bold bg-yellow-500 border-yellow-300 rounded my-2 flex gap-[50px] justify-between items-center">
                                   {item.name} - ₹{item.price}
                                   <button
-                                      className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                                      className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                                       onClick={() => handleRemoveFromCart(categoryId)}
                                   >
                                       Remove

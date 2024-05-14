@@ -10,6 +10,7 @@ import Signup from './pages/signin'
 import EnterOtp from './pages/enterOtp'
 import Dashboard from './pages/dashboard'
 import {gapi} from 'gapi-script'
+import Estimate2 from './pages/Estimate2'
 
 
 
@@ -38,7 +39,8 @@ function App() {
 <Route path='/login' element={<Login/>} />
 <Route path='/signup' element={<Signup/>} />
 <Route path='/otp' element={<EnterOtp/>} />
-<Route path='/dashboard' element={<Dashboard/>} />
+<Route path='/dashboard' element={<Estimate2/>} />
+
 
 <Route path='*' element={<div className=' flex flex-col items-center bg-gray-700 text-white justify-center h-screen w-screen'>
 <h1 className=' text-3xl '>404</h1>
