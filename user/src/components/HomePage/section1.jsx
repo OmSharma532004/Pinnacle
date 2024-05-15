@@ -1,21 +1,17 @@
 import React from 'react';
 import section2 from './section2.png';
+import { Link } from 'react-router-dom';
 
 const Section1 = () => {
   return (
-    <div className="bg-purple-600 w-full p-[50px] pb-[100px] text-white">
+    <div className="bg-purple-800 w-full p-[50px] pb-[100px] text-white">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-3 gap-10">
           <div className="md:col-span-2">
-            <h1 className="text-3xl font-bold mb-3">We construct your dream home. You track progress on app.</h1>
-            <p className="mb-5">We construct homes and ensure peace of mind you deserve with our project tracking service.</p>
-            <ul className="mb-5">
-              <li><span className="text-red-500">✔</span> 4500+ Homes</li>
-              <li><span className="text-red-500">✔</span> 470+ Quality Checks</li>
-              <li><span className="text-red-500">✔</span> 100% Safe Money Transaction</li>
-            </ul>
-            <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded transition duration-200">Talk To Our Expert →</button>
-          </div>
+            <h1 className="text-4xl flex-col items-center justify-center text-yellow-300 font-bold mb-3">"Constructing Dreams, Shaping Futures"</h1>
+            <p className="mb-[50px] font-light text-xl">Welcome to <b className='text-yellow-300 font-semibold text-2xl'>Building It</b>, where construction isn't just about building structures; it's about constructing dreams and shaping futures. Our ethos is rooted in reliability, professionalism, and a commitment to excellence that sets us apart in the construction industry.</p>
+            
+            <Link className=' bg-orange-500 text-white text-xl font-bold  p-4 rounded-xl' to={"/dashboard"}>Calculate Estimate</Link> </div>
           <div>
             <div className="flex flex-col items-center">
               
@@ -28,9 +24,8 @@ const Section1 = () => {
           </div>
         </div>
         <div className="mt-10">
-          <p className="text-sm">Looking to build a home of your dreams? Look no further, Brick&Bolt, India's No.1 tech-enabled building construction company, specializes in building construction in 10+ cities across India.</p>
-          <p className="mt-2 text-sm">Our expert team offers a range of modern house design plans to suit your style and preferences, with a focus on sleek, stylish, and innovative designs. Whether you're looking to Construct a building or have a small Residential building Construction We have you covered.</p>
-        </div>
+          <p className="text-xl font-light">At Building It, we believe in the power of collaboration and the strength of expertise. With a team of seasoned professionals and industry veterans, we bring decades of experience to every project we undertake. From residential homes to commercial complexes, our portfolio speaks volumes about our dedication to quality craftsmanship and attention to detail.</p>
+           </div>
       </div>
     </div>
   );

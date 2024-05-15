@@ -151,28 +151,27 @@ const colorPalette = ["#3b327f", "#d6cdce", "#8c54fb", "#7758b4", "#664ca7", "#1
     };
   
 
-    return (
-      <div className="flex flex-col  items-center min-w-full overflow-auto h-screen justify-center bg-purple-950 text-white">
-          <div className="w-full p-8">
-              <div className="text-center mb-12">
-                  <h1 className="text-4xl font-bold text-yellow-400">Construction Cost Estimator</h1>
-                  <div className="p-4 flex justify-center">
-                      <select
-                          className="p-2 border border-yellow-500 bg-yellow-400 text-black h-[50px]  rounded shadow-lg w-2/4 text-center"
-                          value={selectedCity}
-                          onChange={(e) => {
-                              setSelectedCity(e.target.value);
-                              setShow(true);
-                          }}
-                      >
-                          {cities.map(city => (
-                              <option key={city.id} value={city.id}>{city.name}</option>
-                          ))}
-                      </select>
-                  </div>
-              </div>
-              <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
-                  {Object.values(allCategories).map((category) => (
+  return (
+  <div className="flex flex-col items-center min-w-full overflow-auto h-screen  bg-purple-950 text-white">
+    <div className="w-full p-8">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-yellow-400">Construction Cost Estimator</h1>
+        <div className="p-4 flex justify-center">
+          <select
+            className="p-2 border border-yellow-500 bg-yellow-400 text-black h-[50px] rounded shadow-lg w-full max-w-xs md:max-w-md lg:max-w-lg"
+            value={selectedCity}
+            onChange={(e) => {
+              setSelectedCity(e.target.value);
+            }}
+          >
+            {cities.map(city => (
+              <option key={city.id} value={city.id}>{city.name}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
+      {Object.values(allCategories).map((category) => (
                     <div 
                     key={category.id}
                     onClick={() => handleCardClick(category)}
@@ -192,58 +191,59 @@ const colorPalette = ["#3b327f", "#d6cdce", "#8c54fb", "#7758b4", "#664ca7", "#1
                 </div>
                 
                   ))}
-              </div>
-              {currentCategory && (
-                  <div className="mt-8 p-4 rounded-lg shadow-md  bg-purple-500">
-                      <h2 className="w-full font-semibold text-black text-lg mb-4 ">{currentCategory.id} Items:</h2>
-                      <div className="flex items-center justify-center gap-4">
-                          {currentCategory.items.map(item => (
-                              <AnimatedCard
-                                  key={item.id}
-                                  item={item}
-                                  isSelected={selectedItems[currentCategory.id]?.id === item.id}
-                                  onAddOrRemove={handleAddToCart}
-                              />
-                          ))}
-                      </div>
-                  </div>
-              )}
-          </div>
-          <button
-              onClick={toggleDrawer}
-              className="fixed bottom-5 right-5 flex hover:text-red-600 items-center justify-between px-8 py-4 bg-purple-600 hover:bg-yellow-500 text-xl font-bold rounded-xl shadow-lg transition duration-300 ease-in-out"
-          >
-              Cart ₹{finalCost}
-          </button>
-          {showDrawer && (
-              <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4">
-                  <div className="bg-purple-500 p-4 rounded-lg shadow-xl font-extrabold text-white">
-                      <h2 className="text-xl font-bold mb-4">Selected Items</h2>
-                      <ul>
-                          {Object.entries(selectedItems).map(([categoryId, item]) => (
-                              <li key={categoryId} className="p-2 border text-red-600 font-bold bg-yellow-500 border-yellow-300 rounded my-2 flex gap-[50px] justify-between items-center">
-                                  {item.name} - ₹{item.price}
-                                  <button
-                                      className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                                      onClick={() => handleRemoveFromCart(categoryId)}
-                                  >
-                                      Remove
-                                  </button>
-                              </li>
-                          ))}
-                      </ul>
-                      <p className="text-lg">Total Cost: ₹{finalCost}</p>
-                      <button
-                          onClick={toggleDrawer}
-                          className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                      >
-                          Close
-                      </button>
-                  </div>
-              </div>
-          )}
       </div>
-  );
+      {currentCategory && (
+        <div className="mt-8 p-4 rounded-lg shadow-md bg-purple-500">
+          <h2 className="w-full font-semibold text-lg text-black mb-4">{currentCategory.id} Items:</h2>
+          <div className="flex flex-wrap justify-center gap-4">
+            {currentCategory.items.map(item => (
+              <AnimatedCard
+                key={item.id}
+                item={item}
+                isSelected={selectedItems[currentCategory.id]?.id === item.id}
+                onAddOrRemove={handleAddToCart}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+    <button
+      onClick={toggleDrawer}
+      className="fixed bottom-5 right-5 bg-purple-600 hover:bg-yellow-500 text-xl font-bold py-3 px-6 rounded-xl shadow-lg transition duration-300"
+    >
+      Cart ₹{finalCost}
+    </button>
+    {showDrawer && (
+      <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4">
+        <div className="bg-purple-500 p-4 rounded-lg shadow-xl font-extrabold text-white">
+          <h2 className="text-xl font-bold mb-4">Selected Items</h2>
+          <ul>
+            {Object.entries(selectedItems).map(([categoryId, item]) => (
+              <li key={categoryId} className="p-2 border text-red-600 font-bold bg-yellow-500 border-yellow-300 rounded my-2 flex gap-[50px] justify-between items-center">
+                {item.name} - ₹{item.price}
+                <button
+                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                  onClick={() => handleRemoveFromCart(categoryId)}
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+          <p className="text-lg">Total Cost: ₹{finalCost}</p>
+          <button
+            onClick={toggleDrawer}
+            className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    )}
+  </div>
+);
+
   
     
 };

@@ -9,11 +9,14 @@ import Navbar from "../components/Navbar";
 import Section1 from "../components/HomePage/section1";
 import HeroSection from "../components/HomePage/HeroSection";
 import ServiceHighlights from "../components/HomePage/Service";
+import Section2 from "../components/HomePage/section2";
+import ServiceSteps from "../components/HomePage/steps";
+import Footer from "../components/HomePage/Footer";
 
 const Home=(()=>{
     return(
 
-        <div className=" bg-gray-200 flex flex-col w-full items-center justify-center">
+        <div className=" bg-purple-800 flex flex-col w-full items-center justify-center">
         
 {/* Section1 */}
 {/* <div className=' bg-white flex flex-col w-full min-h-screen items-center justify-center'>
@@ -63,8 +66,19 @@ const Home=(()=>{
   <Section1/>
 </div>
 <div className=" w-full">
+<ServiceSteps/>
+</div>
+<div className=" w-full">
+<Section2/>
+</div>
+<div className=" w-full">
   <ServiceHighlights/>
 </div>
+<div className=" w-full">
+<Footer/>
+</div>
+
+
 
 
 
