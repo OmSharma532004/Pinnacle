@@ -16,7 +16,7 @@ const colorPalette = ["#3b327f", "#d6cdce", "#8c54fb", "#7758b4", "#664ca7", "#1
     const [selectedCity, setSelectedCity] = useState(cities[0]);
     const [show,setShow]=useState(false);
     const [showDrawer, setShowDrawer] = useState(false);
-   
+    const [plotSize, setPlotSize] = useState(0);
 
     const calculateFinalCost = (items) => {
         return Object.values(items).reduce((sum, item) => sum + (item.price || 0), 0);
@@ -149,6 +149,7 @@ const colorPalette = ["#3b327f", "#d6cdce", "#8c54fb", "#7758b4", "#664ca7", "#1
             return updatedItems;
         });
     };
+
   
 
   return (
@@ -156,6 +157,15 @@ const colorPalette = ["#3b327f", "#d6cdce", "#8c54fb", "#7758b4", "#664ca7", "#1
     <div className="w-full p-8">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-yellow-400">Construction Cost Estimator</h1>
+        <div className='p-4 flex gap-[50px] justify-center'>
+          <p className=' text-2xl text-yellow-400 font-bold '>Enter your Plot size</p>
+          <div>
+          <input value={plotSize} onChange={(e)=>[
+            setPlotSize(e.target.value)
+          ]} type="number" className='p-2 border border-yellow-500 bg-yellow-400 text-black h-[50px] text-center rounded shadow-lg w-full max-w-xs md:max-w-md lg:max-w-sm'/>
+          <p className=' text-yellow-300 text-lg'>Sq Ft.</p>
+          </div>
+        </div>
         <div className="p-4 flex justify-center">
           <select
             className="p-2 border border-yellow-500 bg-yellow-400 text-black h-[50px] rounded shadow-lg w-full max-w-xs md:max-w-md lg:max-w-lg"
@@ -231,7 +241,8 @@ const colorPalette = ["#3b327f", "#d6cdce", "#8c54fb", "#7758b4", "#664ca7", "#1
               </li>
             ))}
           </ul>
-          <p className="text-lg">Total Cost: ₹{finalCost}</p>
+          <p className=' text-yellow-300'>Fort Plot Size: {plotSize} sqM</p>
+          <p className="text-lg">Total Cost:   ₹{finalCost*plotSize}</p>
           <button
             onClick={toggleDrawer}
             className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
