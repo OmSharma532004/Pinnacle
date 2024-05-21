@@ -186,10 +186,10 @@ const [cities, setCities] = useState([]);
       };
 
     return (
-       <div className=' flex flex-col items-center justify-center w-screen min-h-screen p-8 bg-gray-100'>
+       <div className=' flex flex-col items-center justify-center w-screen min-h-screen p-8 bg-purple-800'>
          <div className="max-w-lg mx-auto p-6 bg-gray-100 rounded-lg shadow-md">
             <h1 className="text-2xl font-bold mb-4">Add Items</h1>
-
+            <CSVUpload/>
             <div>
                 <h2 className="text-xl font-bold mb-2">Add City</h2>
                 <input
@@ -323,7 +323,7 @@ const [cities, setCities] = useState([]);
                 >
                     Add Item
                 </button>
-              <CSVUpload/>
+            
             </div>
          
         </div>

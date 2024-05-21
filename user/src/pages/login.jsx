@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { toast } from "react-hot-toast"
+import { toast } from "react-hot-toast";
 import { GoogleLogin } from 'react-google-login';
 
 const clientid = "646102159744-39spi62n4lc3orsasooie7je0uka1hc9.apps.googleusercontent.com";
@@ -20,14 +20,14 @@ const Login = () => {
     });
     const data = await res.json();
     if (res.ok) {
-      toast.success("Login Successful!")
+      toast.success("Login Successful!");
       setEmail('');
       setPassword('');
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('user', JSON.stringify(data.user))
-      window.location.href = '/dashboard'
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      window.location.href = '/dashboard';
     } else {
-      toast.error("Invalid Credentials!")
+      toast.error("Invalid Credentials!");
     }
   }
 
@@ -36,16 +36,38 @@ const Login = () => {
     login();
   };
 
-  const onSuccess = (res) => {
+  const onSuccess = async (res) => {
     console.log("login successfully", res.profileObj);
-    localStorage.setItem('token', res.tokenId)
-    localStorage.setItem('user', JSON.stringify(res.profileObj))
-    window.location.href = '/dashboard'
-    
+    const userProfile = res.profileObj;
+    const response = await fetch('http://localhost:3000/api/google-signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        googleId: userProfile.googleId,
+        email: userProfile.email,
+        name: userProfile.name,
+        imageUrl: userProfile.imageUrl,
+        tokenId: res.tokenId
+      })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem('token', res.tokenId);
+      localStorage.setItem('user', JSON.stringify(userProfile));
+      window.location.href = '/dashboard';
+      toast.success("Google Login Successful!");
+    } else {
+      toast.error("Google Login Failed!");
+    }
   }
 
   const onFailure = (res) => {
     console.log("login failed", res);
+    toast.error("Google Login Failed!");
   }
 
   return (

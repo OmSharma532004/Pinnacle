@@ -6,6 +6,7 @@ const { MongoClient } = require('mongodb');
 const dotenv=require('dotenv');
 const fileUpload = require('express-fileupload');
 const cors=require('cors');
+const userRoutes = require('./routes/userRoutes');
 
 dotenv.config();
 
@@ -27,7 +28,7 @@ app.use(express.json());
 // Middleware to enable CORS
 app.use(cors({
 }));
-
+app.use('/api', userRoutes);
 // Example route
 app.get('/', (req, res) => {
   res.send('Hello from Express!');

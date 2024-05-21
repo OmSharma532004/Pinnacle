@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
     },
     phoneNo: {
         type: Number,
-        required: true
+     
     },
     approvedHouses: {
         //object with ref property
