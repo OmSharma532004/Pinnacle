@@ -12,7 +12,7 @@ import ServiceHighlights from "../components/HomePage/Service";
 import Section2 from "../components/HomePage/section2";
 import ServiceSteps from "../components/HomePage/steps";
 import Footer from "../components/HomePage/Footer";
-import WhatsAppButton from "../components/HomePage/WhatsAppButton"
+import WhatsAppButton from "../components/HomePage/WhatsAppButton";
 
 const Home=(()=>{
     return(
