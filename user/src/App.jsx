@@ -11,6 +11,7 @@ import EnterOtp from './pages/enterOtp'
 import Dashboard from './pages/dashboard'
 import {gapi} from 'gapi-script'
 import Estimate2 from './pages/Estimate2'
+import EditMaterials from './pages/EditMaterials'
 
 
 
@@ -40,6 +41,7 @@ function App() {
 <Route path='/signup' element={<Signup/>} />
 <Route path='/otp' element={<EnterOtp/>} />
 <Route path='/dashboard' element={<Estimate2/>} />
+<Route path='/edit' element={<EditMaterials/>} />
 
 
 <Route path='*' element={<div className=' flex flex-col items-center bg-gray-700 text-white justify-center h-screen w-screen'>
