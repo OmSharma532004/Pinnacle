@@ -16,9 +16,10 @@ function App() {
     <>
     <Navbar/>
    <Routes>
-    <Route path="/" element={<AdminUpload />} />
+    <Route path="/upload" element={<AdminUpload />} />
     <Route path="/signup" element={<Signup />} />
     <Route path="/login" element={<Login />} />
+    <Route path="/" element={<Login />} />
     <Route path='/dashboard'element={<Dashboard/>}/>
     <Route path='*' element={<div className=' flex flex-col items-center bg-gray-700 text-white justify-center h-screen w-screen'>
 <h1 className=' animate-pulse text-3xl '>404</h1>

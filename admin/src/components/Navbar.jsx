@@ -18,8 +18,13 @@ const Navbar = () => {
     return (
         <nav className= " bg-white  text-purple-800 font-bold border-b-4 border-yellow-400 text-2xl w-screen p-4  ">
       <ul className="flex items-center  justify-between">
-      <Link to={"/"}>   <li className="t hover:text-yellow-400">Home</li></Link>
-               <span className=' flex flex-row items-center justify-center gap-4'>
+          {
+            token==null ?
+            (<></>):(<>
+            <Link to={"/upload"}>   <li className=" hover:text-yellow-400">Upload</li></Link>
+            </>)
+          }
+                  <span className=' flex flex-row items-center justify-center gap-4'>
                {
                 token==null ?
                 <>

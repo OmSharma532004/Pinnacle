@@ -35,9 +35,9 @@ const ServiceFeatures = () => {
   ];
 
   return (
-    <div className="bg-purple-800 py-12 text-black">
+    <div className="bg-gray-600 py-12 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl text-center text-yellow-300 mb-6">Why Choose Us for Your Construction Needs?</h2>
+        <h2 className="text-2xl text-center text-white mb-6">Why Choose Us for Your Construction Needs?</h2>
         <div className=" flex items-center justify-center flex-wrap gap-4">
           {features.map((feature, index) => (
             <div key={index} className="p-4 bg-white h-[450px] w-[200px] border border-purple-500 rounded-lg shadow-lg">

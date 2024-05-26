@@ -38,7 +38,9 @@ const Estimate2 = () => {
   useEffect(() => {
     fetchAllCities();
     console.log(cities);
-    getAllCategories(cities[0]);
+    if(cities.length>0){
+      getAllCategories(cities[0]);
+    }
   }, []);
 
   useEffect(() => {
