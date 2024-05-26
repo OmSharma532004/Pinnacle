@@ -2,8 +2,14 @@
 
 const express = require('express');
 const router = express.Router();
-const { signup, signin ,sendotp} = require('../controllers/auth'); // Import signup and signin controllers
+const { signup, signin ,sendotp, adminLogin, adminSignup, getAdminDetails} = require('../controllers/auth'); // Import signup and signin controllers
 const passport = require('passport');
+
+
+router.post('/admin/login',adminLogin);
+router.post('/admin/signup',adminSignup);
+
+router.get('/admin/:id',getAdminDetails);
 
 router.get('/login/success',(req,res)=>{
     if(req.user){

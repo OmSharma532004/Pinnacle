@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { uploadFile, getFiles, approveFile } = require('../controllers/fileConttoller');
+const { uploadFile, getFiles, approveFile, getFilesByUserId, rejectFile } = require('../controllers/fileConttoller');
 const path = require('path');
 
 router.post('/upload', uploadFile);
 router.get('/files', getFiles);
 router.post('/approve/:id', approveFile);
+router.get('/files/:userId',getFilesByUserId);
+router.post('/reject/:id', rejectFile);
+
 
 // Route to download files
 router.get('/download/:filename', (req, res) => {

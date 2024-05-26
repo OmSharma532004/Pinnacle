@@ -31,24 +31,25 @@ module.exports.getMaterial = async (req, res) => {
             
             
             for (let j = 0; j < items.length; j++) {
+            if(items[j].prices.find(price => price.cityId.toString() === cityId._id.toString())){
                 const itemInThatCity=
-                    {
-                        name:items[j].name,
-                        description:items[j].description,
-                        price:items[j].prices.find(price => price.cityId.toString() === cityId._id.toString()).price
-                    }
-                    if(data.find(item=>item.category===categoryId.name)===undefined){
-                        data.push({category:categoryId.name,itemInThatCity:[]});
-                    }
-                    else
-                    {
-                        
+                {
+                    name:items[j].name,
+                    description:items[j].description,
+                    price:items[j].prices.find(price => price.cityId.toString() === cityId._id.toString()).price
+                }
+                if(data.find(item=>item.category===categoryId.name)===undefined){
+                    data.push({category:categoryId.name,itemInThatCity:[]});
+                }
+                else
+                {
+                    
 
-                    }
-                
-                    data.find(item=>item.category===categoryId.name).itemInThatCity.push(itemInThatCity);
-               
-            }
+                }
+            
+                data.find(item=>item.category===categoryId.name).itemInThatCity.push(itemInThatCity);
+           
+            }}
             
         }
         return res.status(200).json({ data, success: true });

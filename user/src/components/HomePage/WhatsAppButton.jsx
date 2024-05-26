@@ -12,7 +12,7 @@ const WhatsAppButton = () => {
   return (
     <button
       onClick={handleWhatsAppLogin}
-      className="fixed bottom-4 right-4 bg-purple-800 text-white p-3 rounded-full shadow-lg hover:bg-green-700"
+      className="fixed bottom-[80px] right-4 bg-purple-800 text-white p-3 rounded-full shadow-lg hover:bg-green-700"
       style={{ zIndex: 1000 }}
     >
       <img src={whatsappLogo} alt="WhatsApp" className="w-8 h-8" />

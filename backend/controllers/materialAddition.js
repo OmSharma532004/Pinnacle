@@ -226,3 +226,68 @@ module.exports.getCategoryById = async (req, res) => {
 };
 
 
+module.exports.updateItem= async (req, res) => {
+    try{
+        const item=req.params.item;
+        const cityName=req.params.city;
+         const price=req.body.price;
+        const city=await City.findOne ({name:cityName});
+        if(!city){
+            return res.status(404).json({error:'City not found'});
+        }
+        const itemToUpdate=await Item.findOne({name:item,prices:{$elemMatch:{cityId:city._id}}});
+        if(!itemToUpdate){
+            return res.status(404).json({error:'Item not found in this city'});
+        }
+        itemToUpdate.prices.find(price=>price.cityId.toString()===city._id.toString()).price=price;
+        itemToUpdate.name.find(price=>price.cityId.toString()===city._id.toString()).name=item;
+        
+        await itemToUpdate.save();
+        return res.status(200).json({item:itemToUpdate,success:true});
+
+    }
+    catch(err){
+
+    }
+}
+
+module.exports.deleteItem = async (req, res) => {
+    try {
+        const itemName = req.params.item;
+        const cityName = req.params.city;
+        
+        const city = await City.findOne({ name: cityName });
+        if (!city) {
+            return res.status(404).json({ error: 'City not found' });
+        }
+
+        const itemToUpdate = await Item.findOne({ name: itemName, prices: { $elemMatch: { cityId: city._id } } });
+        if (!itemToUpdate) {
+            return res.status(404).json({ error: 'Item not found in this city' });
+        }
+
+        // Remove the price entry for the specified city
+        itemToUpdate.prices = itemToUpdate.prices.filter(price => price.cityId.toString() !== city._id.toString());
+
+        // Check if prices array is empty
+        if (itemToUpdate.prices.length === 0) {
+            // Remove the item from the category's items array
+            await Category.updateOne(
+                { _id: itemToUpdate.categoryName },
+                { $pull: { items: itemToUpdate._id } }
+            );
+
+            // Delete the item
+            await Item.deleteOne({ _id: itemToUpdate._id });
+            return res.status(200).json({ message: 'Item deleted as it has no prices left', success: true });
+        }
+
+        // Save the updated item
+        await itemToUpdate.save();
+
+        return res.status(200).json({ item: itemToUpdate, success: true });
+
+    } catch (err) {
+        return res.status(500).json({ error: 'Server error', details: err.message });
+    }
+};

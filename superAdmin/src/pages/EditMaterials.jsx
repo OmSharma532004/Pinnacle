@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 
 const EditMaterials = () => {
@@ -5,16 +6,20 @@ const EditMaterials = () => {
   const [cities, setCities] = useState([]);
   const [materials, setMaterials] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [editingMaterial, setEditingMaterial] = useState(null);
-  const [editingCategory, setEditingCategory] = useState(null);
+  const [editingMaterial, setEditingMaterial] = useState();
+  const [editingCategory, setEditingCategory] = useState();
+  const [cityId, setCityId] = useState();
+  const [deleteMaterial,setDeleteMaterial]=useState();
 
   useEffect(() => {
     fetchCities();
+   // Debugging line
   }, []);
 
   useEffect(() => {
     if (selectedCity) {
       fetchMaterialsAndCategories(selectedCity);
+      
     }
   }, [selectedCity]);
 
@@ -33,12 +38,14 @@ const EditMaterials = () => {
   };
 
   const fetchMaterialsAndCategories = async (cityId) => {
+    console.log(cityId); 
     try {
       const response = await fetch(`http://localhost:3000/api/getMaterial/${cityId}`);
       if (response.ok) {
         const result = await response.json();
         setMaterials(result.data);
         setCategories(result.data.map(categoryData => categoryData.category));
+        console.log('Materials:', result.data); // Debugging line
       } else {
         throw new Error('Failed to fetch materials and categories');
       }
@@ -48,9 +55,38 @@ const EditMaterials = () => {
   };
 
   const handleEditMaterial = (material) => {
+    console.log('Selected City:', cityId); // Debugging line
     console.log('Editing Material:', material); // Debugging line
     setEditingMaterial(material);
+    
+    console.log('Editing Material:', editingMaterial); // Debugging line
   };
+  const handleDelete=(material)=>{
+    setDeleteMaterial(material);
+    handleDeleteMaterial();
+  }
+
+  const handleDeleteMaterial=async()=>{
+    try{
+      const response=await fetch(`http://localhost:3000/api/deleteItem/${deleteMaterial.name}/${cityId}`,{
+        method:'DELETE',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body:JSON.stringify(editingMaterial)
+      });
+      if(response.ok){
+        fetchMaterialsAndCategories(selectedCity);
+        setEditingMaterial(null);
+      }
+      else{
+        throw new Error('Failed to delete material');
+      }
+    }
+    catch(error){
+      console.error('Error:',error);
+    }
+  }
 
   const handleEditCategory = (category) => {
     setEditingCategory(category);
@@ -58,13 +94,13 @@ const EditMaterials = () => {
 
   const handleSaveMaterial = async () => {
     console.log('Saving Material:', editingMaterial); // Debugging line
-    if (!editingMaterial || !editingMaterial.id) {
+    if (!editingMaterial ) {
       console.error('No material or material ID found for editing');
       return;
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/materials/${editingMaterial.id}`, {
+      const response = await fetch(`http://localhost:3000/api/updateItem/${editingMaterial.name}/${cityId}/${editingMaterial.price}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -82,12 +118,14 @@ const EditMaterials = () => {
     }
   };
 
+  
+
   const handleSaveCategory = async () => {
     console.log('Saving Category:', editingCategory); // Debugging line
-    if (!editingCategory || !editingCategory.id) {
-      console.error('No category or category ID found for editing');
-      return;
-    }
+    // if (!editingCategory || !editingCategory.id) {
+    //   console.error('No category or category ID found for editing');
+    //   return;
+    // }
 
     try {
       const response = await fetch(`http://localhost:3000/api/categories/${editingCategory.id}`, {
@@ -112,12 +150,16 @@ const EditMaterials = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Edit Materials and Categories</h1>
       <div className="mb-4">
+       
         <select
-          className="p-2 border border-gray-300 rounded"
           value={selectedCity}
-          onChange={(e) => setSelectedCity(e.target.value)}
+          onChange={(e) => {
+            setSelectedCity(e.target.value);
+            setCityId(e.target.value);
+          }}
+          className="p-2 border border-gray-300 rounded"
         >
-          <option value="">Select a city</option>
+          <option value="">Select City</option>
           {cities.map((city) => (
             <option key={city.id} value={city.id}>
               {city.name}
@@ -161,6 +203,11 @@ const EditMaterials = () => {
                         className="bg-blue-500 text-white px-4 py-2 rounded"
                       >
                         Edit
+                      </button>
+
+                      <button   onClick={() => handleDelete(item)}
+                        className="bg-red-500 text-white px-4 py-2 rounded">
+                        Delete
                       </button>
                     </div>
                   </li>

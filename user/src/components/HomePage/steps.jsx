@@ -31,13 +31,13 @@ const ServiceSteps = () => {
   return (
     <div className="bg-purple-800 text-yellow-300 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center mb-6">Home Construction Steps</h2>
+        <h2 className="text-3xl text-center mb-6">Home Construction Steps</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {steps.map((step, index) => (
-            <div key={index} className="p-4 border bg-yellow-400 text-purple-900 border-gray-200 rounded-lg shadow-lg">
+            <div key={index} className="p-4 border bg-white text-purple-900 border-gray-200 rounded-lg shadow-lg">
               <img src={step.image} alt={`Illustration for ${step.title}`} className="mb-4" />
-              <h3 className="text-xl font-semibold">{step.title}</h3>
-              <p>{step.description}</p>
+              <h3 className="text-xl text-gray-950 ">{step.title}</h3>
+              <p className='text-gray-950'>{step.description}</p>
             </div>
           ))}
         </div>

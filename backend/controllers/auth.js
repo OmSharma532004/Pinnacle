@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const otpGenerator = require('otp-generator');
 const OTP = require('../models/OTP');
+const Admin = require('../models/Admin');
 
 
 
@@ -169,3 +170,71 @@ exports.sendotp = async (req, res) => {
       return res.status(500).json({ success: false, error: error.message })
     }
   }
+
+
+  exports.adminLogin = async (req, res) => {
+    try {
+      const { email, password } = req.body;
+  
+      const user = await Admin.findOne({
+        email
+      });
+
+      if (!user) {
+        return res.status(400).json({ message: 'Invalid Credentials' });
+      }
+
+      if(password !== user.password){
+        return res.status(400).json({ message: 'Invalid Credentials' });
+      }
+
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_EXPIRE
+      });
+
+      res.status(200).json({ success: true, token,user });
+    }
+    catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+
+  }
+
+  exports.adminSignup = async (req, res) => {
+    try {
+      const { name, email, password,phoneNo } = req.body;
+      const admin = await Admin.create({
+        name,
+        email,
+        password,
+        phoneNo
+      });
+    
+      bcrypt.hash(password, 10, (err, hash) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).json({ message: 'Internal Server Error' });
+        }
+        admin.password = hash;
+      });
+
+     
+      res.status(201).json({  admin });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
+  exports.getAdminDetails = async (req, res) => {
+    try {
+      const user= req.params.id;
+      const admin = await Admin.findById(user).populate();
+      res.status(200).json({ admin });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  }
+
