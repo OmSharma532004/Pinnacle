@@ -114,22 +114,35 @@ function SuperAdminApproval() {
                       >
                         Reject
                       </button>
+                      <button
+                    onClick={() => getAdminDetails(file.uploadedBy, file._id)}
+                    className="bg-blue-300 text-black py-1 px-3 rounded-lg shadow-md transition duration-300 ease-in-out"
+                  >
+                    {openDropdown === file._id ? 'Hide Details' : 'Show Details'}
+                  </button>
                     </>
                   )}
+               
+                </div></>):(<  >
+                
+                <div className=' flex items-center justify-center gap-4  '>
+                {
+                  file.approved=="approved"?(<>
+                  <h1 className="text-green-500 bg-white p-4 rounded-xl ">Approved</h1>
                   <button
                     onClick={() => getAdminDetails(file.uploadedBy, file._id)}
                     className="bg-blue-300 text-black py-1 px-3 rounded-lg shadow-md transition duration-300 ease-in-out"
                   >
                     {openDropdown === file._id ? 'Hide Details' : 'Show Details'}
                   </button>
-                </div></>):(<  >
-                
-                <div className=' bg-white p-4 rounded-xl'>
-                {
-                  file.approved=="approved"?(<>
-                  <h1 className="text-green-500">Approved</h1>
                   </>):(<>
-                  <h1 className="text-red-500">Rejected</h1>
+                  <h1 className="text-red-500  bg-white p-4 rounded-xl">Rejected</h1>
+                  <button
+                    onClick={() => getAdminDetails(file.uploadedBy, file._id)}
+                    className="bg-blue-300 text-black py-1 px-3 rounded-lg shadow-md transition duration-300 ease-in-out"
+                  >
+                    {openDropdown === file._id ? 'Hide Details' : 'Show Details'}
+                  </button>
                   </>)
 
                 }

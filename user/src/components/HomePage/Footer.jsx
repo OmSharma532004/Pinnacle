@@ -26,7 +26,7 @@ const Footer = () => {
     return (
         <footer className=" bg-white text-black py-12">
             <div className="max-w-6xl mx-auto bg-white p-6 px-4 sm:px-6 lg:px-8">
-                <h2 className="text-3xl font-bold text-purple-800 text-center mb-6">Contact Us</h2>
+                <h2 className="text-3xl  text-purple-800 text-center mb-6">Contact Us</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
                         <label htmlFor="name" className="block text-sm font-medium">Name</label>
@@ -76,7 +76,7 @@ const Footer = () => {
                         />
                     </div>
                     <div className="flex justify-center">
-                        <button type="submit" className="bg-yellow-400 text-2xl hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded">
+                        <button type="submit" className="bg-yellow-400 text-2xl hover:bg-yellow-600 text-black py-2 px-4 rounded">
                             Send us a Query
                         </button>
                     </div>

@@ -20,7 +20,7 @@ const slides = [
           <li>470+ Quality Checks</li>
           <li>100% Money Safety</li>
         </ul>
-        <button className="bg-purple-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">Learn More</button>
+        <button className="bg-purple-500 hover:bg-orange-600 text-white  py-2 px-4 rounded">Learn More</button>
       </>
     ),
   },
@@ -35,7 +35,7 @@ const slides = [
             <h1 className="text-4xl flex-col items-center justify-center   mb-3">"Constructing Dreams, Shaping Futures"</h1>
             <p className="mb-[50px] font-light text-xl">Welcome to <b className='  text-2xl'>Building It</b>, where construction isn't just about building structures; it's about constructing dreams and shaping futures. Our ethos is rooted in reliability, professionalism, and a commitment to excellence that sets us apart in the construction industry.</p>
             
-            <Link className=' bg-yellow-300 text-black text-xl font-bold  p-4 rounded-xl' to={"/dashboard"}>Calculate Estimate</Link> </div>
+            <Link className=' bg-yellow-300 text-gray-800 text-xl   p-4 rounded-xl' to={"/dashboard"}>Calculate Estimate</Link> </div>
           <div>
            
             

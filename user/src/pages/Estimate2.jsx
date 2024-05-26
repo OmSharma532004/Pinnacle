@@ -192,7 +192,7 @@ const Estimate2 = () => {
             >
               <div className="flex flex-grow">
                 <div className="w-1/2 bg-purple-700 text-white rounded-l-3xl flex items-center justify-center p-4">
-                  <h2 className="font-semibold text-lg">{category.id}</h2>
+                  <h2 className=" text-lg">{category.id}</h2>
                 </div>
                 <div className="w-1/2 bg-white text-gray-800 rounded-r-3xl flex items-center justify-center p-4">
                   <div>
@@ -238,11 +238,11 @@ const Estimate2 = () => {
       </div>
       {showDrawer && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4">
-          <div className="bg-purple-500 p-4 rounded-lg shadow-xl font-extrabold text-white">
-            <h2 className="text-xl font-bold mb-4">Selected Items</h2>
+          <div className="bg-purple-500 p-4 rounded-lg shadow-xl  text-white">
+            <h2 className="text-xl  mb-4">Selected Items</h2>
             <ul>
               {Object.entries(selectedItems).map(([categoryId, item]) => (
-                <li key={categoryId} className="p-2 border text-black font-bold bg-white border-yellow-300 rounded my-2 flex gap-[50px] justify-between items-center">
+                <li key={categoryId} className="p-2 border text-gray-800  bg-white border-yellow-300 rounded my-2 flex gap-[50px] justify-between items-center">
                   {item.name} - ₹{item.price}
                   <button
                     className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
