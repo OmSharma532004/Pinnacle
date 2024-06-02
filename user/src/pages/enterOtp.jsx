@@ -6,6 +6,7 @@ const EnterOtp = () => {
     const dispatch = useDispatch();
     const {signupData}= useSelector(state=>state.auth);
     console.log(signupData);
+    const apiUrl =import.meta.env.VITE_API_URL;
     
     const [otp, setOtp] = useState("");
 
@@ -19,7 +20,7 @@ const EnterOtp = () => {
             console.log("otp",otp);
             //register
             console.log(signupData)
-            const response=await fetch('http://localhost:3000/api/signup',{
+            const response=await fetch(`${apiUrl}/signup`,{
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'

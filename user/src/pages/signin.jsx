@@ -16,6 +16,7 @@ const Signup = () => {
   
 
   })
+  const apiUrl =import.meta.env.VITE_API_URL;
 
 
 
@@ -28,7 +29,7 @@ const register= async()=>{
       const toastId=toast.loading('Please wait...');
         dispatch(setSignupData(formData));
         //send otp api
-        const otp= await fetch('http://localhost:3000/api/sendOTP',{
+        const otp= await fetch(`${apiUrl}/sendOTP`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'

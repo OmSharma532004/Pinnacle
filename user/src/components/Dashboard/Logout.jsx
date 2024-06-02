@@ -6,12 +6,13 @@ import { useSelector } from 'react-redux';
 
 
 const LogoutComponent = () => {
+  const apiUrl = import.meta.env.VITE_API_URL;
     const handleGoogleLogout = async () => {
         const tokenId = localStorage.getItem('token');
       
         if (tokenId) {
           try {
-            await axios.post('http://localhost:3000/api/google-logout', { tokenId });
+            await axios.post(`${apiUrl}/google-logout`, { tokenId });
             localStorage.clear();
             
             // Clear cookies

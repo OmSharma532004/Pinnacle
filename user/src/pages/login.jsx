@@ -20,7 +20,7 @@ const clientid = "646102159744-39spi62n4lc3orsasooie7je0uka1hc9.apps.googleuserc
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -31,7 +31,7 @@ useEffect(() => {
   return () => clearInterval(interval);
 }, []);
   const login = async () => {
-    const res = await fetch('http://localhost:3000/api/signin', {
+    const res = await fetch(`${apiUrl}/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ useEffect(() => {
   const onSuccess = async (res) => {
     console.log("login successfully", res.profileObj);
     const userProfile = res.profileObj;
-    const response = await fetch('http://localhost:3000/api/google-signin', {
+    const response = await fetch(`${apiUrl}/google-signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

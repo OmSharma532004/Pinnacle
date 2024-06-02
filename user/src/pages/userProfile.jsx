@@ -14,10 +14,10 @@ const UserProfile = () => {
         email: user.email,
         phoneNo: user.phoneNo,
     });
-
+    const apiUrl = import.meta.env.VITE_API_URL;
     const fetchUser = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/api/getUser/${userId._id}`, {
+            const response = await fetch(`${apiUrl}/getUser/${userId._id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const UserProfile = () => {
     const handleSubmit = async () => {
         console.log('Form Data:', formData);
         try {
-            const response = await fetch(`http://localhost:3000/api/editUser/${userId._id}`, {
+            const response = await fetch(`${apiUrl}/editUser/${userId._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

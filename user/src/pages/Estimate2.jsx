@@ -21,6 +21,7 @@ const Estimate2 = () => {
   const [plotSize, setPlotSize] = useState(0);
   const [materialCosts, setMaterialCosts] = useState({});
   const [showCalculation, setShowCalculation] = useState(false);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const calculateFinalCost = (items) => {
     return Object.values(items).reduce((sum, item) => sum + (item.price || 0), 0);
@@ -69,7 +70,7 @@ const Estimate2 = () => {
 
   const fetchAllCities = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/cities');
+      const response = await fetch(`${apiUrl}/cities`);
       if (response.ok) {
         const result = await response.json();
         setCities(result.cities);
@@ -83,7 +84,7 @@ const Estimate2 = () => {
 
   const getAllCategories = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/getMaterial/${selectedCity}`);
+      const response = await fetch(`${apiUrl}/getMaterial/${selectedCity}`);
       if (response.ok) {
         const result = await response.json();
         const convertedCategories = {};

@@ -16,7 +16,7 @@ require('./passport.js');
 app.use(fileUpload());
 app.use(express.json());
 app.use(cors({
-  origin: ['http://localhost:5175','http://localhost:5174','http://localhost:5173'], // Ensure this matches your frontend URL
+  origin: ['http://localhost:5175','http://localhost:5174','http://localhost:5173','https://building-it-user-5q0y6a9j0-omsharma532004s-projects.vercel.app'], // Ensure this matches your frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type']
 }));

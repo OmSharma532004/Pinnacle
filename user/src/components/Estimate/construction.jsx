@@ -5,6 +5,7 @@ import 'chart.js/auto';
 
 const ConstructionMaterials = ({ costs, city, area = 1000 }) => {
   const [prices, setPrices] = useState({});
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchPrices = async (category, brand) => {
@@ -13,7 +14,7 @@ const ConstructionMaterials = ({ costs, city, area = 1000 }) => {
       };
 
       try {
-        const response = await axios.post('http://localhost:3000/api/getPerPiece', {
+        const response = await axios.post(`${apiUrl}/getPerPiece`, {
           category: capitalizeFirstLetter(category),
           brand,
           city,
