@@ -70,34 +70,35 @@ const UserProfile = () => {
     };
 
     return (
-        <div className="flex w-screen justify-between min-h-screen bg-gray-100">
-            <aside className="w-64 bg-purple-600 text-white p-8">
-                <nav>
-                    <ul>
-                        <li className={`mb-4 ${activeTab === 'profile' ? 'bg-purple-800 rounded-xl' : ''}`}>
-                            <a href="#" onClick={() => handleTabClick('profile')} className="block py-2 px-4 rounded hover:text-gray-300">Profile</a>
-                        </li>
-                        <li className={`mb-4 ${activeTab === 'editProfile' ? 'bg-purple-800 rounded-xl' : ''}`}>
-                            <a href="#" onClick={() => handleTabClick('editProfile')} className="block py-2 px-4 rounded hover:text-gray-300">Edit Profile</a>
-                        </li>
-                        <li className={`mb-4 ${activeTab === 'settings' ? 'bg-purple-800 rounded-xl' : ''}`}>
-                            <a href="#" onClick={() => handleTabClick('settings')} className="block py-2 px-4 rounded hover:text-gray-300">Settings</a>
-                        </li>
-                        <li className={`mb-4 ${activeTab === 'logout' ? 'bg-purple-800 rounded-xl' : ''}`}>
-                            <a href="#" onClick={() => handleTabClick('logout')} className="block py-2 px-4 rounded hover:text-gray-300">Logout</a>
-                        </li>
-                    </ul>
-                </nav>
-            </aside>
-            <main className="flex-grow p-8">
-                <div className="w-[80%] mx-auto bg-white p-8 rounded-lg shadow-lg">
-                    {activeTab === 'profile' && <ProfileComponent user={user} />}
-                    {activeTab === 'editProfile' && <EditProfileComponent formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />}
-                   
-                    {activeTab === 'logout' && <LogoutComponent />}
-                </div>
-            </main>
-        </div>
+        <div className="flex flex-col md:flex-row w-screen min-h-screen bg-gray-100">
+        <aside className="w-full md:w-64 bg-purple-600 text-white p-8 md:min-h-screen">
+          <nav>
+            <ul className="flex md:block">
+              <li className={`mb-4 ${activeTab === 'profile' ? 'bg-purple-800 rounded-xl' : ''}`}>
+                <a href="#" onClick={() => handleTabClick('profile')} className="block py-2 px-4 rounded hover:text-gray-300">Profile</a>
+              </li>
+              <li className={`mb-4 ${activeTab === 'editProfile' ? 'bg-purple-800 rounded-xl' : ''}`}>
+                <a href="#" onClick={() => handleTabClick('editProfile')} className="block py-2 px-4 rounded hover:text-gray-300">Edit Profile</a>
+              </li>
+              <li className={`mb-4 ${activeTab === 'settings' ? 'bg-purple-800 rounded-xl' : ''}`}>
+                <a href="#" onClick={() => handleTabClick('settings')} className="block py-2 px-4 rounded hover:text-gray-300">Settings</a>
+              </li>
+              <li className={`mb-4 ${activeTab === 'logout' ? 'bg-purple-800 rounded-xl' : ''}`}>
+                <a href="#" onClick={() => handleTabClick('logout')} className="block py-2 px-4 rounded hover:text-gray-300">Logout</a>
+              </li>
+            </ul>
+          </nav>
+        </aside>
+        <main className="flex-grow p-8">
+          <div className="w-[80%] mx-auto bg-white p-8 rounded-lg shadow-lg">
+            {activeTab === 'profile' && <ProfileComponent user={user} />}
+            {activeTab === 'editProfile' && <EditProfileComponent formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />}
+            {activeTab === 'settings' && <SettingsComponent />}
+            {activeTab === 'logout' && <LogoutComponent />}
+          </div>
+        </main>
+      </div>
+      
     );
 };
 
