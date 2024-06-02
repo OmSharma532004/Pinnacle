@@ -68,10 +68,10 @@ const ConstructionMaterials = ({ costs, city, area = 1000 }) => {
 
   return (
     <div className="p-8">
-      <h2 className="text-3xl font-bold mb-6 text-center text-purple-700">Material Quantity and Cost for {area} ft²</h2>
+      <h2 className="mid:text-3xl text-xl font-bold mb-6 text-center text-purple-700">Material Quantity and Cost for {area} ft²</h2>
       <div className=" flex flex-wrap gap-8 justify-center">
         <div className="bg-gray-100 p-6 shadow-lg rounded-lg border-2 border-purple-700 overflow-x-auto" style={{ width: '80%' }}>
-          <h3 className="text-2xl font-bold mb-4 text-center text-purple-700">Quantity of Materials</h3>
+          <h3 className="mid:text-2xl font-bold mb-4 text-center text-purple-700">Quantity of Materials</h3>
           <table className="w-full text-left border-collapse text-lg">
             <thead className="bg-purple-500 text-white">
               <tr>
@@ -125,7 +125,7 @@ const ConstructionMaterials = ({ costs, city, area = 1000 }) => {
         </div>
         <div className="bg-gray-100 p-6 flex flex-col items-center justify-center shadow-lg rounded-lg border-2 border-purple-700" style={{ width: '80%' }}>
           <h3 className="text-2xl font-bold mb-4 text-center text-purple-700">Cost Breakdown</h3>
-          <div style={{ width: '500px', height: '500px' }}>
+          <div style={{ width: '450px', height: '500px' }}>
               <Pie data={pieChartData} />
             </div>
         </div>

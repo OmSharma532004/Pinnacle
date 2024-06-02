@@ -32,10 +32,10 @@ const slides = [
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-3 gap-10">
           <div className="md:col-span-2">
-            <h1 className="text-4xl flex-col items-center justify-center   mb-3">"Constructing Dreams, Shaping Futures"</h1>
-            <p className="mb-[50px] font-light text-xl">Welcome to <b className='  text-2xl'>Building It</b>, where construction isn't just about building structures; it's about constructing dreams and shaping futures. Our ethos is rooted in reliability, professionalism, and a commitment to excellence that sets us apart in the construction industry.</p>
+            <h1 className="sm:text-4xl  flex-col text-xl items-center justify-center   mb-3">"Constructing Dreams, Shaping Futures"</h1>
+            <p className="mb-[50px] font-light sm:text-xl">Welcome to <b className='  sm:text-2xl'>Building It</b>, where construction isn't just about building structures; it's about constructing dreams and shaping futures. Our ethos is rooted in reliability, professionalism, and a commitment to excellence that sets us apart in the construction industry.</p>
             
-            <Link className=' bg-yellow-300 text-gray-800 text-xl   p-4 rounded-xl' to={"/dashboard"}>Calculate Estimate</Link> </div>
+            <Link className=' bg-yellow-300 text-gray-800 sm:text-xl   p-4 rounded-xl' to={"/dashboard"}>Calculate Estimate</Link> </div>
           <div>
            
             

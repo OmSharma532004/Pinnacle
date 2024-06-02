@@ -1,0 +1,42 @@
+@media (max-width: 640px) {
+    .min-w-full {
+      min-width: 100%;
+    }
+    .sm\:min-w-1\/3 {
+      min-width: 100%;
+    }
+    .lg\:min-w-1\/4 {
+      min-width: 100%;
+    }
+    .absolute {
+      display: block;
+    }
+  }
+
+  /* Add this to your CSS file */
+
+/* Add this to your CSS file */
+
+/* Ensure category items are displayed below the category name on small screens */
+@media (max-width: 758px) {
+    .category-card {
+      flex-direction: column;
+    }
+  
+    .category-card > div {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  
+    .category-card .items-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .category-card .items-container .item-card {
+      width: 100%;
+    }
+  }
+  
+  
