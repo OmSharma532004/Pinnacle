@@ -3,8 +3,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import image1 from './image.png';
-import image2 from './image.png';
-import image3 from './image.png';
+import image2 from '../../assets/loginPage/i2.png';
+import image3 from '../../assets/loginPage/i3.png';
 import { Link } from 'react-router-dom';
 
 
@@ -90,7 +90,7 @@ const HeroSection = () => {
         {slides.map((slide, index) => (
           <div key={index} className="relative w-full h-[500px]">
             <img src={slide.image} alt={`Slide ${index + 1}`} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 text-white">
+            <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-20 text-white">
               <div className="max-w-6xl mx-auto py-20 px-10">
                 {slide.content}
               </div>

@@ -15,6 +15,7 @@ const Admin = require('../models/Admin');
   module.exports.signup= async(req,res)=>{
     try{
         const {Name,email,password,phoneNo,otp}=req.body;
+        console.log("Name",Name);
         if(!Name || !email || !password || !phoneNo ){
             return res.status(400).json({
                 success:false,
@@ -48,9 +49,10 @@ const Admin = require('../models/Admin');
       })
     }
         const hashedPassword = await bcrypt.hash(password, 10);
+        console.log(Name);
 
         user= new User({
-            Name,
+            Name:Name,
             email,
             password:hashedPassword,
             phoneNo

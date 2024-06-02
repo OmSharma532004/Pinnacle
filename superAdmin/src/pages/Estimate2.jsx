@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { IoIosClose } from "react-icons/io";
 
 import AnimatedCard from '../components/Estimate/animatedCard';
-
+// import WhatsAppButton from '../components/HomePage/WhatsAppButton';
+import ConstructionMaterials from '../components/Estimate/construction';
 
 const colorPalette = ["#3b327f", "#d6cdce", "#8c54fb", "#7758b4", "#664ca7", "#141c5c", "#0c1653", "#9b9dbc", "#6b6d9b"];
 
@@ -18,6 +19,8 @@ const Estimate2 = () => {
   const [showMessagePanel, setShowMessagePanel] = useState(false);
   const [showQueryForm, setShowQueryForm] = useState(false);
   const [plotSize, setPlotSize] = useState(0);
+  const [materialCosts, setMaterialCosts] = useState({});
+  const [showCalculation, setShowCalculation] = useState(false);
 
   const calculateFinalCost = (items) => {
     return Object.values(items).reduce((sum, item) => sum + (item.price || 0), 0);
@@ -37,18 +40,30 @@ const Estimate2 = () => {
 
   useEffect(() => {
     fetchAllCities();
-    console.log(cities);
-    if(cities.length>0){
+    if (cities.length > 0) {
       getAllCategories(cities[0]);
     }
   }, []);
+
+  const calculate = () => {
+    setMaterialCosts((prevMaterialCosts) => {
+      const updatedMaterialCosts = { ...prevMaterialCosts };
+      Object.keys(selectedItems).forEach((category) => {
+        const item = selectedItems[category];
+        updatedMaterialCosts[category] = {
+          price: item.price*plotSize,
+          name: item.name,
+        };
+      });
+      return updatedMaterialCosts;
+    });
+    setShowCalculation(true);
+  };
 
   useEffect(() => {
     if (selectedCity) {
       getAllCategories(selectedCity);
     }
-    console.log(allCategories);
-
     setCurrentCategory(allCategories.Cement);
   }, [selectedCity]);
 
@@ -57,7 +72,6 @@ const Estimate2 = () => {
       const response = await fetch('http://localhost:3000/api/cities');
       if (response.ok) {
         const result = await response.json();
-        console.log(result);
         setCities(result.cities);
       } else {
         throw new Error('Failed to fetch cities');
@@ -72,20 +86,15 @@ const Estimate2 = () => {
       const response = await fetch(`http://localhost:3000/api/getMaterial/${selectedCity}`);
       if (response.ok) {
         const result = await response.json();
-        console.log(result);
-
-        // Convert data from the backend into the specified format
         const convertedCategories = {};
         result.data.forEach(categoryData => {
           const { category, itemInThatCity } = categoryData;
-
           const items = itemInThatCity.map((item, index) => ({
             id: `${index + 1}`,
             name: item.name,
             price: item.price,
             brand: item.name.split(' ')[0]
           }));
-
           let color = '';
           switch (category) {
             case 'Cement':
@@ -113,15 +122,12 @@ const Estimate2 = () => {
               color = 'bg-gray-500';
               break;
           }
-
           convertedCategories[category] = {
             id: category.toLowerCase().replace(/\s/g, '_'),
             items: items,
             color: color
           };
         });
-
-        // Set the converted categories to state
         setAllCategories(convertedCategories);
         setCurrentCategory(convertedCategories.Cement);
       } else {
@@ -177,6 +183,7 @@ const Estimate2 = () => {
                 setSelectedCity(e.target.value);
               }}
             >
+              <option value="">Select City</option>
               {cities.map(city => (
                 <option key={city.id} value={city.id}>{city.name}</option>
               ))}
@@ -220,28 +227,30 @@ const Estimate2 = () => {
           </div>
         )}
       </div>
-      
+      {/* <div className="w-full mt-4">
+        <WhatsAppButton />
+      </div> */}
       <div className="fixed bottom-5 right-5">
-        <button
+        {/* <button
           onClick={toggleDrawer}
           className="bg-yellow-300 text-gray-800 hover:bg-yellow-500 text-xl py-3 px-6 rounded-xl shadow-lg transition duration-300"
         >
           Cart ₹{finalCost}
-        </button>
-        <div className="mt-4 fixed top-[20%]">
+        </button> */}
+        <div className="mt-4 fixed right-0 top-[20%]">
           <div onClick={toggleMessagePanel} className="bg-yellow-300 text-black text-center py-2 px-4 rounded-lg cursor-pointer">
             City Not listed? Send us a request
           </div>
         </div>
       </div>
-      {showDrawer && (
+      {/* {showDrawer && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4">
-          <div className="bg-purple-500 p-4 rounded-lg shadow-xl  text-white">
-            <h2 className="text-xl  mb-4">Selected Items</h2>
+          <div className="bg-gray-200 p-4 rounded-lg shadow-xl text-black">
+            <h2 className="text-xl mb-4">Selected Items</h2>
             <ul>
               {Object.entries(selectedItems).map(([categoryId, item]) => (
-                <li key={categoryId} className="p-2 border text-gray-800  bg-white border-yellow-300 rounded my-2 flex gap-[50px] justify-between items-center">
-                  {item.name} - ₹{item.price}
+                <li key={categoryId} className="p-2 border-4 text-gray-800 bg-white border-purple-600 rounded my-2 flex gap-[50px] justify-between items-center">
+                  {item.name}
                   <button
                     className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                     onClick={() => handleRemoveFromCart(categoryId)}
@@ -251,11 +260,11 @@ const Estimate2 = () => {
                 </li>
               ))}
             </ul>
-            <p className='text-white'>For Plot Size: {plotSize} sqM</p>
+            <p className='text-black'>For Plot Size: {plotSize} sqM</p>
             <p className="text-lg">Total Cost: ₹{finalCost * plotSize}</p>
             <button
               onClick={toggleDrawer}
-              className="mt-4 absolute top-[10%] left-[48%] bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              className="mt-4 absolute top-[0%] left-[48%] bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             >
               <IoIosClose style={{ fontSize: "2rem" }} />
             </button>
@@ -264,6 +273,9 @@ const Estimate2 = () => {
               className="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
             >
               Send us A query
+            </button>
+            <button className="mt-4 ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Save
             </button>
             {showQueryForm && (
               <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4">
@@ -303,7 +315,7 @@ const Estimate2 = () => {
             )}
           </div>
         </div>
-      )}
+      )} */}
       {showMessagePanel && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4">
           <div className="bg-white p-4 rounded-lg shadow-xl">
@@ -344,6 +356,12 @@ const Estimate2 = () => {
           </div>
         </div>
       )}
+      <button className=' bg-black text-white p-4 rounded-lg m-4' onClick={calculate} >Calculate</button>
+      {
+        showCalculation && materialCosts && (
+          <ConstructionMaterials costs={materialCosts} city={selectedCity} area={plotSize} />
+        )
+      }
     </div>
   );
 };

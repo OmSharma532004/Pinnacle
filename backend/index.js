@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
-const cookieSession = require('cookie-session');
 const passport = require('passport');
+const session = require('express-session');
 
 const app = express();
 dotenv.config();
@@ -20,13 +20,12 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type']
 }));
-app.use(
-  cookieSession({
-    name: 'session',
-    keys: ['cyberwolve'],
-    maxAge: 24 * 60 * 60 * 1000, // 24 hours
-  })
-);
+app.use(session({
+  secret: 'Hi',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 

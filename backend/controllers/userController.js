@@ -81,3 +81,86 @@ exports.signIn = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
+
+exports.getUserProfile = async (req, res) => {
+  try {
+      const user = await User.findById(req.params.id);
+      if (!user) {
+          return res.status(404).json({ msg: 'User not found' });
+      }
+      res.json(user);
+  } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+  }
+};
+
+// Update user profile
+exports.updateUserProfile = async (req, res) => {
+  const { name, email, phoneNo } = req.body;
+
+  // Build user object
+  const userFields = {};
+  if (name) userFields.name = name;
+  if (email) userFields.email = email;
+  if (phoneNo) userFields.phoneNo = phoneNo;
+
+  try {
+      let user = await User.findById(req.params.id);
+
+      if (!user) {
+          return res.status(404).json({ msg: 'User not found' });
+      }
+
+      user = await User.findByIdAndUpdate(
+          req.params.id,
+        {
+          Name: userFields.name,
+          email: userFields.email,
+          phoneNo: userFields.phoneNo,
+
+        }
+      );
+      
+      res.json(user);
+  } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+  }
+};
+
+const { OAuth2Client } = require('google-auth-library');
+
+const CLIENT_ID = '646102159744-39spi62n4lc3orsasooie7je0uka1hc9.apps.googleusercontent.com';
+const client = new OAuth2Client(CLIENT_ID);
+
+exports.GoogleLogout = async (req, res) => {
+  const { tokenId } = req.body;
+
+  console.log('Received tokenId:', tokenId);
+
+  try {
+      const ticket = await client.verifyIdToken({
+          idToken: tokenId,
+          audience: CLIENT_ID,
+      });
+
+      const payload = ticket.getPayload();
+      const userId = payload['sub'];
+
+      console.log('User ID:', userId);
+
+      // Invalidate the session or perform any necessary logout steps
+      req.session.destroy((err) => {
+          if (err) {
+              console.error('Session destruction error:', err);
+              return res.status(500).send({ error: 'Failed to log out', details: err });
+          }
+          res.clearCookie('connect.sid', { path: '/' });
+          res.status(200).send('Logout successful');
+      });
+  } catch (error) {
+      console.error('Error during token verification:', error);
+      res.status(500).send({ error: 'Failed to verify token', details: error });
+  }
+};

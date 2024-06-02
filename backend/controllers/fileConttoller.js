@@ -86,10 +86,34 @@ const rejectFile=async(req,res)=>{
   }
 }
 
+const deleteFile = async (req, res) => {
+  const fileId = req.params.id;
+
+  try {
+    const file = await File.findById
+    (fileId);
+    if(file){
+      //remove frome database
+      await File.deleteOne({ _id: fileId });
+      //remove from storage
+      // fs.unlinkSync(file.path);
+      res.send('File deleted!');
+
+    }
+  }
+  catch (error) {
+    res.status(500).send('Error deleting file');
+    console.log(error);
+  }
+}
+
+
+
 module.exports = {
   uploadFile,
   getFiles,
   approveFile,
   getFilesByUserId,
-  rejectFile
+  rejectFile,
+  deleteFile
 };

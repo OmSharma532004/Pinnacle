@@ -23,7 +23,7 @@ function App() {
   <div className=' min-h-screen overflow-hidden'>
       <Navbar />
   <Routes>
-    <Route path="/" element={<Home />} />
+    <Route path="/" element={<SuperAdminApproval />} />
     <Route path="/add" element={<Add />} />
     <Route path="/estimate" element={<Estimate />} />
     {/* <Route path="/structure" element={<Structure />} /> */}

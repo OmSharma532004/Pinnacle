@@ -11,6 +11,7 @@ import EnterOtp from './pages/enterOtp'
 import Dashboard from './pages/dashboard'
 import {gapi} from 'gapi-script'
 import Estimate2 from './pages/Estimate2'
+import UserProfile from './pages/userProfile'
 
 
 
@@ -41,6 +42,7 @@ function App() {
 <Route path='/signup' element={<Signup/>} />
 <Route path='/otp' element={<EnterOtp/>} />
 <Route path='/dashboard' element={<Estimate2/>} />
+<Route path='/profile'element={<UserProfile/>} />
 
 
 

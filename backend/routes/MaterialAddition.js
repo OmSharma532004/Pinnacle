@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { addCategory, addItem, getCategories, getItems, getItemsByCategory, getCategoryById, addCity,getCities, addItemThroughCSV, updateItem, deleteItem } = require('../controllers/materialAddition');
+const { addCategory, addItem, getCategories, getItems, getItemsByCategory, getCategoryById, addCity,getCities, addItemThroughCSV, updateItem, deleteItem, editCategory, deleteCategory } = require('../controllers/materialAddition');
 
 // Add category
 router.post('/category/add', addCategory);
@@ -32,9 +32,13 @@ router.get('/items/:category', getItemsByCategory);
 router.get('/category/:category', getCategoryById);
 
 //add item,price,city in required params
-router.put('/updateItem/:item/:city/:price', updateItem);
+router.put('/updateItem/:item/:city', updateItem);
 
 router.delete('/deleteItem/:item/:city', deleteItem);
+
+router.put('/updateCategory/:category', editCategory);
+
+router.delete('/deleteCategory/:category', deleteCategory);
 
 
 module.exports = router;
