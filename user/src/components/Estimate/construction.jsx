@@ -72,7 +72,7 @@ const ConstructionMaterials = ({ costs, city, area = 1000 }) => {
       <div className=" flex flex-wrap gap-8 justify-center">
         <div className="bg-gray-100 p-6 shadow-lg rounded-lg border-2 border-purple-700 overflow-x-auto" style={{ width: '80%' }}>
           <h3 className="mid:text-2xl font-bold mb-4 text-center text-purple-700">Quantity of Materials</h3>
-          <table className="w-full text-left border-collapse text-lg">
+          <table className="md:w-full text-left border-collapse text-lg">
             <thead className="bg-purple-500 text-white">
               <tr>
                 <th className="border border-gray-400 p-4">Material</th>
@@ -102,10 +102,10 @@ const ConstructionMaterials = ({ costs, city, area = 1000 }) => {
             </tbody>
           </table>
         </div>
-        <div className="bg-gray-100 p-6 shadow-lg rounded-lg border-2 border-purple-700" style={{ width: '80%' }}>
-          <h3 className="text-2xl font-bold mb-4 text-center text-purple-700">Approximate Cost of Materials</h3>
+        <div className="bg-gray-100 p-6 shadow-lg rounded-lg border-2 md:w-[80%] border-purple-700" >
+          <h3 className="md:text-2xl font-bold mb-4 text-center text-purple-700">Approximate Cost of Materials</h3>
           <div className="flex justify-center">
-          <table className="w-full text-left border-collapse text-lg">
+          <table className="md:w-full text-left border-collapse text-lg">
                 <thead className="bg-purple-500 text-white">
                   <tr>
                     <th className="border border-gray-400 p-4">Material</th>
@@ -125,7 +125,7 @@ const ConstructionMaterials = ({ costs, city, area = 1000 }) => {
         </div>
         <div className="bg-gray-100 p-6 flex flex-col items-center justify-center shadow-lg rounded-lg border-2 border-purple-700" style={{ width: '80%' }}>
           <h3 className="text-2xl font-bold mb-4 text-center text-purple-700">Cost Breakdown</h3>
-          <div style={{ width: '450px', height: '500px' }}>
+          <div style={{ width: '350px', height: '400px' }}>
               <Pie data={pieChartData} />
             </div>
         </div>
