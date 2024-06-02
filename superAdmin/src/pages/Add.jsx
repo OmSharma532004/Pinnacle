@@ -15,6 +15,8 @@ const Add = () => {
     const [city, setCity] = useState('');
     const [existingCities, setExistingCities] = useState([]);
 
+    const apiUrl=import.meta.env.VITE_API_URL;
+
     useEffect(() => {
         getAllCategories();
         getAllCities();
@@ -46,7 +48,7 @@ const Add = () => {
 
     const fetchAddCategory = async (category) => {
         try {
-            const response = await fetch('http://localhost:3000/api/category/add', {
+            const response = await fetch(`${apiUrl}/category/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -71,7 +73,7 @@ const Add = () => {
 
     const getAllCategories = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/categories');
+            const response = await fetch(`${apiUrl}/categories`);
             const data = await response.json();
             if (response.ok) {
                 setCategories(data);
@@ -85,7 +87,7 @@ const Add = () => {
 
     const addItem = async (item) => {
         try {
-            const response = await fetch('http://localhost:3000/api/item/add', {
+            const response = await fetch(`${apiUrl}/item/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -111,7 +113,7 @@ const Add = () => {
 
     const getAllCities = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/cities');
+            const response = await fetch(`${apiUrl}/cities`);
             const data = await response.json();
             if (response.ok) {
                 setCities(data.cities);
@@ -125,7 +127,7 @@ const Add = () => {
 
     const fetchAddCity = async (city) => {
         try {
-            const response = await fetch('http://localhost:3000/api/city/add', {
+            const response = await fetch(`${apiUrl}/city/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -254,7 +256,7 @@ const Add = () => {
                             className="w-full border border-gray-300 rounded-md py-2 px-3 mb-2 focus:outline-none focus:border-blue-500"
                             placeholder="Enter item price per piece"
                         />
-                        
+
                         <textarea
                             value={item.description}
                             onChange={(e) => setItem({ ...item, description: e.target.value })}

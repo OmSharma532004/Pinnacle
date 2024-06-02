@@ -6,13 +6,15 @@ function SuperAdminApproval() {
   const [adminDetails, setAdminDetails] = useState({});
   const [openDropdown, setOpenDropdown] = useState(null);
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     fetchFiles();
   }, []);
 
   const fetchFiles = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/files');
+      const response = await fetch(`${apiUrl}/files`);
       const data = await response.json();
       setFiles(data);
     } catch (error) {
@@ -22,7 +24,7 @@ function SuperAdminApproval() {
 
   const getAdminDetails = async (adminId, fileId) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/admin/${adminId}`);
+      const response = await fetch(`${apiUrl}/admin/${adminId}`);
       const data = await response.json();
       setAdminDetails((prevDetails) => ({
         ...prevDetails,
@@ -36,7 +38,7 @@ function SuperAdminApproval() {
 
   const handleReject = async (fileId) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/reject/${fileId}`, {
+      const response = await fetch(`${apiUrl}/reject/${fileId}`, {
         method: 'POST',
       });
 
@@ -53,7 +55,7 @@ function SuperAdminApproval() {
 
   const handleApprove = async (fileId) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/approve/${fileId}`, {
+      const response = await fetch(`${apiUrl}/approve/${fileId}`, {
         method: 'POST',
       });
 
@@ -70,7 +72,7 @@ function SuperAdminApproval() {
   
   const handleDelete = async (fileId) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/delete/${fileId}`, {
+      const response = await fetch(`${apiUrl}/delete/${fileId}`, {
         method: 'DELETE',
       });
 

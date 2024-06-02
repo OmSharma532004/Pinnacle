@@ -11,7 +11,7 @@ const EditMaterials = () => {
   const [category,setCategory]=useState();
   const [cityId, setCityId] = useState();
   const [deleteMaterial,setDeleteMaterial]=useState();
-
+  const apiUrl = import.meta.env.VITE_API_URL;
   useEffect(() => {
     fetchCities();
    // Debugging line
@@ -26,7 +26,7 @@ const EditMaterials = () => {
 
   const fetchCities = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/cities');
+      const response = await fetch(`${apiUrl}/cities`);
       if (response.ok) {
         const result = await response.json();
         setCities(result.cities);
@@ -41,7 +41,7 @@ const EditMaterials = () => {
   const fetchMaterialsAndCategories = async (cityId) => {
     
     try {
-      const response = await fetch(`http://localhost:3000/api/getMaterial/${cityId}`);
+      const response = await fetch(`${apiUrl}/getMaterial/${cityId}`);
       if (response.ok) {
         const result = await response.json();
         setMaterials(result.data);
@@ -69,7 +69,7 @@ const EditMaterials = () => {
   const handleDeleteMaterial=async()=>{
 
     try{
-      const response=await fetch(`http://localhost:3000/api/deleteItem/${deleteMaterial.name}/${cityId}`,{
+      const response=await fetch(`${apiUrl}/deleteItem/${deleteMaterial.name}/${cityId}`,{
         method:'DELETE',
         headers:{
           'Content-Type':'application/json'
@@ -96,7 +96,7 @@ const EditMaterials = () => {
     const body={
       name:editingCategory
     }
-    const response=await fetch(`http://localhost:3000/api/updateCategory/${category}`,{
+    const response=await fetch(`${apiUrl}/updateCategory/${category}`,{
       method:'PUT',
       headers:{
         'Content-Type':'application/json'
@@ -124,7 +124,7 @@ const EditMaterials = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/updateItem/${editingMaterial.name}/${cityId}`, {
+      const response = await fetch(`${apiUrl}/updateItem/${editingMaterial.name}/${cityId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -149,7 +149,7 @@ const EditMaterials = () => {
   const handleDeleteCategory=async()=>{
   
     try{
-      const response=await fetch(`http://localhost:3000/api/deleteCategory/${editingCategory}`,{
+      const response=await fetch(`${apiUrl}/deleteCategory/${editingCategory}`,{
         method:'DELETE',
         headers:{
           'Content-Type':'application/json'
