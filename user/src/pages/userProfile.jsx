@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ProfileComponent from '../components/Dashboard/ProfileComponent';
 import EditProfileComponent from '../components/Dashboard/EditProfileComponent';
-
+import toast from 'react-hot-toast';
 import LogoutComponent from '../components/Dashboard/Logout';
 
 const UserProfile = () => {
@@ -17,6 +17,7 @@ const UserProfile = () => {
     const apiUrl = import.meta.env.VITE_API_URL;
     const fetchUser = async () => {
         try {
+          toast.loading("Fetching user data...");
             const response = await fetch(`${apiUrl}/getUser/${userId._id}`, {
                 method: 'GET',
                 headers: {
@@ -24,6 +25,7 @@ const UserProfile = () => {
                 },
             });
             const data = await response.json();
+            toast.dismiss();
             setUser(data);
             setFormData({
                 name: data.Name,
@@ -31,6 +33,8 @@ const UserProfile = () => {
                 phoneNo: data.phoneNo,
             });
         } catch (error) {
+            toast.dismiss();
+            toast.error('Error fetching user data');
             console.error('Error fetching user data:', error);
         }
     };
@@ -50,6 +54,7 @@ const UserProfile = () => {
     const handleSubmit = async () => {
         console.log('Form Data:', formData);
         try {
+            toast.loading('Updating user data...');
             const response = await fetch(`${apiUrl}/editUser/${userId._id}`, {
                 method: 'PUT',
                 headers: {
@@ -59,8 +64,12 @@ const UserProfile = () => {
             });
             const data = await response.json();
             console.log(data);
+            toast.dismiss();
+            toast.success('User data updated successfully');
             setUser(data);
         } catch (error) {
+            toast.dismiss();
+            toast.error('Error updating user data');
             console.error('Error updating user data:', error);
         }
     };

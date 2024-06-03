@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'tailwindcss/tailwind.css';
+import toast from 'react-hot-toast';
 
 function SuperAdminApproval() {
   const [files, setFiles] = useState([]);
@@ -14,8 +15,11 @@ function SuperAdminApproval() {
 
   const fetchFiles = async () => {
     try {
+      toast.loading('Fetching files...');
       const response = await fetch(`${apiUrl}/files`);
       const data = await response.json();
+      toast.dismiss();
+      toast.success('Files fetched successfully');
       setFiles(data);
     } catch (error) {
       alert('Error fetching files');
@@ -24,12 +28,15 @@ function SuperAdminApproval() {
 
   const getAdminDetails = async (adminId, fileId) => {
     try {
+      toast.loading('Fetching admin details...');
       const response = await fetch(`${apiUrl}/admin/${adminId}`);
       const data = await response.json();
       setAdminDetails((prevDetails) => ({
         ...prevDetails,
         [fileId]: data,
       }));
+      toast.dismiss();
+      toast.success('Admin details fetched successfully');
       setOpenDropdown(fileId);
     } catch (error) {
       alert('Error fetching admin details');
@@ -37,19 +44,21 @@ function SuperAdminApproval() {
   };
 
   const handleReject = async (fileId) => {
+    
     try {
       const response = await fetch(`${apiUrl}/reject/${fileId}`, {
         method: 'POST',
       });
 
       if (response.ok) {
-        alert('File rejected successfully');
+        
+        toast.success('File rejected successfully');
         fetchFiles(); // Refresh the list of files after rejection
       } else {
-        alert('Error rejecting file');
+        toast.error('Error rejecting file');
       }
     } catch (error) {
-      alert('Error rejecting file');
+      toast.error('Error rejecting file');
     }
   };
 
@@ -60,13 +69,13 @@ function SuperAdminApproval() {
       });
 
       if (response.ok) {
-        alert('File approved successfully');
+        toast.success('File approved successfully');
         fetchFiles(); // Refresh the list of files after approval
       } else {
-        alert('Error approving file');
+        toast.error('Error approving file');
       }
     } catch (error) {
-      alert('Error approving file');
+      toast.error('Error approving file');
     }
   };
   
@@ -77,7 +86,7 @@ function SuperAdminApproval() {
       });
 
       if (response.ok) {
-        alert('File deleted successfully');
+        toast.success('File deleted successfully');
         fetchFiles(); // Refresh the list of files after deletion
         window.location.reload();
       } else {

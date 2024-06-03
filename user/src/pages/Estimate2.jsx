@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { IoIosClose } from "react-icons/io";
-
+import toast from 'react-hot-toast';
 import AnimatedCard from '../components/Estimate/animatedCard';
 import WhatsAppButton from '../components/HomePage/WhatsAppButton';
 import ConstructionMaterials from '../components/Estimate/construction';
@@ -59,20 +59,28 @@ const Estimate2 = () => {
 
   const fetchAllCities = async () => {
     try {
+      toast.loading('Fetching cities...');
       const response = await fetch(`${apiUrl}/cities`);
       if (response.ok) {
         const result = await response.json();
+        toast.dismiss();
+        toast.success('Cities fetched successfully');
         setCities(result.cities);
       } else {
+        toast.dismiss();
+        toast.error('Failed to fetch cities');
         throw new Error('Failed to fetch cities');
       }
     } catch (error) {
+      toast.dismiss();
+      toast.error('Failed to fetch cities');
       console.error('Error:', error);
     }
   };
 
   const getAllCategories = async () => {
     try {
+      toast.loading('Fetching categories...');
       const response = await fetch(`${apiUrl}/getMaterial/${selectedCity}`);
       if (response.ok) {
         const result = await response.json();
@@ -118,12 +126,18 @@ const Estimate2 = () => {
             color: color
           };
         });
+        toast.dismiss();
+        toast.success('Categories fetched successfully');
         setAllCategories(convertedCategories);
         setCurrentCategory(convertedCategories.Cement);
       } else {
+        toast.dismiss();
+        toast.error('Failed to fetch categories');
         throw new Error('Failed to fetch categories');
       }
     } catch (error) {
+      toast.dismiss();
+      toast.error('Failed to fetch categories');
       console.error('Error:', error);
     }
   };

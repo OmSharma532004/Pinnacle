@@ -20,6 +20,7 @@ const EnterOtp = () => {
             console.log("otp",otp);
             //register
             console.log(signupData)
+            toast.loading('Registering user...')
             const response=await fetch(`${apiUrl}/signup`,{
                 method:'POST',
                 headers:{
@@ -36,6 +37,7 @@ const EnterOtp = () => {
             });
             const data= await response.json();
             if(data.success){
+                toast.dismiss();
                 toast.success('User registered successfully')
                 console.log(data);
                 window.location.href='/login'

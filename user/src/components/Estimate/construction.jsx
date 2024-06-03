@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
+import toast from 'react-hot-toast';  
 
 const ConstructionMaterials = ({ costs, city, area = 1000 }) => {
   const [prices, setPrices] = useState({});
@@ -28,10 +29,13 @@ const ConstructionMaterials = ({ costs, city, area = 1000 }) => {
 
     const fetchAllPrices = async () => {
       const newPrices = {};
+      toast.loading('Calculating prices Please wait...');
       for (const [category, item] of Object.entries(costs)) {
         const price = await fetchPrices(category, item.name);
         newPrices[category] = price;
       }
+      toast.dismiss();
+      toast.success('Price calculated successfully');
       setPrices(newPrices);
     };
 

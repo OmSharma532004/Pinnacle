@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const EditMaterials = () => {
   const [selectedCity, setSelectedCity] = useState('');
@@ -26,31 +27,43 @@ const EditMaterials = () => {
 
   const fetchCities = async () => {
     try {
+      toast.loading('Fetching cities...');
       const response = await fetch(`${apiUrl}/cities`);
       if (response.ok) {
         const result = await response.json();
+        toast.dismiss();
+        toast.success('Cities fetched successfully');
         setCities(result.cities);
       } else {
+        toast.dismiss();
+        toast.error('Failed to fetch cities');
         throw new Error('Failed to fetch cities');
       }
     } catch (error) {
-     alert('Error:', error);
+      toast.dismiss();
+      toast.error('Failed to fetch cities');
     }
   };
 
   const fetchMaterialsAndCategories = async (cityId) => {
     
     try {
+      toast.loading('Fetching materials and categories...');
       const response = await fetch(`${apiUrl}/getMaterial/${cityId}`);
       if (response.ok) {
         const result = await response.json();
         setMaterials(result.data);
         setCategories(result.data.map(categoryData => categoryData.category));
-       
+        toast.dismiss();
+        toast.success('Materials and categories fetched successfully');
       } else {
+        toast.dismiss();
+        toast.error('Failed to fetch materials and categories');
         throw new Error('Failed to fetch materials and categories');
       }
     } catch (error) {
+      toast.dismiss();
+      toast.error('Failed to fetch materials and categories');
       console.error('Error:', error);
     }
   };
@@ -69,6 +82,7 @@ const EditMaterials = () => {
   const handleDeleteMaterial=async()=>{
 
     try{
+       toast.loading('Deleting Material...');
       const response=await fetch(`${apiUrl}/deleteItem/${deleteMaterial.name}/${cityId}`,{
         method:'DELETE',
         headers:{
@@ -79,9 +93,12 @@ const EditMaterials = () => {
       if(response.ok){
         fetchMaterialsAndCategories(selectedCity);
         setEditingMaterial(null);
-        alert('Material Deleted Successfully');
+        toast.dismiss();
+        toast.success('Material Deleted Successfully');
       }
       else{
+        toast.dismiss();
+        toast.error('Failed to delete material');
         throw new Error('Failed to delete material');
       }
     }
@@ -96,6 +113,7 @@ const EditMaterials = () => {
     const body={
       name:editingCategory
     }
+    toast.loading('Updating Category...');
     const response=await fetch(`${apiUrl}/updateCategory/${category}`,{
       method:'PUT',
       headers:{
@@ -105,11 +123,14 @@ const EditMaterials = () => {
     });
     if(response.ok){
       const result=await response.json();
-      alert('Category Updated Successfully');
+      toast.dismiss();
+      toast.success('Category Updated Successfully');
       setEditingCategory(null);
 
     }
     else{
+      toast.dismiss();
+      toast.error('Failed to update category');
       throw new Error('Failed to fetch category');
     }
 
@@ -122,7 +143,7 @@ const EditMaterials = () => {
       price:editingMaterial.price,
       pricePerPiece:editingMaterial.pricePerPiece
     }
-
+    toast.loading('Updating Material...');
     try {
       const response = await fetch(`${apiUrl}/updateItem/${editingMaterial.name}/${cityId}`, {
         method: 'PUT',
@@ -135,12 +156,16 @@ const EditMaterials = () => {
       if (response.ok) {
         fetchMaterialsAndCategories(selectedCity);
         setEditingMaterial(null);
-        alert('Material Updated Successfully');
+        toast.dismiss();
+        toast.success('Material updated successfully');
       } else {
+        toast.dismiss();
+        toast.error('Failed to update material');
         throw new Error('Failed to update material');
         alert('Failed to update material');
       }
     } catch (error) {
+      toast.dismiss();
       console.error('Error:', error);
       alert('Error:', error);
     }

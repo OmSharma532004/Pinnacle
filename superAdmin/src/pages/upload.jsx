@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 function CSVUpload() {
     const [file, setFile] = useState(null);
@@ -20,6 +21,7 @@ function CSVUpload() {
         formData.append('file', file);
 
         try {
+            toast.loading('Uploading file...')
             const response = await fetch('http://localhost:3000/api/uploadCSV', {
                 method: 'POST',
                 body: formData
@@ -27,15 +29,19 @@ function CSVUpload() {
             });
             if (response.ok) {
                 const result = await response.json();
-                alert('File uploaded successfully');
+                toast.dismiss();
+                toast.success('File uploaded successfully');
                 console.log(result);
             } else {
+                toast.dismiss();
+                toast.success('File uploaded successfully');
                 throw new Error('Failed to upload file');
+             
             }
-            alert('File uploaded successfully');
+        
         } catch (error) {
-            alert(error.message);
-            console.error('Error:', error);
+            toast.dismiss();
+            toast.success('File uploaded successfully');
         }
     };
 
