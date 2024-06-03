@@ -80,7 +80,7 @@ useEffect(() => {
     if (response.ok) {
       localStorage.setItem('token', res.tokenId);
       localStorage.setItem('user', JSON.stringify(userProfile));
-      window.location.href = '/dashboard';
+      window.location.href = '/';
       toast.success("Google Login Successful!");
     } else {
       toast.error("Google Login Failed!");

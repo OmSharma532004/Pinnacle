@@ -38,12 +38,14 @@ const EnterOtp = () => {
             const data= await response.json();
             if(data.success){
                 toast.dismiss();
+
                 toast.success('User registered successfully')
                 console.log(data);
                 window.location.href='/login'
             }
             else{
-                toast.error('Error registering user')
+                toast.dismiss();
+                toast.error(data.message)
                 console.log(data);
 
 
