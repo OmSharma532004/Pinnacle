@@ -6,8 +6,8 @@ function SuperAdminApproval() {
   const [files, setFiles] = useState([]);
   const [adminDetails, setAdminDetails] = useState({});
   const [openDropdown, setOpenDropdown] = useState(null);
-
-  const apiUrl = import.meta.env.VITE_API_URL;
+  const apiUrl= import.meta.env.VITE_API_URL;
+  
 
   useEffect(() => {
     fetchFiles();
@@ -127,7 +127,7 @@ function SuperAdminApproval() {
             <p><strong>Time:</strong> {new Date(files.find(file => file._id === openDropdown).uploadedAt).toLocaleString()}</p>
            <div className="flex items-center space-x-4 mt-4">
               <a
-                href={`http://localhost:3000/api/download/${files.find(file => file._id === openDropdown).name}`}
+                href={`${apiUrl}/download/${files.find(file => file._id === openDropdown).name}`}
                 download
                 className="bg-gray-800 text-white font-bold py-1 px-3 rounded-lg shadow-md transition duration-300 ease-in-out"
               >
