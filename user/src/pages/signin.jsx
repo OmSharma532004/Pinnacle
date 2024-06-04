@@ -24,6 +24,18 @@ const register= async()=>{
     const {Name,email,password,phoneNo,confirmPassword}=formData;
     if(password!==confirmPassword){
         alert('Passwords do not match')
+        return;
+    }
+    //check if password is 8 digits with one special character
+    else if(!/(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}/.test(password)){
+       toast.error('Password should have 8 digits with one special character')
+        return;
+    }
+
+    //phone no should have 10 digits
+    else if(!/^[0-9]{10}$/.test(phoneNo)){
+        toast.error('Phone number should have 10 digits')
+        return;
     }
     else{
       const toastId=toast.loading('Please wait...');
@@ -103,6 +115,7 @@ const register= async()=>{
               />
             </div>
             <div>
+              {/* add password security 8 digits with on special character */}
               <label htmlFor="password" className="sr-only">Password</label>
               <input
                 id="password"
@@ -110,9 +123,8 @@ const register= async()=>{
                 type="password"
                 autoComplete="current-password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:"
                 placeholder="Password"
-                value={formData.password}
                 onChange={(e) => setFormData({...formData,password:e.target.value})}
               />
             </div>
@@ -132,11 +144,12 @@ const register= async()=>{
                
                 </div>
                 <div>
+                  {/* add that digits should be 10 */}
                 <label htmlFor="phoneNo" className="sr-only">Phone Number</label>
                 <input
                 id="phoneNo"
                 name="phoneNo"
-                type="number"
+                type="tel"
                 autoComplete="phoneNo"
                 required
                 placeholder='Phone Number'

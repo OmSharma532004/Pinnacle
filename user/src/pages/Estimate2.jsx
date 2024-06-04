@@ -9,6 +9,8 @@ import { useSelector } from 'react-redux';
 const colorPalette = ["#3b327f", "#d6cdce", "#8c54fb", "#7758b4", "#664ca7", "#141c5c", "#0c1653", "#9b9dbc", "#6b6d9b"];
 
 const Estimate2 = () => {
+
+  const [errors, setErrors] = useState({});
   const [selectedItems, setSelectedItems] = useState({});
   const [finalCost, setFinalCost] = useState(0);
   const [allCategories, setAllCategories] = useState([]);
@@ -21,7 +23,14 @@ const Estimate2 = () => {
   const [showCalculation, setShowCalculation] = useState(false);
   const apiUrl = import.meta.env.VITE_API_URL;
   const user=useSelector(state=>state.auth.user);
-  console.log(user);
+  const [formData, setFormData] = useState({
+    name: user?user.name:'',
+    email: user?user.email:'',
+    cityName: '',
+    message: '',
+  });
+  
+
 
   const calculateFinalCost = (items) => {
     return Object.values(items).reduce((sum, item) => sum + (item.price || 0), 0);
@@ -180,6 +189,65 @@ const Estimate2 = () => {
     });
   };
 
+  const handleSubmitRequest = async (e) => {
+  
+    
+    const newErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Valid email is required';
+    }
+
+    if (!formData.cityName) {
+      newErrors.phone = 'Enter the city name';
+    }
+
+    setErrors(newErrors);
+
+    // If no errors, proceed with form submission (replace with your backend logic)
+    if (Object.keys(newErrors).length === 0) {
+        toast.loading("Sending Email...");
+    //   console.log('Submitting form data:', formData);
+      const response=await fetch(`${apiUrl}/sendMail`,{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+            name:formData.name,
+            email:formData.email,
+            phone:formData.cityName,
+            message:formData.message,
+        }),
+    });
+    const data= await response.json();
+    if(data.success){
+        toast.dismiss();
+        toast.success('Mail sent successfully')
+        console.log(data);
+        setFormData({
+
+            name: '',
+            email: '',
+            cityName: '',
+            message: '',
+          });
+          toggleMessagePanel();
+    }
+    else{
+        toast.dismiss();
+        toast.success(data.message)
+        console.log(data);
+
+    
+    }
+  };
+}
+
   return (
     <div className="flex flex-col items-center min-w-full overflow-auto h-screen bg-white text-black">
       <div className="w-full p-8">
@@ -307,37 +375,59 @@ const Estimate2 = () => {
         <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4">
           <div className="bg-white p-4 rounded-lg shadow-xl">
             <h2 className="text-xl font-bold mb-4">Request a City</h2>
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Your Name</label>
-                <input type="text" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+            {/* create the form and store all fields in formdata */}
+            <form>
+              <div className="mb-4">
+                <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Your Email</label>
-                <input type="email" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+              <div className="mb-4">
+                <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">City Name</label>
-                <input type="text" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+              <div className="mb-4">
+                <label htmlFor="cityName" className="block text-gray-700 text-sm font-bold mb-2">City Name:</label>
+                <input
+                  type="text"
+                  id="cityName"
+                  name="cityName"
+                  value={formData.cityName}
+                  onChange={(e) => setFormData({ ...formData, cityName: e.target.value })}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Message</label>
-                <textarea className="mt-1 block w-full border-gray-300 rounded-md shadow-sm" rows="4"></textarea>
+              <div className="mb-4">
+                <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">Message:</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
               </div>
-              <div className="flex justify-between items-center">
-                <button
-                  type="button"
-                  onClick={toggleMessagePanel}
-                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                >
-                  Close
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                >
-                  Send Request
-                </button>
+              
+              <div className="flex justify-between">
+                <button className="bg-black text-white p-4 rounded-lg" onClick={toggleMessagePanel}>Close</button>
+                <button className="bg-black text-white p-4 rounded-lg" onClick={(e)=>{
+                  e.preventDefault();
+                  handleSubmitRequest();
+                }} >Send</button>
+                
               </div>
             </form>
           </div>

@@ -89,9 +89,9 @@ const UserProfile = () => {
               <li className={`mb-4 ${activeTab === 'editProfile' ? 'bg-purple-800 rounded-xl' : ''}`}>
                 <a href="#" onClick={() => handleTabClick('editProfile')} className="block py-2 px-4 rounded hover:text-gray-300">Edit Profile</a>
               </li>
-              <li className={`mb-4 ${activeTab === 'settings' ? 'bg-purple-800 rounded-xl' : ''}`}>
+              {/* <li className={`mb-4 ${activeTab === 'settings' ? 'bg-purple-800 rounded-xl' : ''}`}>
                 <a href="#" onClick={() => handleTabClick('settings')} className="block py-2 px-4 rounded hover:text-gray-300">Settings</a>
-              </li>
+              </li> */}
               <li className={`mb-4 ${activeTab === 'logout' ? 'bg-purple-800 rounded-xl' : ''}`}>
                 <a href="#" onClick={() => handleTabClick('logout')} className="block py-2 px-4 rounded hover:text-gray-300">Logout</a>
               </li>
