@@ -42,7 +42,7 @@ const Dashboard = () => {
                   <div className="flex-1">
              
                     <a
-                    href={`http://localhost:3000/api/download/${file.name}`}
+                    href={`${apiUrl}/download/${file.name}`}
                     download
                     className=" p-4 text-gray-900 font-bold m-4 rounded-lg shadow-md transition duration-300 ease-in-out"
                   >
