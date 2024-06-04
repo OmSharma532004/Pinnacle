@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import toast from 'react-hot-toast';
 function AdminUpload() {
   const apiUrl = import.meta.env.VITE_API_URL;
   const [file, setFile] = useState(null);
@@ -17,12 +17,14 @@ function AdminUpload() {
       return;
     }
 
+
     const formData = new FormData();
     formData.append('file', file);
     formData.append('user', user); // Append the user ID directly
     formData.append('time', Date.now().toString()); // Convert time to string
 
     try {
+      toast.loading('Uploading file...');
       const response = await fetch(`${apiUrl}/upload`, {
         method: 'POST',
         body: formData,
@@ -32,10 +34,14 @@ function AdminUpload() {
       });
 
       if (response.ok) {
-        alert('File uploaded successfully');
+        const data = await response.json();
+        toast.dismiss();
+        toast.success('File uploaded successfully');
+        console.log(data);
       } else {
         const errorData = await response.json();
-        alert(`Error uploading file: ${errorData.message}`);
+        toast.dismiss();
+        toast.error('Failed to upload file');
       }
     } catch (error) {
       alert('Error uploading file');

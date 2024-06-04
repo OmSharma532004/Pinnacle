@@ -8,6 +8,7 @@ const Login = () => {
   const apiUrl=import.meta.env.VITE_API_URL;
 
   const login = async () => {
+    toast.loading('Logging in...');
     const res = await fetch(`${apiUrl}/admin/login`, {
       method: 'POST',
       headers: {
@@ -19,6 +20,7 @@ const Login = () => {
     });
     const data = await res.json();
     if (res.ok) {
+      toast.dismiss();
       toast.success("Login Successful!");
       setEmail('');
       setPassword('');
@@ -27,6 +29,7 @@ const Login = () => {
       localStorage.setItem('user', JSON.stringify(data.user._id));
       window.location.href = '/dashboard';
     } else {
+      toast.dismiss();
       toast.error("Invalid Credentials!");
     }
   }

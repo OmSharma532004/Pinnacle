@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import toast from 'react-hot-toast';
 const Dashboard = () => {
   const userId = useSelector(state => state.auth.user);
   const [files, setFiles] = useState([]);
@@ -13,11 +13,16 @@ const Dashboard = () => {
 
   const getFiles = async () => {
     try {
+      toast.loading('Fetching files...');
       const response = await fetch(`${apiUrl}/files/${userId}`);
       if (response.ok) {
+        toast.dismiss();
+        toast.success('Files fetched successfully');
         const result = await response.json();
         setFiles(result);
       } else {
+        toast.dismiss();
+        toast.error('Failed to fetch files');
         throw new Error('Failed to fetch files');
       }
     } catch (error) {

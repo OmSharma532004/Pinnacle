@@ -1,7 +1,7 @@
 //create a signup page with wnteries name email password phone no as entries
 
 import React, { useState } from 'react';
-
+import toast from 'react-hot-toast';
 const Signup = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -9,6 +9,7 @@ const Signup = () => {
     const [phone, setPhone] = useState('');
     const apiUrl = import.meta.env.VITE_API_URL;
     const createAdmin=async()=>{
+        toast.loading('Creating Admin')
         const res=await fetch(`${apiUrl}/admin/signup`,{
             method:'POST',
             headers:{
@@ -20,8 +21,12 @@ const Signup = () => {
         });
         const data=await res.json();
         if(res.ok){
+            toast.dismiss();
+            toast.success('Admin created successfully');
             console.log(data);
         }else{
+            toast.dismiss();
+            toast.error('Error creating admin');
             console.log('error');
         }
 
