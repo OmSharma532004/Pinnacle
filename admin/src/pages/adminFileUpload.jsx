@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 function AdminUpload() {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [file, setFile] = useState(null);
   const user = useSelector(state => state.auth.user); // Ensure this is an ID
   console.log('User ID:', user); // Debugging
@@ -22,7 +23,7 @@ function AdminUpload() {
     formData.append('time', Date.now().toString()); // Convert time to string
 
     try {
-      const response = await fetch('http://localhost:3000/api/upload', {
+      const response = await fetch(`${apiUrl}/upload`, {
         method: 'POST',
         body: formData,
         headers: {

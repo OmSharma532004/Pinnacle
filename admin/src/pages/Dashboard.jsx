@@ -5,7 +5,7 @@ const Dashboard = () => {
   const userId = useSelector(state => state.auth.user);
   const [files, setFiles] = useState([]);
 
-  
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     getFiles();
@@ -13,7 +13,7 @@ const Dashboard = () => {
 
   const getFiles = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/files/${userId}`);
+      const response = await fetch(`${apiUrl}/files/${userId}`);
       if (response.ok) {
         const result = await response.json();
         setFiles(result);

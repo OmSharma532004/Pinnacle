@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { toast } from "react-hot-toast";
-import { GoogleLogin } from 'react-google-login';
 
-const clientid = "646102159744-39spi62n4lc3orsasooie7je0uka1hc9.apps.googleusercontent.com";
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const apiUrl=import.meta.env.VITE_API_URL;
 
   const login = async () => {
-    const res = await fetch('http://localhost:3000/api/admin/login', {
+    const res = await fetch(`${apiUrl}/admin/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

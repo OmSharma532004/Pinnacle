@@ -7,9 +7,9 @@ const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [phone, setPhone] = useState('');
-
+    const apiUrl = import.meta.env.VITE_API_URL;
     const createAdmin=async()=>{
-        const res=await fetch('http://localhost:3000/api/admin/signup',{
+        const res=await fetch(`${apiUrl}/admin/signup`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
