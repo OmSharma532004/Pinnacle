@@ -26,6 +26,7 @@ const sendMail = async (req, res) => {
             "Demo Request",
             "Thank you for your interest in our services. We will get back to you shortly."
         );
+        return res.json({success:true});
     }
     catch(error) {
         console.log(error.message);

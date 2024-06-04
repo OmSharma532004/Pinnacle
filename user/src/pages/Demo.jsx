@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
 function BookDemoForm() {
-    toast.loading("Sending Email...");
+    
     const apiUrl = import.meta.env.VITE_API_URL;
   const [formData, setFormData] = useState({
     name: '',
@@ -38,7 +38,8 @@ function BookDemoForm() {
 
     // If no errors, proceed with form submission (replace with your backend logic)
     if (Object.keys(newErrors).length === 0) {
-      console.log('Submitting form data:', formData);
+        toast.loading("Sending Email...");
+    //   console.log('Submitting form data:', formData);
       const response=await fetch(`${apiUrl}/sendMail`,{
         method:'POST',
         headers:{

@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import AnimatedCard from '../components/Estimate/animatedCard';
 import WhatsAppButton from '../components/HomePage/WhatsAppButton';
 import ConstructionMaterials from '../components/Estimate/construction';
+import { useSelector } from 'react-redux';
 
 const colorPalette = ["#3b327f", "#d6cdce", "#8c54fb", "#7758b4", "#664ca7", "#141c5c", "#0c1653", "#9b9dbc", "#6b6d9b"];
 
@@ -19,6 +20,8 @@ const Estimate2 = () => {
   const [materialCosts, setMaterialCosts] = useState({});
   const [showCalculation, setShowCalculation] = useState(false);
   const apiUrl = import.meta.env.VITE_API_URL;
+  const user=useSelector(state=>state.auth.user);
+  console.log(user);
 
   const calculateFinalCost = (items) => {
     return Object.values(items).reduce((sum, item) => sum + (item.price || 0), 0);
@@ -51,6 +54,9 @@ const Estimate2 = () => {
   };
 
   useEffect(() => {
+    if(!user){
+      window.location.href='/login';
+    }
     if (selectedCity) {
       getAllCategories(selectedCity);
     }
@@ -144,6 +150,15 @@ const Estimate2 = () => {
 
   const handleCardClick = (category) => {
     setCurrentCategory(category);
+    //scroll down the screen to 500px down
+    
+    window.scrollTo({
+      top: 900,
+      behavior: "smooth"
+    });
+
+    
+
   };
 
   const handleAddToCart = (item) => {

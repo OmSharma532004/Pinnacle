@@ -20,7 +20,7 @@ const slides = [
           <li>470+ Quality Checks</li>
           <li>100% Money Safety</li>
         </ul>
-       <Link to={"/demo"}>
+       <Link to={'/demo'}>
         <button className="bg-purple-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded">
          Book Free Consultation
         </button>
