@@ -6,6 +6,7 @@ import i1 from "../components/HomePage/image.png"
 import i2 from "../assets/loginPage/i2.png"
 import i3 from "../assets/loginPage/i3.png"
 import { useEffect } from 'react';
+import {Link} from 'react-router-dom';
 
 
 const images = [
@@ -176,8 +177,10 @@ useEffect(() => {
           <p className="mt-4 text-center text-sm text-gray-600">Don't have an account? <a href="/signup" className="font-medium text-gray-900 hover:text-gray-700">Sign up</a></p>
         </div>
         <div>
-          <p className="mt-4 text-center text-sm text-gray-600">Forgot your password? <a href="/reset-password" className="font-medium text-gray-900 hover:text-gray-700">Reset Password</a></p>
-        </div>
+          
+          <p className="mt-4 text-center text-sm text-gray-600">Forgot your password?<Link to={"/reset-password"} > <button>Reset Password</button> </Link></p>
+
+                  </div>
       </div>
       </div>
     </div>
