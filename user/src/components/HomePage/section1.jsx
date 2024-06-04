@@ -11,7 +11,7 @@ const Section1 = () => {
             <h1 className="text-4xl flex-col items-center justify-center text-purple-800  mb-3">"Constructing Dreams, Shaping Futures"</h1>
             <p className="mb-[50px] font-light text-xl">Welcome to <b className='text-purple-800  text-2xl'>Building It</b>, where construction isn't just about building structures; it's about constructing dreams and shaping futures. Our ethos is rooted in reliability, professionalism, and a commitment to excellence that sets us apart in the construction industry.</p>
             
-            <Link className=' bg-yellow-300 text-gray-800 text-xl p-4 rounded-xl' to={"/dashboard"}>Calculate Estimate</Link> </div>
+            <Link className=' bg-yellow-300 text-gray-800 text-xl p-4 rounded-xl' to={"/demo"}>Book A Demo</Link> </div>
           <div>
             <div className="flex flex-col items-center">
               
