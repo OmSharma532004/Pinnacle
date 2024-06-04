@@ -170,6 +170,13 @@ useEffect(() => {
               </button>
             )}
           />
+          
+        </div>
+        <div>
+          <p className="mt-4 text-center text-sm text-gray-600">Don't have an account? <a href="/signup" className="font-medium text-gray-900 hover:text-gray-700">Sign up</a></p>
+        </div>
+        <div>
+          <p className="mt-4 text-center text-sm text-gray-600">Forgot your password? <a href="/reset-password" className="font-medium text-gray-900 hover:text-gray-700">Reset Password</a></p>
         </div>
       </div>
       </div>

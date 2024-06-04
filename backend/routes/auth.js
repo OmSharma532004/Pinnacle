@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const { signup, signin ,sendotp, adminLogin, adminSignup, getAdminDetails} = require('../controllers/auth'); // Import signup and signin controllers
 const passport = require('passport');
+const { resetPasswordToken, resetPassword } = require('../controllers/resetPassword');
 
 
 router.post('/admin/login',adminLogin);
@@ -52,5 +53,11 @@ router.get('/logout',(req,res)=>{
     req.logout();
     res.redirect(process.env.CLIENT_URL);
 });
+
+router.post("/reset-password-token", resetPasswordToken)
+
+router.post("/reset-password", resetPassword)
+
+
 
 module.exports = router;

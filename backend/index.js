@@ -41,12 +41,14 @@ const fileRoutes = require('./routes/fileRoutes');
 const authRoutes = require('./routes/auth');
 const getMaterialRoutes = require('./routes/getMaterial');
 const materialAdditionRoutes = require('./routes/MaterialAddition');
+const mailSendRoutes = require('./routes/mailSend');
 
 app.use('/api', userRoutes);
 app.use('/api', fileRoutes);
 app.use('/api', authRoutes);
 app.use('/api', getMaterialRoutes);
 app.use('/api', materialAdditionRoutes);
+app.use('/api', mailSendRoutes);
 
 // Example route
 app.get('/', (req, res) => {

@@ -19,6 +19,13 @@ const UserSchema = new mongoose.Schema({
         type: Number,
      
     },
+    token:{
+        type:String,
+    },
+    resetPasswordExpires: {
+        type: Date,
+    },
+    
     approvedHouses: {
         //object with ref property
         type:  mongoose.Schema.Types.ObjectId,

@@ -12,6 +12,9 @@ import Dashboard from './pages/dashboard'
 import {gapi} from 'gapi-script'
 import Estimate2 from './pages/Estimate2'
 import UserProfile from './pages/userProfile'
+import UpdatePassword from './pages/updatePassword'
+import ForgotPassword from './pages/enterEmail'
+import BookDemoForm from './pages/Demo'
 
 
 
@@ -43,6 +46,9 @@ function App() {
 <Route path='/otp' element={<EnterOtp/>} />
 <Route path='/dashboard' element={<Estimate2/>} />
 <Route path='/profile'element={<UserProfile/>} />
+<Route path='/update-password/:id' element={<UpdatePassword/>} />
+<Route path='/reset-password' element={<ForgotPassword/>} />
+<Route path='/demo' element={<BookDemoForm/>} />
 
 
 
