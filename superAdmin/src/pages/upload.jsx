@@ -34,7 +34,7 @@ function CSVUpload() {
                 console.log(result);
             } else {
                 toast.dismiss();
-                toast.success('File uploaded successfully');
+                toast.error(response);
                 throw new Error('Failed to upload file');
              
             }
