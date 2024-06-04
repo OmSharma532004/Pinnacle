@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 
 function BookDemoForm() {
+    toast.loading("Sending Email...");
     const apiUrl = import.meta.env.VITE_API_URL;
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    message: '',
   });
   const [errors, setErrors] = useState({});
 
@@ -16,7 +18,7 @@ function BookDemoForm() {
   };
 
   const handleSubmit = async (e) => {
-    toast.loading('Please wait...');
+  
     e.preventDefault();
     const newErrors = {};
 
@@ -45,7 +47,8 @@ function BookDemoForm() {
         body:JSON.stringify({
             name:formData.name,
             email:formData.email,
-            body:formData
+            phone:formData.phone,
+            message:formData.message
         }),
     });
     const data= await response.json();
@@ -61,7 +64,7 @@ function BookDemoForm() {
     }
     else{
         toast.dismiss();
-        toast.error(data.message)
+        toast.success(data.message)
         console.log(data);
 
     
@@ -127,6 +130,18 @@ function BookDemoForm() {
                 }`}
             />
             {errors.phone && <p className="text-red-500 text-xs italic">{errors.phone}</p>}
+        </div>
+
+        {/* Message Input */}
+        <div className="mb-4">
+          <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">Message:</label>
+          <textarea
+            id="message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          />
         </div>
 
         <div className="flex items-center justify-center">
