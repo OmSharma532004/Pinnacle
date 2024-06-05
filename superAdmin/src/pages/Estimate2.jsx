@@ -4,40 +4,40 @@ import toast from 'react-hot-toast';
 import AnimatedCard from '../components/Estimate/animatedCard';
 // import WhatsAppButton from '../components/HomePage/WhatsAppButton';
 import ConstructionMaterials from '../components/Estimate/construction';
+import { useSelector } from 'react-redux';
 
 const colorPalette = ["#3b327f", "#d6cdce", "#8c54fb", "#7758b4", "#664ca7", "#141c5c", "#0c1653", "#9b9dbc", "#6b6d9b"];
 
 const Estimate2 = () => {
+
+  const [errors, setErrors] = useState({});
   const [selectedItems, setSelectedItems] = useState({});
   const [finalCost, setFinalCost] = useState(0);
   const [allCategories, setAllCategories] = useState([]);
   const [currentCategory, setCurrentCategory] = useState(allCategories[0]);
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState(cities[0]);
-  const [show, setShow] = useState(false);
-  const [showDrawer, setShowDrawer] = useState(false);
   const [showMessagePanel, setShowMessagePanel] = useState(false);
-  const [showQueryForm, setShowQueryForm] = useState(false);
   const [plotSize, setPlotSize] = useState(0);
   const [materialCosts, setMaterialCosts] = useState({});
   const [showCalculation, setShowCalculation] = useState(false);
-
   const apiUrl = import.meta.env.VITE_API_URL;
+  const user=useSelector(state=>state.auth.user);
+  const [formData, setFormData] = useState({
+    name: user?user.name:'',
+    email: user?user.email:'',
+    cityName: '',
+    message: '',
+  });
+  
+
 
   const calculateFinalCost = (items) => {
     return Object.values(items).reduce((sum, item) => sum + (item.price || 0), 0);
   };
 
-  const toggleDrawer = () => {
-    setShowDrawer(!showDrawer);
-  };
-
   const toggleMessagePanel = () => {
     setShowMessagePanel(!showMessagePanel);
-  };
-
-  const toggleQueryForm = () => {
-    setShowQueryForm(!showQueryForm);
   };
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const Estimate2 = () => {
       Object.keys(selectedItems).forEach((category) => {
         const item = selectedItems[category];
         updatedMaterialCosts[category] = {
-          price: item.price*plotSize,
+          price: item.price * plotSize,
           name: item.name,
         };
       });
@@ -63,6 +63,9 @@ const Estimate2 = () => {
   };
 
   useEffect(() => {
+    if(!user){
+      window.location.href='/login';
+    }
     if (selectedCity) {
       getAllCategories(selectedCity);
     }
@@ -75,9 +78,9 @@ const Estimate2 = () => {
       const response = await fetch(`${apiUrl}/cities`);
       if (response.ok) {
         const result = await response.json();
-        setCities(result.cities);
         toast.dismiss();
         toast.success('Cities fetched successfully');
+        setCities(result.cities);
       } else {
         toast.dismiss();
         toast.error('Failed to fetch cities');
@@ -156,6 +159,15 @@ const Estimate2 = () => {
 
   const handleCardClick = (category) => {
     setCurrentCategory(category);
+    //scroll down the screen to 500px down
+    
+    window.scrollTo({
+      top: 900,
+      behavior: "smooth"
+    });
+
+    
+
   };
 
   const handleAddToCart = (item) => {
@@ -176,6 +188,65 @@ const Estimate2 = () => {
       return updatedItems;
     });
   };
+
+  const handleSubmitRequest = async (e) => {
+  
+    
+    const newErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+
+    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Valid email is required';
+    }
+
+    if (!formData.cityName) {
+      newErrors.phone = 'Enter the city name';
+    }
+
+    setErrors(newErrors);
+
+    // If no errors, proceed with form submission (replace with your backend logic)
+    if (Object.keys(newErrors).length === 0) {
+        toast.loading("Sending Email...");
+    //   console.log('Submitting form data:', formData);
+      const response=await fetch(`${apiUrl}/sendMail`,{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+            name:formData.name,
+            email:formData.email,
+            phone:formData.cityName,
+            message:formData.message,
+        }),
+    });
+    const data= await response.json();
+    if(data.success){
+        toast.dismiss();
+        toast.success('Mail sent successfully')
+        console.log(data);
+        setFormData({
+
+            name: '',
+            email: '',
+            cityName: '',
+            message: '',
+          });
+          toggleMessagePanel();
+    }
+    else{
+        toast.dismiss();
+        toast.success(data.message)
+        console.log(data);
+
+    
+    }
+  };
+}
 
   return (
     <div className="flex flex-col items-center min-w-full overflow-auto h-screen bg-white text-black">
@@ -206,6 +277,46 @@ const Estimate2 = () => {
             </select>
           </div>
         </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
+          {Object.values(allCategories).map((category) => (
+            <div key={category.id} className=" md:hidden category-card">
+              <div
+                onClick={() => handleCardClick(category)}
+                className="flex items-center justify-around text-red-600 rounded-3xl shadow-md cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+              >
+                <div className="flex flex-grow">
+                  <div className="w-1/2 bg-purple-700 text-white rounded-l-3xl flex items-center justify-center p-4">
+                    <h2 className=" text-lg">{category.id}</h2>
+                  </div>
+                  <div className="w-1/2 bg-white text-gray-800 rounded-r-3xl flex items-center justify-center p-4">
+                    <div>
+                      <p>Selected: {selectedItems[category.id]?.name || "None"}</p>
+                      <p>Price: ₹{selectedItems[category.id]?.price || 0}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className={`items-container ${currentCategory && currentCategory.id === category.id ? '' : 'hidden md:block'}`}>
+                {currentCategory && currentCategory.id === category.id && (
+                  <div className="mt-4 p-4 rounded-lg shadow-md bg-gray-200">
+                    <h2 className="w-full font-semibold text-lg text-black mb-4">You Can Choose From :</h2>
+                    <div className="flex flex-wrap justify-center gap-4">
+                      {currentCategory.items.map(item => (
+                        <AnimatedCard
+                          key={item.id}
+                          item={item}
+                          isSelected={selectedItems[currentCategory.id]?.id === item.id}
+                          onAddOrRemove={handleAddToCart}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className=' hidden md:flex flex-col'>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-4">
           {Object.values(allCategories).map((category) => (
             <div
@@ -242,142 +353,90 @@ const Estimate2 = () => {
             </div>
           </div>
         )}
+        </div>
       </div>
       {/* <div className="w-full mt-4">
         <WhatsAppButton />
       </div> */}
       <div className="fixed bottom-5 right-5">
-        {/* <button
-          onClick={toggleDrawer}
-          className="bg-yellow-300 text-gray-800 hover:bg-yellow-500 text-xl py-3 px-6 rounded-xl shadow-lg transition duration-300"
-        >
-          Cart ₹{finalCost}
-        </button> */}
-        <div className="mt-4 fixed right-0 top-[20%]">
-          <div onClick={toggleMessagePanel} className="bg-yellow-300 text-black text-center py-2 px-4 rounded-lg cursor-pointer">
-            City Not listed? Send us a request
-          </div>
+        <div className="mt-4  right-0 top-[20%] sm:fixed">
+          {selectedCity ? (
+            <>
+              {/* Additional Content if city is selected */}
+            </>
+          ) : (
+            <div onClick={toggleMessagePanel} className="bg-yellow-300 text-black text-center py-2 px-4 rounded-lg cursor-pointer">
+              City not listed? Send us a request
+            </div>
+          )}
         </div>
       </div>
-      {/* {showDrawer && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4">
-          <div className="bg-gray-200 p-4 rounded-lg shadow-xl text-black">
-            <h2 className="text-xl mb-4">Selected Items</h2>
-            <ul>
-              {Object.entries(selectedItems).map(([categoryId, item]) => (
-                <li key={categoryId} className="p-2 border-4 text-gray-800 bg-white border-purple-600 rounded my-2 flex gap-[50px] justify-between items-center">
-                  {item.name}
-                  <button
-                    className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                    onClick={() => handleRemoveFromCart(categoryId)}
-                  >
-                    <IoIosClose style={{ fontSize: "2rem" }} />
-                  </button>
-                </li>
-              ))}
-            </ul>
-            <p className='text-black'>For Plot Size: {plotSize} sqM</p>
-            <p className="text-lg">Total Cost: ₹{finalCost * plotSize}</p>
-            <button
-              onClick={toggleDrawer}
-              className="mt-4 absolute top-[0%] left-[48%] bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-            >
-              <IoIosClose style={{ fontSize: "2rem" }} />
-            </button>
-            <button
-              onClick={toggleQueryForm}
-              className="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Send us A query
-            </button>
-            <button className="mt-4 ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Save
-            </button>
-            {showQueryForm && (
-              <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4">
-                <div className="bg-white p-4 rounded-lg shadow-xl">
-                  <h2 className="text-xl font-bold mb-4">Send Us a Query</h2>
-                  <form className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700">Your Name</label>
-                      <input type="text" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700">Your Email</label>
-                      <input type="email" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700">Message</label>
-                      <textarea className="mt-1 block w-full border-gray-300 rounded-md shadow-sm" rows="4"></textarea>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <button
-                        type="button"
-                        onClick={toggleQueryForm}
-                        className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                      >
-                        Close
-                      </button>
-                      <button
-                        type="submit"
-                        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                      >
-                        Send Query
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )} */}
       {showMessagePanel && (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center p-4">
           <div className="bg-white p-4 rounded-lg shadow-xl">
             <h2 className="text-xl font-bold mb-4">Request a City</h2>
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Your Name</label>
-                <input type="text" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+            {/* create the form and store all fields in formdata */}
+            <form>
+              <div className="mb-4">
+                <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Your Email</label>
-                <input type="email" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+              <div className="mb-4">
+                <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">City Name</label>
-                <input type="text" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
+              <div className="mb-4">
+                <label htmlFor="cityName" className="block text-gray-700 text-sm font-bold mb-2">City Name:</label>
+                <input
+                  type="text"
+                  id="cityName"
+                  name="cityName"
+                  value={formData.cityName}
+                  onChange={(e) => setFormData({ ...formData, cityName: e.target.value })}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Message</label>
-                <textarea className="mt-1 block w-full border-gray-300 rounded-md shadow-sm" rows="4"></textarea>
+              <div className="mb-4">
+                <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">Message:</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
               </div>
-              <div className="flex justify-between items-center">
-                <button
-                  type="button"
-                  onClick={toggleMessagePanel}
-                  className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                >
-                  Close
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                >
-                  Send Request
-                </button>
+              
+              <div className="flex justify-between">
+                <button className="bg-black text-white p-4 rounded-lg" onClick={toggleMessagePanel}>Close</button>
+                <button className="bg-black text-white p-4 rounded-lg" onClick={(e)=>{
+                  e.preventDefault();
+                  handleSubmitRequest();
+                }} >Send</button>
+                
               </div>
             </form>
           </div>
         </div>
       )}
-      <button className=' bg-black text-white p-4 rounded-lg m-4' onClick={calculate} >Calculate</button>
-      {
-        showCalculation && materialCosts && (
-          <ConstructionMaterials costs={materialCosts} city={selectedCity} area={plotSize} />
-        )
-      }
+      <button className='bg-black text-white p-4 rounded-lg m-4' onClick={calculate}>Calculate</button>
+      {showCalculation && materialCosts && (
+        <ConstructionMaterials costs={materialCosts} city={selectedCity} area={plotSize} />
+      )}
     </div>
   );
 };

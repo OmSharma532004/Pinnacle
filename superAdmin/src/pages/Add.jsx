@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import uploadCSV from './upload';
 import toast from 'react-hot-toast';
 import CSVUpload from './upload';
-
+import { useSelector } from 'react-redux';
 const Add = () => {
     const [selectedOption, setSelectedOption] = useState('Upload from CSV');
     const [category, setCategory] = useState('');
@@ -14,6 +14,8 @@ const Add = () => {
     const [filteredCategories, setFilteredCategories] = useState([]);
     const [city, setCity] = useState('');
     const [existingCities, setExistingCities] = useState([]);
+    const auth=useSelector(state=>state.auth);
+    const user=auth.user;
 
     const apiUrl=import.meta.env.VITE_API_URL;
 
@@ -148,8 +150,15 @@ const Add = () => {
     const handleAddCity = () => {
         fetchAddCity(city);
     };
+    useEffect(() => {
+        if(!user){
+            window.location.href='/'
+        }
+    }
+    , [])
 
     return (
+        
         <div className="flex w-screen min-h-screen bg-purple-800">
             <div className="w-1/4 bg-purple-800 text-white  p-6">
                 <ul>

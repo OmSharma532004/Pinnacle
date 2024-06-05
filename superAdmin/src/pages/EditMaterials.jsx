@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 const EditMaterials = () => {
   const [selectedCity, setSelectedCity] = useState('');
@@ -13,7 +14,12 @@ const EditMaterials = () => {
   const [cityId, setCityId] = useState();
   const [deleteMaterial,setDeleteMaterial]=useState();
   const apiUrl = import.meta.env.VITE_API_URL;
+  const user=useSelector(state=>state.auth.user);
   useEffect(() => {
+    if(!user){
+      window.location.href='/';
+    }
+
     fetchCities();
    // Debugging line
   }, []);
@@ -75,15 +81,14 @@ const EditMaterials = () => {
     
   };
   const handleDelete=(material)=>{
-    setDeleteMaterial(material);
-    handleDeleteMaterial();
+    handleDeleteMaterial(material);
   }
 
-  const handleDeleteMaterial=async()=>{
-
+  const handleDeleteMaterial=async(material)=>{
+   setDeleteMaterial(material);
     try{
        toast.loading('Deleting Material...');
-      const response=await fetch(`${apiUrl}/deleteItem/${deleteMaterial.name}/${cityId}`,{
+      const response=await fetch(`${apiUrl}/deleteItem/${material.name}/${cityId}`,{
         method:'DELETE',
         headers:{
           'Content-Type':'application/json'
@@ -104,7 +109,7 @@ const EditMaterials = () => {
     }
     catch(error){
       console.error('Error:',error);
-      alert('Error:',error);
+      // alert('Error:',error);
     }
   }
 
@@ -286,8 +291,14 @@ const EditMaterials = () => {
                         </button>
                         <button
                           onClick={() => {
-                            handleDelete(item);
                             setDeleteMaterial(item);
+                            //setTimer before calling handleDelete
+                            handleDeleteMaterial(item);
+
+
+
+        
+                         
                           }}
                           className="bg-yellow-500 text-white px-4 py-2 rounded"
                         >

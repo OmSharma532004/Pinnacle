@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import 'tailwindcss/tailwind.css';
 import toast from 'react-hot-toast';
-
+import { useSelector } from 'react-redux';
 function SuperAdminApproval() {
   const [files, setFiles] = useState([]);
   const [adminDetails, setAdminDetails] = useState({});
   const [openDropdown, setOpenDropdown] = useState(null);
   const apiUrl= import.meta.env.VITE_API_URL;
-  
+  const user=useSelector(state=>state.auth.user);
 
   useEffect(() => {
+    if(!user){
+      window.location.href='/';
+    }
     fetchFiles();
   }, []);
 

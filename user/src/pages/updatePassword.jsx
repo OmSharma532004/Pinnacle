@@ -3,11 +3,10 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { BiArrowBack } from "react-icons/bi"
 import toast from "react-hot-toast"
 import { Link, useLocation } from "react-router-dom"
-
-
+import { useNavigate } from "react-router-dom"
 function UpdatePassword() {
     const apiUrl = import.meta.env.VITE_API_URL;
-  
+  const navigate = useNavigate();
   const location = useLocation()
 
   const [formData, setFormData] = useState({
@@ -29,6 +28,21 @@ function UpdatePassword() {
 
   const handleOnSubmit = async (e) =>  {
     e.preventDefault()
+    //check if password is 8 characters with a special character
+    if (password.length < 8) {
+        toast.error("Password must be at least 8 characters")
+        return
+    }
+    if (password !== confirmPassword) {
+        toast.error("Passwords do not match")
+        return
+    }
+
+    //it should also have a special character
+    if (!/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password)) {
+        toast.error("Password must contain a special character")
+        return
+    }
     toast.loading("Please wait...")
     const token = location.pathname.split("/").at(-1)
     console.log(token)
@@ -48,6 +62,8 @@ function UpdatePassword() {
         toast.dismiss();
         toast.success('Password updated successfully')
         console.log(data);
+        navigate('/login');
+        
        
     }
     else{

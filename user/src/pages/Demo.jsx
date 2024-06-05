@@ -55,22 +55,26 @@ function BookDemoForm() {
     const data= await response.json();
     if(data.success){
         toast.dismiss();
-        toast.success('Mail sent successfully')
+        toast.success('Thanks, Our team will contact you soon!')
         console.log(data);
         setFormData({
             name: '',
             email: '',
             phone: '',
           });
+        
+          window.location.href='/'
+         
     }
     else{
         toast.dismiss();
-        toast.success(data.message)
+        toast.success('Error sending mail')
         console.log(data);
-
+        
     
     }
   };
+  
 }
 
   return (

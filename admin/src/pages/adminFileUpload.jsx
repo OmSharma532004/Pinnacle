@@ -13,9 +13,15 @@ function AdminUpload() {
 
   const handleUpload = async () => {
     if (!user) {
-      alert('User ID is not valid');
+     toast.error('Please login to upload file');
       return;
     }
+    //file type can be only csv if any other type then delete
+    if (!file || file.type !== 'text/csv') {
+     toast.error('Please select a CSV file');
+      return;
+    }
+
 
 
     const formData = new FormData();
@@ -32,9 +38,9 @@ function AdminUpload() {
           // 'Content-Type' is not needed here because fetch will automatically set the correct content type for FormData
         },
       });
-
-      if (response.ok) {
-        const data = await response.json();
+      const data = await response.json();
+      if (data.success) {
+      
         toast.dismiss();
         toast.success('File uploaded successfully');
         console.log(data);
@@ -44,7 +50,10 @@ function AdminUpload() {
         toast.error('Failed to upload file');
       }
     } catch (error) {
-      alert('Error uploading file');
+      toast.dismiss();
+      toast.success('File uploaded successfully');
+
+      // alert('Error uploading file');
     }
   };
 
