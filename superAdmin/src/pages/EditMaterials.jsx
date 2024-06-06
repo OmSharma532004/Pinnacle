@@ -235,7 +235,7 @@ const EditMaterials = () => {
               {categories.map((category) => (
                 <tr key={category.id}>
                   <td className="border border-purple-300 p-2">{category}</td>
-                  <td className="border border-purple-300 p-2">
+                  <td className="border text-center border-purple-300 p-2">
                     <button
                       onClick={() => {
                         setEditingCategory(category);
@@ -279,10 +279,10 @@ const EditMaterials = () => {
                 <tbody>
                   {materialData.itemInThatCity.map((item) => (
                     <tr key={item.id}>
-                      <td className="border border-purple-300 p-2">{item.name}</td>
+                      <td className="border w-[300px] border-purple-300 p-2">{item.name}</td>
                       <td className="border border-purple-300 p-2">₹{item.price}</td>
                       <td className="border border-purple-300 p-2">₹{item.pricePerPiece}</td>
-                      <td className="border border-purple-300 p-2">
+                      <td className="border text-center border-purple-300 p-2">
                         <button
                           onClick={() => handleEditMaterial(item)}
                           className="bg-purple-500 text-white px-4 py-2 rounded mr-2"

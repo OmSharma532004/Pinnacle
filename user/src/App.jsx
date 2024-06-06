@@ -16,6 +16,8 @@ import UpdatePassword from './pages/updatePassword'
 import ForgotPassword from './pages/enterEmail'
 import BookDemoForm from './pages/Demo'
 
+import SuperVisionForm from './pages/superVision'
+
 
 
 
@@ -49,6 +51,7 @@ function App() {
 <Route path='/update-password/:id' element={<UpdatePassword/>} />
 <Route path='/reset-password' element={<ForgotPassword/>} />
 <Route path='/demo' element={<BookDemoForm/>} />
+<Route path='/supervision' element={<SuperVisionForm/>} />
 
 
 

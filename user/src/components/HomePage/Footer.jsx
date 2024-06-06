@@ -78,6 +78,18 @@ const Footer = () => {
     return (
         <footer className=" bg-white text-black py-12">
             <div className="max-w-6xl mx-auto bg-white p-6 px-4 sm:px-6 lg:px-8">
+                {
+                    Object.keys(errors).length > 0 && (
+                        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                            <ul>
+                                {Object.values(errors).map((error, index) => (
+                                    <li key={index}>{error}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )
+                    
+                }
                 <h2 className="text-3xl  text-purple-800 text-center mb-6">Contact Us</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>

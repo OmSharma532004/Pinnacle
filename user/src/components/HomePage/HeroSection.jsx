@@ -55,22 +55,11 @@ const slides = [
     image: image3,
     content: (
       <>
-        <h1 className="text-6xl  mb-4">Your Dream Home</h1>
-        <p className="mb-4">We make your vision a reality with our expert team.</p>
-        <form>
-          <div className="mb-4">
-            <input type="text" placeholder="Name*" className="w-full p-2 border border-gray-300 rounded" />
-          </div>
-          <div className="mb-4">
-            <input type="tel" placeholder="Mobile Number*" className="w-full p-2 border border-gray-300 rounded" />
-          </div>
-          <div className="mb-4">
-            <input type="email" placeholder="Email" className="w-full p-2 border border-gray-300 rounded" />
-          </div>
-          <button type="submit" className="bg-purple-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded w-full">
-            BOOK FREE CONSULTATION
-          </button>
-        </form>
+        <h1 className="text-6xl  mb-4">Want Supervisor</h1>
+        <p className="text-2xl mb-4">We make your vision a reality with our expert team.</p>
+    
+          <Link to={'/supervision'}><button className=' bg-yellow-300 text-black p-4 rounded-xl'>Hire Supervisor</button></Link>
+       
       </>
     ),
   }
