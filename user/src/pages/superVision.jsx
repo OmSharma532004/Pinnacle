@@ -88,7 +88,7 @@ function SuperVisionForm() {
       >
         {/* Name Input */}
         <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+          <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Name*</label>
           <input
             type="text"
             id="name"
@@ -105,7 +105,7 @@ function SuperVisionForm() {
         {/* Email Input */}
 
         <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email:</label>
+            <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email*</label>
             <input
                 type="email"
                 id="email"
@@ -123,7 +123,7 @@ function SuperVisionForm() {
         {/* Phone Input */}
         
         <div className="mb-4">
-            <label htmlFor="phone" className="block text-gray-700 text-sm font-bold mb-2">Phone:</label>
+            <label htmlFor="phone" className="block text-gray-700 text-sm font-bold mb-2">Phone*</label>
             <input
                 type="tel"
                 id="phone"
@@ -139,7 +139,7 @@ function SuperVisionForm() {
 
         {/* Message Input */}
         <div className="mb-4">
-          <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">Requirement:-</label>
+          <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">Requirement*</label>
           <textarea
             id="message"
             name="message"

@@ -88,12 +88,12 @@ const Footer = () => {
                             </ul>
                         </div>
                     )
-                    
+
                 }
                 <h2 className="text-3xl  text-purple-800 text-center mb-6">Contact Us</h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                        <label htmlFor="name" className="block text-sm font-medium">Name</label>
+                        <label htmlFor="name" className="block text-sm font-medium">Name*</label>
                         <input
                             type="text"
                             id="name"
@@ -105,7 +105,7 @@ const Footer = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium">Email ID</label>
+                        <label htmlFor="email" className="block text-sm font-medium">Email ID*</label>
                         <input
                             type="email"
                             id="email"
@@ -117,7 +117,7 @@ const Footer = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="phone" className="block text-sm font-medium">Mobile Number</label>
+                        <label htmlFor="phone" className="block text-sm font-medium">Mobile Number*</label>
                         <input
                             type="tel"
                             id="mobile"
@@ -129,7 +129,7 @@ const Footer = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="message" className="block text-sm font-medium">Comment</label>
+                        <label htmlFor="message" className="block text-sm font-medium">Comment*</label>
                         <textarea
                             id="comment"
                             name="message"

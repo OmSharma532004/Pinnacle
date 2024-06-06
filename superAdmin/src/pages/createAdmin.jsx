@@ -53,19 +53,48 @@ const Admin = () => {
         console.log(name, email, password, phone);
         createAdmin();
     }
-
     return (
-        <div className="flex flex-col items-center justify-center bg-black w-screen h-screen text-white">
-            <h1>Signup</h1>
-            <form onSubmit={handleSubmit} className="flex flex-col text-black gap-4">
-                <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <input type="tel" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
-                <button className=' bg-white  p-4 mt-2 rounded-xl' type="submit">Signup</button>
+        <div className="flex flex-col items-center justify-center bg-gray-100 w-screen h-screen text-gray-800">
+            <h1 className="text-4xl font-semibold mb-6">Create Admin</h1>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-1/3">
+                <input
+                    type="text"
+                    placeholder="Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="p-3 text-lg border border-gray-300 rounded-md"
+                />
+                <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="p-3 text-lg border border-gray-300 rounded-md"
+                />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="p-3 text-lg border border-gray-300 rounded-md"
+                />
+                <input
+                    type="tel"
+                    placeholder="Phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="p-3 text-lg border border-gray-300 rounded-md"
+                />
+                <button
+                    className="bg-purple-600 text-white text-lg p-4 mt-2 rounded-md hover:bg-yellow-600 transition duration-300"
+                    type="submit"
+                >
+                    Create
+                </button>
             </form>
         </div>
     );
+    
 }
 
 export default Admin;

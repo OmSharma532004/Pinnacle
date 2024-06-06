@@ -77,10 +77,11 @@ useEffect(() => {
     });
 
     const data = await response.json();
+    console.log(data);
 
     if (response.ok) {
       localStorage.setItem('token', res.tokenId);
-      localStorage.setItem('user', JSON.stringify(userProfile));
+      localStorage.setItem('user', JSON.stringify(data.user));
       window.location.href = '/';
       toast.success("Google Login Successful!");
     } else {
