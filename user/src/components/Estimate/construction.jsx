@@ -144,6 +144,16 @@ const ConstructionMaterials = ({ costs, city, area = 1000 }) => {
             </div>
           </div>
         </div>
+
+        
+          {/* //Disclaimer */}
+          <div className="bg-gray-100 p-6 shadow-lg rounded-lg border-2 border-purple-700" style={{ width: '80%' }}>
+            <h3 className="text-2xl font-bold mb-4 text-center text-gay-800">Disclaimer</h3>
+            <p className="text-center text-lg text-gray-700">
+            Disclaimer: The construction cost calculator provides an estimate based on the information provided and current market rates. Actual costs may vary due to site conditions, material availability, labor costs, and other factors. This tool should be used as a guide and not as a definitive quote. For accurate pricing, please consult a professional contractor or construction company. The website owners and developers are not responsible for any discrepancies or financial losses resulting from the use
+of this calculator. </p>
+
+        </div>
        
       </div>
     </div>

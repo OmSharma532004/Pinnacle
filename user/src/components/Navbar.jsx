@@ -28,7 +28,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="bg-purple-800 text-white border-b-4 border-yellow-400 text-2xl w-screen p-4">
+            <nav className="bg-purple-800 text-white border-b-4 border-yellow-400 text-xl w-screen p-4">
                 <div className="container mx-auto flex items-center justify-between">
                     <Link to={"/"} className="hover:text-yellow-400">
                         <div>Home</div>
@@ -41,7 +41,8 @@ const Navbar = () => {
                             {location.pathname === "/" && (
                                 <div className='flex flex-col md:flex-row md:gap-5'>
                                     <li onClick={() => scrollToSection('section1')} className="cursor-pointer hover:text-yellow-400">About Us</li>
-                                    <li onClick={() => scrollToSection('service-steps')} className="cursor-pointer hover:text-yellow-400">Service Steps</li>
+                                    <li onClick={() => scrollToSection('service-steps')} className="cursor-pointer hover:text-yellow-400">Services</li>
+                                  <li className='cursor-pointer hover:text-yellow-400 '>  <Link to={"/dashboard"}> Calculator </Link></li>
                                     <li onClick={() => scrollToSection('service-highlights')} className="cursor-pointer hover:text-yellow-400">Why Us?</li>
                                     <li onClick={() => scrollToSection('footer')} className="cursor-pointer hover:text-yellow-400">Contact</li>
                                 </div>
