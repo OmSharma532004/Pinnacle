@@ -16,7 +16,7 @@ import WhatsAppButton from "../components/HomePage/WhatsAppButton";
 
 const Home = () => {
     return (
-        <div className="bg-purple-800 flex flex-col w-full items-center justify-center">
+        <div className=" flex flex-col overflow-hidden w-full items-center justify-center">
             <div id="hero-section" className="w-full">
                 <HeroSection/>
             </div>
