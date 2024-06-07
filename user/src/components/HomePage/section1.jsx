@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 const Section1 = () => {
   return (
     <div className="bg-white w-full p-[50px] pb-[100px] text-gray-800">
+
+      
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-3 gap-10">
           <div className="md:col-span-2">

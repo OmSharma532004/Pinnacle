@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
-import toast from 'react-hot-toast';  
+import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
 const ConstructionMaterials = ({ costs, city, area = 1000 }) => {
   const [prices, setPrices] = useState({});
+  const user=useSelector(state=>state.auth.user)
+  console.log(user);
   const apiUrl = import.meta.env.VITE_API_URL;
+ 
 
   useEffect(() => {
     const fetchPrices = async (category, brand) => {
@@ -68,6 +72,36 @@ const ConstructionMaterials = ({ costs, city, area = 1000 }) => {
         ],
       },
     ],
+  };
+
+  const sendEmail = async () => {
+    
+    const userEmail = user.email;
+    const userName = user.Name;
+
+    if (!userEmail || !userName) {
+      toast.error('Email and Name are required');
+      return;
+    }
+
+    try {
+      const emailData = {
+        city,
+        area,
+        costs,
+        prices,
+        totalMaterialCost,
+        userEmail,
+        userName,
+      };
+      toast.loading('Sending Email...');
+      await axios.post(`${apiUrl}/send-construction-details`, emailData);
+      toast.dismiss();
+      toast.success('Request Recieved successfully');
+    } catch (error) {
+      toast.dismiss();
+      toast.error('Failed to send email');
+    }
   };
 
   return (
@@ -154,6 +188,15 @@ const ConstructionMaterials = ({ costs, city, area = 1000 }) => {
 of this calculator. </p>
 
         </div>
+        <div className="flex w-full justify-center mt-6">
+<button
+  onClick={sendEmail}
+  className="bg-purple-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-purple-600 transition-colors"
+>
+  Send Request
+</button>
+</div>
+        
        
       </div>
     </div>
@@ -161,3 +204,5 @@ of this calculator. </p>
 };
 
 export default ConstructionMaterials;
+
+

@@ -4,6 +4,7 @@ import step1Image from "./stepsAssets/1.png";
 import step2Image from "./stepsAssets/2.png";
 import step3Image from "./stepsAssets/3.png";
 import step4Image from "./stepsAssets/4.png";
+import { Link } from 'react-router-dom';
 
 const ServiceSteps = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
@@ -48,7 +49,26 @@ const ServiceSteps = () => {
   };
 
   return (
-    <div className="bg-purple-800 text-yellow-300 py-12">
+    <div>
+       <div className="bg-white w-full p-[50px] pb-[100px] text-gray-800">
+      <div className="max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-10">
+          <div className="md:col-span-2">
+            <h1 className="text-4xl flex-col items-center justify-center text-purple-800 mb-3">"On-Site Supervision Service"</h1>
+            <p className="mb-[50px] font-light text-xl">
+              Our On-Site Supervision Service is a specialized service focused exclusively on overseeing construction activities directly on-site to ensure that the project aligns with the client’s standards and expectations. Our service provides vigilant, day-to-day supervision, ensuring quality, safety, and efficiency from ground-breaking to project completion.
+            </p>
+            <p className="mb-[50px] font-light text-xl">
+              Our dedicated supervision team brings extensive experience, attention to detail, and a commitment to excellence, providing peace of mind and exceptional outcomes. With our On-Site Supervision Service, you’re not just hiring a supervisor; you’re gaining a steadfast partner committed to the success of your construction project.
+            </p>
+            <Link className='bg-yellow-300 text-gray-800 text-xl p-4 rounded-xl' to={"/supervision"}>Book Supervision</Link>
+          </div>
+         
+        </div>
+       
+      </div>
+    </div>
+      <div className="bg-purple-800 text-yellow-300 py-12">
       <div className="sm:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl text-center mb-6">Home Construction Steps</h2>
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -76,6 +96,7 @@ const ServiceSteps = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -76,8 +76,22 @@ const Footer = () => {
     }
 
     return (
-        <footer className=" bg-white text-black py-12">
-            <div className="max-w-6xl mx-auto bg-white p-6 px-4 sm:px-6 lg:px-8">
+        <footer className=" bg-white flex text-black py-12">
+            <div className=' w-[50%]'>
+                {/* create a component which will display my company logo and details of contact phone no and email id */}
+
+                <div className="flex items-center w-[100%] h-full  justify-center">
+                    <div className="ml-4">
+                        <h3 className="text-2xl font-bold">BuildingIT</h3>
+                        <p className="text-lg">Contact us: 1234567890</p>
+                        <p className="text-lg">Email:
+                            <a href="mailto: ">abc@gmail.com</a>
+                        </p>
+                        </div>
+
+                    </div>
+            </div>
+            <div className="max-w-6xl mx-auto bg-white p-6 w-[40%] px-4 sm:px-6 lg:px-8">
                 {
                     Object.keys(errors).length > 0 && (
                         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
