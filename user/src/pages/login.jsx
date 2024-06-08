@@ -111,7 +111,7 @@ useEffect(() => {
       <div className=' h-screen flex items-center justify-center'>
       <div className="relative z-10 flex flex-col bg-purple-300 h-screen pr-8 items-center justify-center p-8 rounded-md shadow-md w-full max-w-md space-y-8">
         <div>
-          <h1 className='text-3xl font-bold text-black text-center'>Welcome to Pinnacle</h1>
+          <h1 className='text-3xl font-bold text-black text-center'>Welcome to BuildWorX</h1>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-black">Sign in to your account</h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

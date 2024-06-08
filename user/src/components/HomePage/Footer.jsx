@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
-
+import logo2 from '../../assets/logo2.png';
 const apiUrl = import.meta.env.VITE_API_URL;
 const Footer = () => {
     const [formData, setFormData] = useState({
@@ -82,7 +82,7 @@ const Footer = () => {
 
                 <div className="flex items-center w-[100%] h-full  justify-center">
                     <div className="ml-4">
-                        <h3 className="text-2xl font-bold">BuildingIT</h3>
+                        <img src={logo2} width={400} />
                         <p className="text-lg">Contact us: 1234567890</p>
                         <p className="text-lg">Email:
                             <a href="mailto: ">abc@gmail.com</a>

@@ -13,7 +13,7 @@ const slides = [
     image: image1,
     content: (
       <>
-        <h1 className="text-6xl  mb-4">BuildingIt</h1>
+        <h1 className="text-6xl  mb-4">BuildWorX</h1>
         <p className="mb-4">Step into the home you've always dreamed of, built to the highest standard of quality.</p>
         <ul className="mb-4">
           <li>4500+ Homes</li>
@@ -36,8 +36,8 @@ const slides = [
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-3 gap-10">
           <div className="md:col-span-2">
-            <h1 className="sm:text-4xl  flex-col text-xl items-center justify-center   mb-3">"Constructing Dreams, Shaping Futures"</h1>
-            <p className="mb-[50px] font-light sm:text-xl">Welcome to <b className='  sm:text-2xl'>Building It</b>, where construction isn't just about building structures; it's about constructing dreams and shaping futures. Our ethos is rooted in reliability, professionalism, and a commitment to excellence that sets us apart in the construction industry.</p>
+            <h1 className="sm:text-4xl  flex-col text-xl items-center justify-center   mb-3">Construct the House of Your Dreams with BuildWorX</h1>
+            <p className="mb-[50px] font-light sm:text-xl">Imagine a home that perfectly aligns with your vision, crafted with precision and care, reflecting your personality, and meeting every functional need. At BuildWorX, we transform your dream house into a tangible reality.</p>
             
             <Link className=' bg-yellow-300 text-gray-800 sm:text-xl   p-4 rounded-xl' to={"/dashboard"}>Calculate Estimate</Link> </div>
           <div>
@@ -55,7 +55,7 @@ const slides = [
     image: image3,
     content: (
       <>
-        <h1 className="text-6xl  mb-4">Want Supervisor</h1>
+        <h1 className="text-4xl  mb-4">Need Supervision While Building Your Home?</h1>
         <p className="text-2xl mb-4">We make your vision a reality with our expert team.</p>
     
           <Link to={'/supervision'}><button className=' bg-yellow-300 text-black p-4 rounded-xl'>Hire Supervisor</button></Link>

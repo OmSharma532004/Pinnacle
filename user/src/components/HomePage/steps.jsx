@@ -54,7 +54,7 @@ const ServiceSteps = () => {
       <div className="max-w-6xl mx-auto">
         <div className="">
           <div className="md:col-span-2">
-            <h1 className="text-4xl flex-col items-center justify-center text-purple-800 mb-3">"On-Site Supervision Service"</h1>
+            <h1 className="text-4xl flex-col items-center justify-center text-purple-800 mb-3">On-Site Supervision Service</h1>
             <p className="mb-[50px] font-light text-xl">
               Our On-Site Supervision Service is a specialized service focused exclusively on overseeing construction activities directly on-site to ensure that the project aligns with the client’s standards and expectations. Our service provides vigilant, day-to-day supervision, ensuring quality, safety, and efficiency from ground-breaking to project completion.
             </p>
