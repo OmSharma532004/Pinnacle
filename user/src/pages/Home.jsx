@@ -13,6 +13,7 @@ import Section2 from "../components/HomePage/section2";
 import ServiceSteps from "../components/HomePage/steps";
 import Footer from "../components/HomePage/Footer";
 import WhatsAppButton from "../components/HomePage/WhatsAppButton";
+import Footer2 from "../components/HomePage/Footer2";
 
 const Home = () => {
     return (
@@ -35,6 +36,9 @@ const Home = () => {
             <div id="footer" className="w-full">
                 <Footer/>
             </div>
+            {/* <div id="footer" className="w-full">
+                <Footer2/>
+            </div> */}
             <div className="w-full mt-4">
                 <WhatsAppButton /> {/* Add the WhatsAppButton component here */}
             </div>
