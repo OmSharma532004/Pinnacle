@@ -125,7 +125,7 @@ const Footer = () => {
             </div>
           )}
           <h2 className="text-3xl text-purple-800 text-center mb-6">Contact Us</h2>
-          <form onSubmit={handleSubmit} className="space-y-6 min-w-[500px] mb-[50px]">
+          <form onSubmit={handleSubmit} className="space-y-6 md:min-w-[500px] mb-[50px]">
             <div>
               <label htmlFor="name" className="block text-sm font-medium">Name*</label>
               <input
