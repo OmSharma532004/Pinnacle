@@ -14,6 +14,7 @@ import ServiceSteps from "../components/HomePage/steps";
 import Footer from "../components/HomePage/Footer";
 import WhatsAppButton from "../components/HomePage/WhatsAppButton";
 import Footer2 from "../components/HomePage/Footer2";
+import Resources from "../components/HomePage/Resources";
 
 const Home = () => {
     return (
@@ -27,9 +28,10 @@ const Home = () => {
             <div id="service-steps" className="w-full">
                 <ServiceSteps/>
             </div>
-            <div id="section2" className="w-full">
-                <Section2/>
+            <div id="resources" className="w-full">
+                <Resources/>
             </div>
+           
             <div id="service-highlights" className="w-full">
                 <ServiceHighlights/>
             </div>

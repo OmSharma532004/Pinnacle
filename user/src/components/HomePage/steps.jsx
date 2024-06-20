@@ -1,104 +1,110 @@
 import React, { useState, useEffect } from 'react';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import step1Image from "./stepsAssets/1.png";
-import step2Image from "./stepsAssets/2.png";
-import step3Image from "./stepsAssets/3.png";
-import step4Image from "./stepsAssets/4.png";
+import Slider from 'react-slick';
+import i1 from '../../assets/services/1.png';
+import i2 from '../../assets/services/2.png';
+import i3 from '../../assets/services/3.png';
+import i4 from '../../assets/services/4.png';
 import { Link } from 'react-router-dom';
+import Section2 from './section2';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const ServiceSteps = () => {
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
-
-  const steps = [
+  const services = [
     {
-      title: "Step 1: Choose Your Material",
-      description: "Select from a wide range of quality materials.",
-      image: step1Image
+      title: "Residential",
+      description: "Homes and More that are built to last, with quality materials and expert craftsmanship.",
+      imgSrc: i1
     },
     {
-      title: "Step 2: Co-create Your Dream House",
-      description: "Work with our architects to design your dream home.",
-      image: step2Image
+      title: "Commercial",
+      description: "Offices, Retail Spaces, and more, built to meet your business needs.",
+      imgSrc: i2
     },
     {
-      title: "Step 3: Speak to Our Representative",
-      description: "Discuss your plans and get professional advice.",
-      image: step3Image
+      title: "Enterprise and PSU Projects",
+      description: "Customized solutions for large-scale projects, with a focus on quality and efficiency.",
+      imgSrc: i3
     },
     {
-      title: "Step 4: Build Your Dream Home",
-      description: "Watch as we bring your vision to life.",
-      image: step4Image
+      title: "Supervision",
+      description: "On-Site Supervision Service to ensure quality, safety, and efficiency.",
+      imgSrc: i4
     }
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentStepIndex((prevIndex) => (prevIndex + 1) % steps.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [steps.length]);
-
-  const handlePrev = () => {
-    setCurrentStepIndex((prevIndex) => (prevIndex - 1 + steps.length) % steps.length);
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 1000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
   };
 
-  const handleNext = () => {
-    setCurrentStepIndex((prevIndex) => (prevIndex + 1) % steps.length);
-  };
+ 
 
   return (
-    <div>
-       <div className="bg-white w-full p-[50px] pb-[100px] text-gray-800">
-      <div className="max-w-6xl mx-auto">
-        <div className="">
-          <div className="md:col-span-2">
-            <h1 className="text-4xl flex-col items-center justify-center text-purple-800 mb-3">On-Site Supervision Service</h1>
-            <p className="mb-[50px] font-light text-xl">
-              Our On-Site Supervision Service is a specialized service focused exclusively on overseeing construction activities directly on-site to ensure that the project aligns with the client’s standards and expectations. Our service provides vigilant, day-to-day supervision, ensuring quality, safety, and efficiency from ground-breaking to project completion.
-            </p>
-            <p className="mb-[50px] font-light text-xl">
-              Our dedicated supervision team brings extensive experience, attention to detail, and a commitment to excellence, providing peace of mind and exceptional outcomes. With our On-Site Supervision Service, you’re not just hiring a supervisor; you’re gaining a steadfast partner committed to the success of your construction project.
-            </p>
-            <Link className='bg-yellow-300 text-gray-800 text-xl p-4 rounded-xl' to={"/supervision"}>Book Supervision</Link>
-          </div>
-         
-        </div>
-       
-      </div>
-    </div>
-      <div className="bg-purple-800 text-yellow-300 py-12">
-      <div className="sm:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl text-center mb-6">Home Construction Steps</h2>
-        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {steps.map((step, index) => (
-            <div key={index} className="p-2 sm:p-4 border bg-white text-purple-900 border-gray-200 rounded-lg shadow-lg">
-              <img src={step.image} alt={`Illustration for ${step.title}`} className="mb-2 sm:mb-4" />
-              <h3 className="text-lg sm:text-xl text-gray-950">{step.title}</h3>
-              <p className="text-sm sm:text-base text-gray-950">{step.description}</p>
-            </div>
-          ))}
-        </div>
-        <div className="md:hidden relative text-center">
-          <div className="p-4 border bg-white text-purple-900 h-[450px] w-[300px] mx-auto border-gray-200 rounded-lg shadow-lg">
-            <img src={steps[currentStepIndex].image} alt={`Illustration for ${steps[currentStepIndex].title}`} className="w-full mb-4" />
-            <h3 className="text-lg text-gray-950">{steps[currentStepIndex].title}</h3>
-            <p className="text-sm text-gray-950">{steps[currentStepIndex].description}</p>
-          </div>
-          <div className="flex justify-between mt-4">
-            <button onClick={handlePrev} className="bg-yellow-300 absolute top-[45%]  text-purple-800 py-2 px-4 rounded">
-              <FaArrowLeft />
-            </button>
-            <button onClick={handleNext} className="bg-yellow-300 absolute top-[45%] right-0 text-purple-800 py-2 px-4 rounded">
-              <FaArrowRight />
-            </button>
-          </div>
+    <div className='bg-purple-900'>
+      <div className='flex flex-col items-center justify-around text-yellow-300 py-12 w-full'>
+        <h2 className="text-3xl text-white text-center font-mono mb-6">Our Services</h2>
+        <div className="hidden w-[80%] md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+{services.map((step, index) => (
+  <div key={index} className="p-2 sm:p-4 border hover:bg-gray-300 border-purple-900 transition-all duration-200 hover:scale-105 bg-white text-purple-900 border-gray-200 rounded-lg shadow-lg">
+    <img src={step.imgSrc} alt={`Illustration for ${step.title}`} className="mb-2 sm:mb-4" />
+     <h3 className="text-lg font-mono mb-5 sm:text-xl text-gray-950">{step.title}</h3>
+    <p className="text-sm sm:text-base text-gray-950">{step.description}</p>
+  </div>
+))}
+</div>
+        <div className="w-[80%] md:hidden lg:hidden">
+          <Slider {...settings}>
+            {services.map((step, index) => (
+              <div key={index} className="p-2 sm:p-4 border bg-white text-purple-900 border-gray-200 rounded-lg shadow-lg">
+                <img src={step.imgSrc} alt={`Illustration for ${step.title}`} className="mb-2 sm:mb-4 w-full h-auto" />
+                <h3 className="text-lg sm:text-xl text-gray-950">{step.title}</h3>
+                <p className="text-sm sm:text-base text-gray-950">{step.description}</p>
+              </div>
+            ))}
+          </Slider>
         </div>
       </div>
-    </div>
+      <div id="section2" className="w-full">
+        <Section2 />
+      </div>
     </div>
   );
 };
 
 export default ServiceSteps;
+
+
+
+
