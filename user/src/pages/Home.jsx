@@ -19,9 +19,9 @@ import Resources from "../components/HomePage/Resources";
 const Home = () => {
     return (
         <div className=" flex flex-col overflow-hidden w-full items-center justify-center">
-            <div id="hero-section" className="w-full">
+            {/* <div id="hero-section" className="w-full">
                 <HeroSection/>
-            </div>
+            </div> */}
             <div id="section1" className="w-full">
                 <Section1/>
             </div>
