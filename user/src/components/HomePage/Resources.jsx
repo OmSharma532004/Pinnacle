@@ -54,7 +54,7 @@ const Resources = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 1000,
+    autoplaySpeed: 2000,
     responsive: [
       {
         breakpoint: 1024,
@@ -85,11 +85,11 @@ const Resources = () => {
 
   return (
     <div className=''>
-      <div className='flex flex-col items-center justify-around text-yellow-300 py-12 w-full'>
-        <h2 className="text-4xl mb-9 text-purple-900  text-center font-mono ">Resources</h2>
+      <div className='flex flex-col items-center bg-pink-300 justify-around 00 py-12 w-full'>
+        <h2 className="text-4xl mb-9 text-purple-900   text-center font-mono ">Resources</h2>
         <div className="hidden w-[80%] md:grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {resources.map((resource, index) => (
-            <div key={index} className="p-2 mb-9 w-[350px] sm:p-4 hover:bg-white hover:scale-105 hover:text-purple-900 transition-all duration-200  bg-purple-900 border-4 border-purple-900 text-white  rounded-lg shadow-lg">
+            <div key={index} className="p-2 mb-9 w-[350px] sm:p-4 hover:bg-white hover:scale-105 hover:text-purple-900 transition-all duration-200  bg-purple-900 border-4 text-pink-200 border-purple-950  rounded-lg shadow-lg">
               <img src={resource.imgSrc} alt={`Illustration for ${resource.title}`} className="mb-2 sm:mb-4" />
               <h3 className="text-lg font-mono sm:text-xl ">{resource.title}</h3>
               <p className="text-sm  sm:text-base ">{resource.description}</p>
@@ -99,10 +99,10 @@ const Resources = () => {
         <div className="w-[80%] md:hidden lg:hidden">
           <Slider {...settings}>
             {resources.map((resource, index) => (
-              <div key={index} className="p-2 sm:p-4 border bg-white text-purple-900 border-gray-200 rounded-lg shadow-lg">
+              <div key={index} className="p-5 sm:p-4 border  bg-purple-900 text-pink-200 border-gray-200 rounded-lg shadow-lg">
                 <img src={resource.imgSrc} alt={`Illustration for ${resource.title}`} className="mb-2 sm:mb-4 w-full h-auto" />
-                <h3 className="text-lg sm:text-xl text-gray-950">{resource.title}</h3>
-                <p className="text-sm sm:text-base text-gray-950">{resource.description}</p>
+                <h3 className="text-lg sm:text-xl font-mono ">{resource.title}</h3>
+                <p className="text-sm sm:text-base">{resource.description}</p>
               </div>
             ))}
           </Slider>

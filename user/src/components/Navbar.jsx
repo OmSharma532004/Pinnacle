@@ -33,7 +33,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="bg-purple-900 text-white border-b-4 border-yellow-400 text-xl w-screen p-4">
+            <nav className="bg-purple-900 text-pink-200 border-b-4 border-pink-300 text-xl w-screen p-4">
                 <div className="container mx-auto flex items-center justify-between">
                     <Link to={"/"} className="hover:text-yellow-400">
                         <div><img src={logo} width={200} /></div>
@@ -96,7 +96,7 @@ const Navbar = () => {
             {isOpen && (
                 <>
                     <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={closeMenu}></div>
-                    <div className="fixed top-0 right-0 text-xl flex flex-col items-center w-[30%] text-center h-full bg-purple-800 text-white p-4 z-50">
+                    <div className="fixed top-0 right-0 text-xl flex flex-col items-center w-[40%] text-center h-full bg-purple-800 text-white p-4 z-50">
                         <ul className="flex flex-col gap-4">
                             {location.pathname === "/" && (
                                 <>

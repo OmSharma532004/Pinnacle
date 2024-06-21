@@ -98,24 +98,24 @@ const ServiceFeatures = () => {
   };
 
   return (
-    <div className=" py-12">
+    <div className="bg-pink-300 p-8 ">
        <div className=" bg-purple-900 mb-[50px] py-12">
       <div className="sm:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl text-white text-center font-mono mb-6">Home Construction Steps</h2>
+        <h2 className="text-3xl  text-center text-pink-300 font-mono mb-6">Home Construction Steps</h2>
         <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {steps.map((step, index) => (
-            <div key={index} className="p-2 sm:p-4 border bg-white hover:bg-gray-300 transition-all duration-200 hover:scale-105 text-purple-900 border-gray-200 rounded-lg shadow-lg">
+            <div key={index} className="p-2 sm:p-4 border bg-pink-300 hover:bg-gray-300 transition-all duration-200 hover:scale-105 text-purple-900 border-purple-950  border-4 rounded-lg shadow-lg">
               <img src={step.image} alt={`Illustration for ${step.title}`} className="mb-2 sm:mb-4" />
-              <h3 className="text-lg font-mono mb-5 sm:text-xl text-gray-950">{step.title}</h3>
-              <p className="text-sm sm:text-base text-gray-950">{step.description}</p>
+              <h3 className="text-lg font-mono mb-5 sm:text-xl ">{step.title}</h3>
+              <p className="text-sm sm:text-base ">{step.description}</p>
             </div>
           ))}
         </div>
         <div className="md:hidden relative text-center">
-          <div className="p-4 border bg-white text-purple-900 h-[450px] w-[300px] mx-auto border-gray-200 rounded-lg shadow-lg">
+          <div className="p-4 border bg-pink-300 text-purple-900 h-[450px] w-[300px] mx-auto border-gray-200 rounded-lg shadow-lg">
             <img src={steps[currentStepIndex].image} alt={`Illustration for ${steps[currentStepIndex].title}`} className="w-full mb-4" />
-            <h3 className="text-lg text-gray-950">{steps[currentStepIndex].title}</h3>
-            <p className="text-sm text-gray-950">{steps[currentStepIndex].description}</p>
+            <h3 className="text-lg">{steps[currentStepIndex].title}</h3>
+            <p className="text-sm ">{steps[currentStepIndex].description}</p>
           </div>
           <div className="flex justify-between mt-4">
             <button onClick={handlePrev2} className="bg-yellow-300 absolute top-[45%]  text-purple-800 py-2 px-4 rounded">
@@ -128,11 +128,11 @@ const ServiceFeatures = () => {
         </div>
       </div>
     </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl text-center text-purple-800 font-mono mb-[30px]">Why Choose Us for Your Construction Needs?</h2>
+      <div className="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
+        <h2 className="text-3xl text-center text-purple-900 font-mono mb-[30px]">Why Choose Us for Your Construction Needs?</h2>
         <div className="hidden md:flex items-center justify-center  gap-4">
           {features.map((feature, index) => (
-            <div key={index} className="p-4  h-[400px] w-[300px] border-4 hover:bg-white hover:text-purple-900 transition-all duration-200 hover:scale-105 bg-purple-900 text-white border-purple-500 rounded-lg shadow-lg">
+            <div key={index} className="p-4  h-[400px] w-[300px] border-4 hover:bg-white hover:text-purple-900 transition-all duration-200 hover:scale-105 bg-purple-900 text-pink-200 border-purple-950 rounded-lg shadow-lg">
               <img src={feature.image} alt={feature.title} className="w-full mb-4"/>
               <h3 className=" font-mono text-lg">{feature.title}</h3>
               <p>{feature.description}</p>
@@ -140,9 +140,9 @@ const ServiceFeatures = () => {
           ))}
         </div>
         <div className="md:hidden relative text-center">
-          <div className="p-4 bg-white h-[450px] w-[300px] mx-auto border border-purple-500 rounded-lg shadow-lg">
+          <div className="p-4 bg-purple-900 h-[450px] text-white w-[300px] mx-auto border border-purple-950 rounded-lg shadow-lg">
             <img src={features[currentFeatureIndex].image} alt={features[currentFeatureIndex].title} className="w-full mb-4"/>
-            <h3 className="text-lg">{features[currentFeatureIndex].title}</h3>
+            <h3 className="text-lg font-mono">{features[currentFeatureIndex].title}</h3>
             <p>{features[currentFeatureIndex].description}</p>
           </div>
           <div className="flex justify-between mt-4">
