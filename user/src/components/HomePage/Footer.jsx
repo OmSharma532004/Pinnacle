@@ -182,7 +182,7 @@ const Footer = () => {
           <div className="flex flex-col items-start">
             <img src={logo2} alt="Logo" width={200} />
             <p className="text-lg mt-4">Contact us: 1234567890</p>
-            <p className="text-lg">Email: <a href="mailto:abc@gmail.com" className="text-purple-800 hover:underline">abc@gmail.com</a></p>
+            <p className="text-lg">Email: <a href="mailto:contact@buildworx.co.in" className="text-purple-800 hover:underline">contact@buildworx.co.in</a></p>
           </div>
         </div>
       </div>

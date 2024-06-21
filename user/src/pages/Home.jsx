@@ -44,6 +44,14 @@ const Home = () => {
             <div className="w-full mt-4">
                 <WhatsAppButton /> {/* Add the WhatsAppButton component here */}
             </div>
+            {/* Add Disclaimer at End */}
+            <div className="w-[80%] text-sm text-center">
+                <p className="md:text-lg">
+                Disclaimer : -
+
+Buildworx endeavors to ensure that the information and data in this section is correct and complete, but does not accept liability for any error made or omission from this section. Buildworx shall not be liable for any claims or losses of any nature, arising directly or indirectly from use of the information or data on this section or unauthorized access to this section or otherwise howsoever arising, except to the extent required by law.
+                 </p>
+                </div>
         </div>
     );
 };

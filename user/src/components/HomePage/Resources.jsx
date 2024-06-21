@@ -85,7 +85,7 @@ const Resources = () => {
 
   return (
     <div className=''>
-      <div className='flex flex-col items-center bg-pink-300 justify-around 00 py-12 w-full'>
+      <div className='flex flex-col items-center  justify-around 00 py-12 w-full'>
         <h2 className="text-4xl mb-9 text-purple-900   text-center font-mono ">Resources</h2>
         <div className="hidden w-[80%] md:grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4">
           {resources.map((resource, index) => (

@@ -41,7 +41,7 @@ const Navbar = () => {
                     <button className="md:hidden text-2xl" onClick={toggleMenu}>
                         {isOpen ? <FaTimes /> : <FaBars />}
                     </button>
-                    <ul className="hidden md:flex font-mono items-center justify-between w-[75%]">
+                    <ul className="hidden md:flex  items-center justify-between w-[75%]">
                         <div className="flex flex-row items-center justify-between w-[100%]">
                             <div>
                                 {location.pathname === "/" && (

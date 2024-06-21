@@ -98,7 +98,7 @@ const ServiceFeatures = () => {
   };
 
   return (
-    <div className="bg-pink-300 p-8 ">
+    <div className=" p-8 ">
        <div className=" bg-purple-900 mb-[50px] py-12">
       <div className="sm:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl  text-center text-pink-300 font-mono mb-6">Home Construction Steps</h2>
