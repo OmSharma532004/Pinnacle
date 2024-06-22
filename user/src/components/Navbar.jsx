@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FaUserCircle, FaBars, FaTimes } from 'react-icons/fa';
 import logo from '../assets/logo.png';
@@ -60,8 +60,10 @@ const Navbar = () => {
                                             </select>
                                         </li>
                                         <li onClick={() => scrollToSection('service-steps')} className="cursor-pointer hover:text-yellow-400 text-lg">Services</li>
-                                        <li className='cursor-pointer hover:text-yellow-400 text-lg'>
-                                            <Link to={"/dashboard"}> Estimator </Link>
+                                        <li onClick={()=>{
+                                            window.location.href = '/dashboard';
+                                        }} className='cursor-pointer hover:text-yellow-400 text-lg'>
+                                           Estimator
                                         </li>
                                         <li onClick={() => scrollToSection('blogs')} className="cursor-pointer text-lg hover:text-yellow-400">Blogs</li>
                                         <li onClick={() => scrollToSection('resources')} className="cursor-pointer text-lg hover:text-yellow-400">Resources</li>

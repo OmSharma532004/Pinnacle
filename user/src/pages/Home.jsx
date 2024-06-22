@@ -16,7 +16,6 @@ import WhatsAppButton from "../components/HomePage/WhatsAppButton";
 import Footer2 from "../components/HomePage/Footer2";
 import Resources from "../components/HomePage/Resources";
 
-
 const Home = () => {
     const sectionsRef = useRef([]);
 
@@ -26,18 +25,23 @@ const Home = () => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible'); // Optional: Remove class if not intersecting
                     }
                 });
             },
             { threshold: 0.1 }
         );
 
-        sectionsRef.current.forEach((section) => {
+        // Ensure sectionsRef is populated with valid DOM elements
+        const sections = sectionsRef.current.filter(section => section); // Filter out undefined/null elements
+
+        sections.forEach((section) => {
             observer.observe(section);
         });
 
         return () => {
-            sectionsRef.current.forEach((section) => {
+            sections.forEach((section) => {
                 observer.unobserve(section);
             });
         };
