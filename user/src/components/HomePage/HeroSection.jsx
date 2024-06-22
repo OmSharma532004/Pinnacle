@@ -17,18 +17,18 @@ const HeroSection = () => {
 
   return (
     <div className="relative w-full h-[500px]">
-      <img src={image1} alt="BuildWorX" className="w-full h-full object-cover" />
+      <img src={image1}  alt="BuildWorX" className="w-full h-full object-cover" />
       <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-40 md:bg-opacity-10 text-white">
         <div className="w-full lg:ml-9 md:ml-9 mx-auto text-start py-20 px-10">
-          <h1 className="text-6xl mb-4">BuildWorX</h1>
-          <p className="mb-4 w-[40%]">Step into the home you've always dreamed of, built to the highest standard of quality.</p>
+          <h1 className="text-6xl mb-4">Build<b className=' text-yellow-300 font-light '>WorX</b></h1>
+          <p className="mb-4 w-[40%]">XXXXXX</p>
           <ul className="mb-4">
-            <li>4500+ Homes</li>
-            <li>470+ Quality Checks</li>
-            <li>100% Money Safety</li>
+            <li>100+ Executed Projects</li>
+            <li>200+ Audit Checks</li>
+            <li>100% Customer Satisfaction</li>
           </ul>
           <Link to="/demo">
-            <button className="bg-purple-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded mb-4">
+            <button className="bg-yellow-400 hover:bg-purple-600 text-black py-2 px-4 rounded mb-4">
               Book Free Consultation
             </button>
           </Link>
@@ -36,10 +36,10 @@ const HeroSection = () => {
       </div>
       <button
         onClick={openModal}
-        className="bg-pink-300 hover:bg-purple-500 hover:text-white  text-purple-900 py-5 font-bold px-9 rounded absolute bottom-0 right-0 z-10"
+        className="bg-yellow-400 hover:bg-purple-500 hover:text-white text-black md:py-5 md:w-[100px] p-4 w-[80px] md:px-5 fixed rounded top-96 right-0 z-10"
         style={{ backdropFilter: 'blur(10px)' }}
       >
-        Talk to Us
+        Talk to Our Expert
       </button>
       <Modal
         isOpen={modalIsOpen}

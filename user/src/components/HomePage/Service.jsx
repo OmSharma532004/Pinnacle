@@ -1,66 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import experienceImage from "./serviceAssets/1.png";
-import qualityImage from "./serviceAssets/2.png";
-import serviceImage from "./serviceAssets/3.png";
-import reliabilityImage from "./serviceAssets/4.png";
-import satisfactionImage from "./serviceAssets/5.png";
+import { FaArrowLeft, FaArrowRight, FaTools, FaCheckCircle, FaHandHoldingUsd, FaClock, FaSmile } from 'react-icons/fa';
 import step1Image from "./stepsAssets/1.png";
 import step2Image from "./stepsAssets/2.png";
 import step3Image from "./stepsAssets/3.png";
 import step4Image from "./stepsAssets/4.png";
 
 const ServiceFeatures = () => {
-  const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
+
   const steps = [
     {
-      title: "Step 1: Choose Your Material",
+      title: "Choose Your Material",
       description: "Select from a wide range of quality materials.",
       image: step1Image
     },
     {
-      title: "Step 2: Co-create Your Dream House",
+      title: "Co-create Your Dream House",
       description: "Work with our architects to design your dream home.",
       image: step2Image
     },
     {
-      title: "Step 3: Speak to Our Representative",
+      title: "Speak to Our Representative",
       description: "Discuss your plans and get professional advice.",
       image: step3Image
     },
     {
-      title: "Step 4: Build Your Dream Home",
+      title: "Build Your Dream Home",
       description: "Watch as we bring your vision to life.",
       image: step4Image
     }
   ];
-
+  
   const features = [
     {
       title: "Experience",
       description: "Benefit from our industry expertise.",
-      image: experienceImage
+      icon: <FaTools className="w-12 h-12 text-purple-900 mb-4"/>
     },
     {
       title: "Quality",
       description: "We ensure top-notch craftsmanship in every detail.",
-      image: qualityImage
+      icon: <FaCheckCircle className="w-12 h-12 text-purple-900 mb-4"/>
     },
     {
       title: "Personalized Service",
       description: "Work closely with our team to realize your vision.",
-      image: serviceImage
+      icon: <FaHandHoldingUsd className="w-12 h-12 text-purple-900 mb-4"/>
     },
     {
       title: "Reliability",
       description: "Trust us to meet deadlines and deliver results.",
-      image: reliabilityImage
+      icon: <FaClock className="w-12 h-12 text-purple-900 mb-4"/>
     },
     {
       title: "Customer Satisfaction",
       description: "Your happiness is our priority; we exceed expectations.",
-      image: satisfactionImage
+      icon: <FaSmile className="w-12 h-12 text-purple-900 mb-4"/>
     }
   ];
 
@@ -72,86 +67,66 @@ const ServiceFeatures = () => {
     return () => clearInterval(interval);
   }, [steps.length]);
 
-  const handlePrev2 = () => {
+  const handlePrev = () => {
     setCurrentStepIndex((prevIndex) => (prevIndex - 1 + steps.length) % steps.length);
   };
 
-  const handleNext2 = () => {
+  const handleNext = () => {
     setCurrentStepIndex((prevIndex) => (prevIndex + 1) % steps.length);
   };
-  
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentFeatureIndex((prevIndex) => (prevIndex + 1) % features.length);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [features.length]);
-
-  const handlePrev = () => {
-    setCurrentFeatureIndex((prevIndex) => (prevIndex - 1 + features.length) % features.length);
-  };
-
-  const handleNext = () => {
-    setCurrentFeatureIndex((prevIndex) => (prevIndex + 1) % features.length);
+  const handleStepClick = (index) => {
+    setCurrentStepIndex(index);
   };
 
   return (
-    <div className=" p-8 ">
-       <div className=" bg-purple-900 mb-[50px] py-12">
-      <div className="sm:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl  text-center text-pink-300 font-mono mb-6">Home Construction Steps</h2>
-        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {steps.map((step, index) => (
-            <div key={index} className="p-2 sm:p-4 border bg-pink-300 hover:bg-gray-300 transition-all duration-200 hover:scale-105 text-purple-900 border-purple-950  border-4 rounded-lg shadow-lg">
-              <img src={step.image} alt={`Illustration for ${step.title}`} className="mb-2 sm:mb-4" />
-              <h3 className="text-lg font-mono mb-5 sm:text-xl ">{step.title}</h3>
-              <p className="text-sm sm:text-base ">{step.description}</p>
-            </div>
-          ))}
-        </div>
-        <div className="md:hidden relative text-center">
-          <div className="p-4 border bg-pink-300 text-purple-900 h-[450px] w-[300px] mx-auto border-gray-200 rounded-lg shadow-lg">
-            <img src={steps[currentStepIndex].image} alt={`Illustration for ${steps[currentStepIndex].title}`} className="w-full mb-4" />
-            <h3 className="text-lg">{steps[currentStepIndex].title}</h3>
-            <p className="text-sm ">{steps[currentStepIndex].description}</p>
+    <div className="p-8">
+      <div className="bg-purple-100 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl mb-6">How It Works</h2>
+          <div className="flex justify-center items-center mb-12">
+            {steps.map((step, index) => (
+              <div key={index} className="flex items-center">
+                <div 
+                  className={`md:w-10 md:h-10 lg:h-10 lg:w-10 w-5 h-5 rounded-full flex items-center justify-center text-white cursor-pointer ${currentStepIndex === index ? 'bg-black' : 'bg-purple-900'}`} 
+                  onClick={() => handleStepClick(index)}
+                >
+                  {index + 1}
+                </div>
+                {index < steps.length - 1 && (
+                  <div className="w-8 h-0.5 bg-purple-900 mx-2"></div>
+                )}
+              </div>
+            ))}
           </div>
-          <div className="flex justify-between mt-4">
-            <button onClick={handlePrev2} className="bg-yellow-300 absolute top-[45%]  text-purple-800 py-2 px-4 rounded">
+          <div className="flex flex-col md:flex-row justify-center items-center mb-8">
+            <div className="w-full md:w-1/3 flex flex-col items-center">
+              <img src={steps[currentStepIndex].image} alt={`Illustration for ${steps[currentStepIndex].title}`} className="w-4/5 mb-4 object-contain" />
+              <div className="bg-white p-5 rounded-xl border-2 border-purple-900 flex flex-col items-center text-center">
+                <h3 className="text-xl text-purple-900 font-semibold">{steps[currentStepIndex].title}</h3>
+                <p className="text-sm text-purple-900">{steps[currentStepIndex].description}</p>
+              </div>
+            </div>
+          </div>
+          {/* <div className="flex justify-center mt-4">
+            <button onClick={handlePrev} className="bg-yellow-300 text-purple-800 py-2 px-4 rounded mx-2">
               <FaArrowLeft />
             </button>
-            <button onClick={handleNext2} className="bg-yellow-300 absolute top-[45%] right-0 text-purple-800 py-2 px-4 rounded">
+            <button onClick={handleNext} className="bg-yellow-300 text-purple-800 py-2 px-4 rounded mx-2">
               <FaArrowRight />
             </button>
-          </div>
+          </div> */}
         </div>
-      </div>
-    </div>
-      <div className="max-w-7xl mx-auto px-4  sm:px-6 lg:px-8">
-        <h2 className="text-3xl text-center text-purple-900 font-mono mb-[30px]">Why Choose Us for Your Construction Needs?</h2>
-        <div className="hidden md:flex items-center justify-center  gap-4">
-          {features.map((feature, index) => (
-            <div key={index} className="p-4  h-[400px] w-[300px] border-4 hover:bg-white hover:text-purple-900 transition-all duration-200 hover:scale-105 bg-purple-900 text-pink-200 border-purple-950 rounded-lg shadow-lg">
-              <img src={feature.image} alt={feature.title} className="w-full mb-4"/>
-              <h3 className=" font-mono text-lg">{feature.title}</h3>
-              <p>{feature.description}</p>
-            </div>
-          ))}
-        </div>
-        <div className="md:hidden relative text-center">
-          <div className="p-4 bg-purple-900 h-[450px] text-white w-[300px] mx-auto border border-purple-950 rounded-lg shadow-lg">
-            <img src={features[currentFeatureIndex].image} alt={features[currentFeatureIndex].title} className="w-full mb-4"/>
-            <h3 className="text-lg font-mono">{features[currentFeatureIndex].title}</h3>
-            <p>{features[currentFeatureIndex].description}</p>
-          </div>
-          <div className="flex justify-between mt-4">
-            <button onClick={handlePrev} className="bg-yellow-300 absolute top-[45%] text-purple-800 py-2 px-4 rounded">
-              <FaArrowLeft />
-            </button>
-            <button onClick={handleNext} className="bg-yellow-300 absolute top-[45%] right-0 text-purple-800 py-2 px-4 rounded">
-              <FaArrowRight />
-            </button>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl text-center text-purple-900 mt-12 mb-8">Why Choose BuildWorX</h2>
+          <div className="flex items-center justify-center flex-wrap gap-4">
+            {features.map((feature, index) => (
+              <div key={index} className="p-4 md:p-2 w-[200px] h-[250px] lg:p-4 border bg-white transition-all duration-200 hover:scale-105 border-purple-950 rounded-lg shadow-lg mb-4 md:mb-2 lg:mb-4">
+                <div className="flex justify-center mb-4">{feature.icon}</div>
+                <h3 className="mb-2 text-center text-lg">{feature.title}</h3>
+                <p className="text-center">{feature.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -160,6 +135,3 @@ const ServiceFeatures = () => {
 };
 
 export default ServiceFeatures;
-
-
-

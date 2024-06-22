@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import Section2 from './section2';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 const ServiceSteps = () => {
   const services = [
@@ -22,7 +23,7 @@ const ServiceSteps = () => {
       imgSrc: i2
     },
     {
-      title: "Enterprise and PSU Projects",
+      title: "Enterprise / PSU Projects",
       description: "Customized solutions for large-scale projects, with a focus on quality and efficiency.",
       imgSrc: i3
     },
@@ -69,17 +70,18 @@ const ServiceSteps = () => {
     ]
   };
 
+
  
 
   return (
     <div className='bg-purple-900'>
       <div className='flex flex-col items-center justify-around text-yellow-300 py-12 w-full'>
-        <h2 className="text-3xl text-white text-center font-mono mb-6">Our Services</h2>
+        <h2 className="text-3xl text-white text-center  mb-6">Our Services</h2>
         <div className="hidden w-[80%] md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 {services.map((step, index) => (
-  <div key={index} className="p-2 sm:p-4 border hover:bg-gray-300 border-purple-900 transition-all duration-200 hover:scale-105 bg-white text-purple-900 border-gray-200 rounded-lg shadow-lg">
+  <div key={index} className="p-2 sm:p-4 border hover:bg-gray-300 border-purple-900 transition-all duration-200 hover:scale-105 bg-white text-purple-900 rounded-lg shadow-lg">
     <img src={step.imgSrc} alt={`Illustration for ${step.title}`} className="mb-2 sm:mb-4" />
-     <h3 className="text-lg font-mono mb-5 sm:text-xl text-gray-950">{step.title}</h3>
+     <h3 className="text-lg text-center  mb-5 sm:text-xl text-gray-950">{step.title}</h3>
     <p className="text-sm sm:text-base text-gray-950">{step.description}</p>
   </div>
 ))}
@@ -98,6 +100,9 @@ const ServiceSteps = () => {
       </div>
       <div id="section2" className="w-full">
         <Section2 />
+      </div>
+      <div>
+   
       </div>
     </div>
   );

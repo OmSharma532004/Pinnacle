@@ -14,7 +14,7 @@ const Section2 = () => {
 From the initial blueprint to the final inspection, we manage every detail with precision and care. Trust in our expertise and experience to bring your dream home to life.
 
 </p>
-            <Link className=' bg-yellow-300 text-black text-xl  p-4 rounded-xl' to={"/dashboard"}>Calculate Estimate</Link> </div>
+            <Link className=' bg-yellow-300 text-black text-xl  p-4 rounded-xl' to={"/dashboard"}> Estimate Calculator</Link> </div>
        
         </div>
        

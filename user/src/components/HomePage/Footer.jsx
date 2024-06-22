@@ -83,7 +83,7 @@ const Footer = () => {
   return (
     <footer className="bg-white text-black py-12">
       <div className="container mx-auto flex items-center flex-wrap justify-between">
-        <div className="w-full md:w-1/2 px-4">
+        <div className="w-full text-center md:text-start md:w-1/2 px-4">
           
           <div className="mt-8">
             <h2 className="text-2xl font-bold text-purple-800 mb-4">Quick Links</h2>

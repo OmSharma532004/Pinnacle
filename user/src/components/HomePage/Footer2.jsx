@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="bg-white text-gray-800 py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className=" ">
           {/* Section 1: Quick Links */}
           <div>
             <h2 className="text-2xl font-bold text-purple-800 mb-4">Quick Links</h2>

@@ -33,7 +33,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="bg-purple-900 text-pink-200 border-b-4 border-pink-300 text-xl w-screen p-4">
+            <nav className="bg-purple-900 text-white border-b-4 border-yellow-500 text-xl w-screen p-4">
                 <div className="container mx-auto flex items-center justify-between">
                     <Link to={"/"} className="hover:text-yellow-400">
                         <div><img src={logo} width={200} /></div>
@@ -46,15 +46,7 @@ const Navbar = () => {
                             <div>
                                 {location.pathname === "/" && (
                                     <div className='flex items-center justify-center flex-col md:flex-row md:gap-5'>
-                                        <li onClick={() => scrollToSection('service-steps')} className="cursor-pointer hover:text-yellow-400 text-lg">Services</li>
-                                        <li className='cursor-pointer hover:text-yellow-400 text-lg'>
-                                            <Link to={"/dashboard"}> Estimator </Link>
-                                        </li>
-                                        <li onClick={() => scrollToSection('blogs')} className="cursor-pointer text-lg hover:text-yellow-400">Blogs</li>
-                                        <li onClick={() => scrollToSection('resources')} className="cursor-pointer text-lg hover:text-yellow-400">Resources</li>
-                                        <li onClick={() => scrollToSection('footer')} className="cursor-pointer text-lg hover:text-yellow-400">Contact Us</li>
-                                        <li onClick={() => scrollToSection('section1')} className="cursor-pointer hover:text-yellow-400 text-lg">About Us</li>
-                                        <li className="relative ">
+                                         <li className="relative ">
                                             <select
                                                 value={selectedCity}
                                                 onChange={handleCityChange}
@@ -67,18 +59,29 @@ const Navbar = () => {
                                                 <option value="gurugram">Gurugram</option>
                                             </select>
                                         </li>
+                                        <li onClick={() => scrollToSection('service-steps')} className="cursor-pointer hover:text-yellow-400 text-lg">Services</li>
+                                        <li className='cursor-pointer hover:text-yellow-400 text-lg'>
+                                            <Link to={"/dashboard"}> Estimator </Link>
+                                        </li>
+                                        <li onClick={() => scrollToSection('blogs')} className="cursor-pointer text-lg hover:text-yellow-400">Blogs</li>
+                                        <li onClick={() => scrollToSection('resources')} className="cursor-pointer text-lg hover:text-yellow-400">Resources</li>
+                                        <li onClick={() => scrollToSection('footer')} className="cursor-pointer text-lg hover:text-yellow-400">Contact Us</li>
+                                        <li onClick={() => scrollToSection('section1')} className="cursor-pointer hover:text-yellow-400 text-lg">About Us</li>
+                                       
                                     </div>
                                 )}
                             </div>
                             <div>
                                 {token == null ? (
                                     <>
-                                        <Link to={"/login"}>
+                                       <div className=' flex  gap-[20px]'>
+                                       <Link to={"/login"}>
                                             <li className="hover:text-yellow-400">Login</li>
                                         </Link>
                                         <Link to={"/signup"}>
                                             <li className="hover:text-yellow-400">Signup</li>
                                         </Link>
+                                       </div>
                                     </>
                                 ) : (
                                     <Link to={"/profile"}>

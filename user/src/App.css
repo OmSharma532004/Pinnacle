@@ -64,3 +64,15 @@
   background-color: rgba(0, 0, 0, 0.75);
   z-index: 1000;
 }
+
+
+.section {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 1s ease-out;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
