@@ -18,15 +18,22 @@ import Resources from "../components/HomePage/Resources";
 
 const Home = () => {
     const sectionsRef = useRef([]);
+    const observedElements = useRef(new Set());
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+                        if (!observedElements.current.has(entry.target)) {
+                            entry.target.classList.add('visible');
+                            observedElements.current.add(entry.target);
+                        }
                     } else {
-                        entry.target.classList.remove('visible'); // Optional: Remove class if not intersecting
+                        // Optionally, you can remove the class if not intersecting, but only if it has not been added before
+                        // if (!observedElements.current.has(entry.target)) {
+                        //     entry.target.classList.remove('visible');
+                        // }
                     }
                 });
             },
