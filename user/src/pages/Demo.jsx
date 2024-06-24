@@ -80,7 +80,7 @@ function BookDemoForm() {
   return (
     <div className="container mx-auto mt-10">
       <h2 className="text-3xl text-center font-semibold text-purple-800 mb-8">
-        Book a Demo
+        Book a Free Consultation
       </h2>
       <form
         onSubmit={handleSubmit}

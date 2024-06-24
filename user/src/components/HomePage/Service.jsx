@@ -4,29 +4,31 @@ import step1Image from "./stepsAssets/1.png";
 import step2Image from "./stepsAssets/2.png";
 import step3Image from "./stepsAssets/3.png";
 import step4Image from "./stepsAssets/4.png";
+import { Link } from 'react-router-dom';
 
 const ServiceFeatures = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
   const steps = [
     {
-      title: "Choose Your Material",
-      description: "Select from a wide range of quality materials.",
+      title: "Connect With Our Experts",
+      description: "Schedule a consultation with our team to discuss your project",
+      code :<Link to="/demo">Book Free Consultation</Link>,
       image: step1Image
     },
     {
-      title: "Co-create Your Dream House",
-      description: "Work with our architects to design your dream home.",
+      title: "Get Your Free Consultation",
+      description: " Share your ideas and requirements with us.",
       image: step2Image
     },
     {
-      title: "Speak to Our Representative",
-      description: "Discuss your plans and get professional advice.",
+      title: "Engage With Us",
+      description: " Collaborate with our team to plan your project.",
       image: step3Image
     },
     {
-      title: "Build Your Dream Home",
-      description: "Watch as we bring your vision to life.",
+      title: "Start Construction",
+      description: " Watch your vision come to life with our expert team.",
       image: step4Image
     }
   ];
@@ -81,30 +83,36 @@ const ServiceFeatures = () => {
 
   return (
     <div className="p-8">
-      <div className="bg-purple-100 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl mb-6">How It Works</h2>
+      <div className="py-12">
+        <div className="max-w-7xl bg-purple-900 rounded-xl py-4  mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl text-white mb-6">How It Works</h2>
           <div className="flex justify-center items-center mb-12">
             {steps.map((step, index) => (
               <div key={index} className="flex items-center">
                 <div 
-                  className={`md:w-10 md:h-10 lg:h-10 lg:w-10 w-5 h-5 rounded-full flex items-center justify-center text-white cursor-pointer ${currentStepIndex === index ? 'bg-black' : 'bg-purple-900'}`} 
+                  className={`md:w-10 md:h-10 lg:h-10 lg:w-10 w-5 h-5 rounded-full flex items-center justify-center text-black cursor-pointer ${currentStepIndex === index ? 'bg-white' : 'bg-yellow-300'}`} 
                   onClick={() => handleStepClick(index)}
                 >
                   {index + 1}
                 </div>
                 {index < steps.length - 1 && (
-                  <div className="w-8 h-0.5 bg-purple-900 mx-2"></div>
+                  <div className="w-8 h-0.5 bg-yellow-300 mx-2"></div>
                 )}
               </div>
             ))}
           </div>
           <div className="flex flex-col md:flex-row justify-center items-center mb-8">
             <div className="w-full md:w-1/3 flex flex-col items-center">
-              <img src={steps[currentStepIndex].image} alt={`Illustration for ${steps[currentStepIndex].title}`} className="w-4/5 mb-4 object-contain" />
+              {/* <img src={steps[currentStepIndex].image} alt={`Illustration for ${steps[currentStepIndex].title}`} className="w-4/5 mb-4 object-contain" /> */}
               <div className="bg-white p-5 rounded-xl border-2 border-purple-900 flex flex-col items-center text-center">
                 <h3 className="text-xl text-purple-900 font-semibold">{steps[currentStepIndex].title}</h3>
                 <p className="text-sm text-purple-900">{steps[currentStepIndex].description}</p>
+                {
+                  steps[currentStepIndex].code&&
+                  <div className="mt-4 bg-purple-900 p-4 text-white rounded-lg">
+                    {steps[currentStepIndex].code}
+                  </div>
+                }
               </div>
             </div>
           </div>
@@ -118,7 +126,7 @@ const ServiceFeatures = () => {
           </div> */}
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl text-center text-purple-900 mt-12 mb-8">Why Choose BuildWorX</h2>
+          <h2 className="text-3xl text-center text-black mt-12 mb-8">Why Choose BuildWorX</h2>
           <div className="flex items-center justify-center flex-wrap gap-4">
             {features.map((feature, index) => (
               <div key={index} className="p-4 md:p-2 w-[200px] h-[250px] lg:p-4 border bg-white transition-all duration-200 hover:scale-105 border-purple-950 rounded-lg shadow-lg mb-4 md:mb-2 lg:mb-4">

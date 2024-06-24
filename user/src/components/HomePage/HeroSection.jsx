@@ -18,10 +18,11 @@ const HeroSection = () => {
   return (
     <div className="relative w-full h-[500px]">
       <img src={image1}  alt="BuildWorX" className="w-full h-full object-cover" />
-      <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-40 md:bg-opacity-10 text-white">
+      <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-0 md:bg-opacity-0 text-white">
         <div className="w-full lg:ml-9 md:ml-9 mx-auto text-start py-20 px-10">
           <h1 className="text-6xl mb-4">Build<b className=' text-yellow-300 font-light '>WorX</b></h1>
-          <p className="mb-4 w-[40%]">XXXXXX</p>
+          <p className="mb-4 w-[40%]">Turning Visions into Reality, constructing excellence
+</p>
           <ul className="mb-4">
             <li>100+ Executed Projects</li>
             <li>200+ Audit Checks</li>
@@ -35,12 +36,14 @@ const HeroSection = () => {
         </div>
       </div>
       <button
-        onClick={openModal}
-        className="bg-yellow-400 hover:bg-purple-500 hover:text-white text-black md:py-5 md:w-[100px] p-4 w-[80px] md:px-5 fixed rounded top-96 right-0 z-10"
-        style={{ backdropFilter: 'blur(10px)' }}
-      >
-        Talk to Our Expert
-      </button>
+  onClick={openModal}
+  className="bg-yellow-400 hover:bg-purple-500 hover:text-white text-black py-4 md:py-5 md:w-[100px] w-[80px] md:px-5 fixed rounded top-1/2 right-0 transform -translate-y-1/2 z-10"
+  style={{ backdropFilter: 'blur(10px)' }}
+>
+  Talk to Our Expert
+</button>
+
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
