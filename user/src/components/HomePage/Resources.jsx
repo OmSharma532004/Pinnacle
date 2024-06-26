@@ -38,7 +38,7 @@ const Resources = () => {
   ];
 
   return (
-    <div className='flex flex-col items-center justify-around w-full'>
+    <div className='flex flex-col bg-white items-center justify-around w-full'>
       <h2 className="text-4xl mb-9 text-purple-900 text-center">Resources</h2>
       <div className="w-[80%] grid grid-cols-1 md:grid-cols-2 gap-4">
         {resources.map((resource, index) => (

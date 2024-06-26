@@ -55,8 +55,8 @@ const Home = () => {
     }, []);
 
     return (
-        <div className="flex flex-col overflow-hidden w-full items-center justify-center">
-            <div id="hero-section" className="w-full section" ref={(el) => sectionsRef.current[0] = el}>
+        <div className="flex flex-col overflow-hidden  w-full items-center justify-center">
+            <div id="hero-section" className="w-full " ref={(el) => sectionsRef.current[0] = el}>
                 <HeroSection/>
             </div>
             <div id="section1" className="w-full section" ref={(el) => sectionsRef.current[1] = el}>
@@ -71,18 +71,13 @@ const Home = () => {
             <div id="service-highlights" className="w-full section" ref={(el) => sectionsRef.current[4] = el}>
                 <ServiceHighlights/>
             </div>
-            <div id="footer" className="w-full section" ref={(el) => sectionsRef.current[5] = el}>
+            <div id="footer" className="w-full" ref={(el) => sectionsRef.current[5] = el}>
                 <Footer/>
             </div>
             <div className="w-full mt-4">
                 <WhatsAppButton /> {/* Add the WhatsAppButton component here */}
             </div>
             {/* Add Disclaimer at End */}
-            <div className="w-[80%] text-sm text-center section" ref={(el) => sectionsRef.current[6] = el}>
-                <p className="md:text-lg">
-                    Disclaimer: BuildWorX endeavors to ensure that the information and data in this section is correct and complete, but does not accept liability for any error made or omission from this section. Buildworx shall not be liable for any claims or losses of any nature, arising directly or indirectly from use of the information or data on this section or unauthorized access to this section or otherwise howsoever arising, except to the extent required by law.
-                </p>
-            </div>
         </div>
     );
 };
