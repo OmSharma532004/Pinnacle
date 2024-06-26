@@ -40,9 +40,9 @@ const Footer = () => {
               <li className="mb-2">
                 <a href="/privacy-policy" className="hover:text-purple-600">Privacy Policy</a>
               </li>
-              <li className="mb-2">
+              {/* <li className="mb-2">
                 <a href="/disclaimer" className="hover:text-purple-600">Disclaimer</a>
-              </li>
+              </li> */}
               <li className="mb-2">
                 <a href="/sitemap" className="hover:text-purple-600">Sitemap</a>
               </li>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import logo2 from '../../assets/logo2.png';
 const apiUrl = import.meta.env.VITE_API_URL;
+import sitemap from "../../../public/sitemap.pdf";
 
 const Footer = () => {
   const [formData, setFormData] = useState({
@@ -107,9 +108,12 @@ const Footer = () => {
             <h2 className="text-2xl font-bold text-purple-800 mb-4">Legal</h2>
             <ul>
               <li className="mb-2">Copyright BuildWorX 2024, all rights reserved</li>
-              <li className="mb-2"><a href="/privacy-policy" className="hover:text-purple-600">Privacy Policy</a></li>
-              <li className="mb-2"><a href="/disclaimer" className="hover:text-purple-600">Disclaimer</a></li>
-              <li className="mb-2"><a href="/sitemap" className="hover:text-purple-600">Sitemap</a></li>
+              <li className="mb-2">
+  <a href="../../../public/Policy.pdf" target="_blank" className="hover:text-purple-600">Privacy Policy</a>
+</li>
+<li className="mb-2">
+  <a href="../../../public/sitemap.pdf" target="_blank" className="hover:text-purple-600">Sitemap</a>
+</li>
             </ul>
           </div>
         </div>

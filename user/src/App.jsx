@@ -17,12 +17,20 @@ import ForgotPassword from './pages/enterEmail'
 import BookDemoForm from './pages/Demo'
 
 import SuperVisionForm from './pages/superVision'
-
+import Modal from 'react-modal'
 
 
 
 
 function App() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openModal = () => setModalIsOpen(true);
+  const closeModal = () => setModalIsOpen(false);
+  const handleCall = () => {
+    window.location.href = 'tel:+1234567890'; // Replace with your phone number
+  };
+
   const clientId="646102159744-39spi62n4lc3orsasooie7je0uka1hc9.apps.googleusercontent.com";
   useEffect(() => {
    function start(){
@@ -36,6 +44,7 @@ function App() {
    gapi.load('client:auth2',start);
 
   }, [])
+  Modal.setAppElement('#root');
 
   return (
   < >
@@ -60,7 +69,41 @@ function App() {
 <h2 className=' text-4xl'>Page not found</h2>
 
 </div>} />
+
 </Routes>
+<button
+  onClick={openModal}
+  className="bg-yellow-400 hover:bg-purple-500 hover:text-white text-black py-4 md:py-5 md:w-[100px] w-[80px] md:px-5 fixed rounded top-1/2 right-0 transform -translate-y-1/2 z-10"
+  style={{ backdropFilter: 'blur(10px)' }}
+>
+  Talk to Our Expert
+</button>
+
+
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Contact Modal"
+        className="modal"
+        overlayClassName="overlay"
+      >
+        <h2 className="text-2xl mb-4">Contact Us</h2>
+        <p className="mb-4">Call us at: +1234567890</p>
+        <div className="flex justify-end">
+          <button
+            onClick={handleCall}
+            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+          >
+            Call
+          </button>
+          <button
+            onClick={closeModal}
+            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Cancel
+          </button>
+        </div>
+      </Modal>
 </div>
   </>
   )
