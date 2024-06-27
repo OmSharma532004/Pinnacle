@@ -9,16 +9,15 @@ Modal.setAppElement('#root');
 
 const HeroSection = () => {
   const offers = [
-    "Get 20% off on all projects!",
-    "Free consultation for first-time clients!",
-    "Audit checks at discounted rates!",
-    "Free project evaluation!",
-    "Get a free project plan!",
-    "Discounted rates on long-term projects!",
-    "Free maintenance for the first year!",
-    "Exclusive offers for referrals!",
-    "Get a free cost estimate!",
-    "Priority support for all clients!"
+    "Get your free consultation today",
+    " Contact our team for preferred pricing",
+    "Early bird offers for July 2024 - get in touch with our team!",
+    " Supervision and 200+ audit checks for structural projects - get in touch with our team!",
+    "Get your free consultation today",
+    " Contact our team for preferred pricing",
+    "Early bird offers for July 2024 - get in touch with our team!",
+    " Supervision and 200+ audit checks for structural projects - get in touch with our team!",
+    
   ];
 
   return (

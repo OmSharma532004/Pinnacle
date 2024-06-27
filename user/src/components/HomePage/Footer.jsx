@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import logo2 from '../../assets/logo.png';
 const apiUrl = import.meta.env.VITE_API_URL;
-import sitemap from "../../../public/sitemap.pdf";
+
+import { Link } from 'react-router-dom';
+import { FaInstagram } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { FaLinkedin } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+
 
 const Footer = () => {
   const [formData, setFormData] = useState({
@@ -90,7 +97,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-white -m-[20px] text-black pt-12">
+    <footer className="bg-white  -mb-[20px] text-black">
       <div className="mx-auto flex flex-col items-center flex-wrap justify-center">
       <div className="w-full flex flex-col items-center  justify-center md:w-1/2 px-4 mt-12 md:mt-0">
             
@@ -180,19 +187,34 @@ const Footer = () => {
               <p className="text-lg mt-4">Contact us: 1234567890</p>
               <p className="text-lg">Email: <a href="mailto:contact@buildworx.co.in" className="text-purple-800 hover:underline">contact@buildworx.co.in</a></p>
             </div>
-          <div className="  px-4">
-          
-          <div className="mt-8">
+          <div className=" md:flex md:flex-wrap items-center justify-around md:w-[50%] gap-[20px]  px-4">
+           
+          <div className="mt-8 md:w-[200px]">
             <h2 className="text-2xl font-bold text-yellow-300 mb-4">Quick Links</h2>
             <ul className="mb-4">
               <li className="mb-2"><a href="/" className="hover:text-purple-600">Home</a></li>
               <li onClick={() => scrollToSection('section1')} className="cursor-pointer mb-2 hover:text-purple-600">About Us</li>
                               
               <li onClick={() => scrollToSection('footer')} className="cursor-pointer mb-2 hover:text-purple-600">Contact Us</li>
-              <li onClick={() => scrollToSection('footer')} className="cursor-pointer mb-2 hover:text-purple-600">Resources</li>
-                                </ul>
+              <li onClick={() => scrollToSection('resources')} className="cursor-pointer mb-2 hover:text-purple-600">Resources</li>
+              <li onClick={() => scrollToSection('resources')} className="cursor-pointer mb-2 hover:text-purple-600">Blogs</li>
+              <li onClick={()=>{
+                                            window.location.href = '/dashboard';
+                                        }} className='cursor-pointer hover:text-purple-600 mb-2 text-lg'>
+                                           Estimator
+                                        </li>
+
+              <li  className="cursor-pointer mb-2 hover:text-purple-600">Delhi</li>     
+          
+              <li  className="cursor-pointer mb-2 hover:text-purple-600">Noida</li>                          
+              <li  className="cursor-pointer mb-2 hover:text-purple-600">Faridabad</li>                          
+              <li  className="cursor-pointer mb-2 hover:text-purple-600">Gurugram</li>                          
+              <li  className="cursor-pointer mb-2 hover:text-purple-600">Ghaziabad</li>                                                                       
+
+                               </ul>
           </div>
-          <div className="mt-8">
+        <div className=' flex flex-col items-center justify-center'>
+        <div className="mt-8  md:w-[200px]">
             <h2 className="text-2xl font-bold text-yellow-300 mb-4">Our Services</h2>
             <ul>
                 <li className="mb-2 mt-2"><a href="/dashboard" className="hover:text-purple-600">Construction</a></li>
@@ -200,7 +222,7 @@ const Footer = () => {
                 <li className="mb-2"><a href="/supervision" className="hover:text-purple-600">Consulting</a></li>
             </ul>
           </div>
-          <div className="mt-8">
+          <div className="mt-8  md:w-[200px]">
             <h2 className="text-2xl font-bold text-yellow-300 mb-4">Legal</h2>
             <ul>
               <li className="mb-2">Copyright BuildWorX 2024, all rights reserved</li>
@@ -212,6 +234,19 @@ const Footer = () => {
 </li>
             </ul>
           </div>
+          <div className='mt-8 flex flex-col items-start justify-center  md:w-[200px]'>
+          <h2 className="text-2xl font-bold text-yellow-300 mb-4">Get Connected</h2>
+          <ul className=' flex  flex-row items-start justify-center'>
+          <Link to="/" className="hover:text-purple-600"><FaFacebook style={{ fontSize: "2rem" }} className="ml-4" /></Link>
+          <Link to="/" className="hover:text-purple-600"><FaInstagram style={{ fontSize: "2rem" }} className="ml-4" /></Link>
+          <Link to="/" className="hover:text-purple-600"><FaLinkedin style={{ fontSize: "2rem" }} className="ml-4" /></Link>
+          <Link to="/" className="hover:text-purple-600"><FaTwitter style={{ fontSize: "2rem" }} className="ml-4" /></Link>
+          <Link to="/" className="hover:text-purple-600"><FaYoutube style={{ fontSize: "2rem" }} className="ml-4" /></Link>
+         </ul>
+           
+          </div>
+        </div>
+          
         </div>
       
           </div>

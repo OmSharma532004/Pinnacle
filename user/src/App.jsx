@@ -20,10 +20,12 @@ import viteLogo from '/vite.svg';
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [leaveDialogIsOpen, setLeaveDialogIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    city: '',
     comment: '',
   });
   const [errors, setErrors] = useState({});
@@ -70,7 +72,7 @@ function App() {
           name: formData.name,
           email: formData.email,
           phone: formData.phone,
-          message: formData.comment
+          message: "City:- " + formData.city + " Comment:- " + formData.comment
         }),
       });
       const data = await response.json();
@@ -102,10 +104,27 @@ function App() {
     gapi.load('client:auth2', start);
   }, []);
 
+  const handleMouseLeave = (e) => {
+    if (e.clientY <= 0) {
+      setLeaveDialogIsOpen(true);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mouseleave', handleMouseLeave);
+    return () => {
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
+  const closeLeaveDialog = () => {
+    setLeaveDialogIsOpen(false);
+  };
+
   Modal.setAppElement('#root');
 
   return (
-   <div>
+    <div>
       <div className='flex -mb-[120px] flex-col items-center justify-center'>
         <Navbar />
         <Routes>
@@ -132,18 +151,15 @@ function App() {
           Talk to Our Expert
         </button>
         <Modal
-        
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
           contentLabel="Contact Modal"
-          className="modal w-[40%] flex flex-col items-center justify-center mx-auto p-8 bg-white rounded shadow-2x"
+          className="modal md:w-[40%] w-[80%] flex flex-col items-center justify-center mx-auto p-8 bg-white rounded shadow-2x"
           overlayClassName="overlay"
         >
-           {
-            
-
+          {
             Object.keys(errors).length > 0 && (
-              <div className="  text-red-700 px-4 py-3 rounded relative" role="alert">
+              <div className="text-red-700 px-4 py-3 rounded relative" role="alert">
                 <ul>
                   {Object.values(errors).map((error, index) => (
                     <li key={index}>{error}</li>
@@ -151,9 +167,9 @@ function App() {
                 </ul>
               </div>
             )
-           }
-          <h2 className="text-2xl text-center mb-4">  Talk to Our Expert</h2>
-          <form onSubmit={handleSubmit} className="flex items-center w-[90%] justify-center  flex-col">
+          }
+          <h2 className="text-2xl text-center mb-4">Talk to Our Expert</h2>
+          <form onSubmit={handleSubmit} className="flex items-center md:w-[90%] justify-center flex-col">
             <label className="mb-2">Name</label>
             <input
               type="text"
@@ -169,7 +185,7 @@ function App() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="mb-4 w-[70%]  border-black border-2  p-2 rounded"
+              className="mb-4 w-[70%] border-black border-2 p-2 rounded"
               required
             />
             <label className="mb-2">Phone</label>
@@ -178,33 +194,43 @@ function App() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="mb-4 p-2 w-[70%]  border-black border-2  rounded"
+              className="mb-4 p-2 w-[70%] border-black border-2 rounded"
               required
             />
-            <label className="mb-2">Comment</label>
-            <textarea
-              name="comment"
-              value={formData.comment}
+            <label className="mb-2">City</label>
+            <input
+              type="text"
+              name="city"
+              value={formData.city}
               onChange={handleChange}
-              className="mb-4 p-2 w-[70%]  border-black border-2 rounded"
+              className="mb-4 p-2 w-[70%] border-black border-2 rounded"
               required
-            ></textarea>
-            <div className="flex  w-[50%] justify-end">
+            />
+            <div className="flex w-[50%] justify-end">
               <button
                 type="submit"
-                className="bg-purple-900 rounded-xl w-[100%] mt-[20px] text-white font-bold py-2 px-4  mr-2"
+                className="bg-purple-900 rounded-xl w-[100%] mt-[20px] text-white font-bold py-2 px-4 mr-2"
               >
                 Submit
               </button>
-              {/* <button
-                type="button"
-                onClick={closeModal}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-              >
-                Cancel
-              </button> */}
             </div>
           </form>
+        </Modal>
+        <Modal
+          isOpen={leaveDialogIsOpen}
+          onRequestClose={closeLeaveDialog}
+          contentLabel="Leave Page Dialog"
+          className="modal md:w-[40%] w-[80%] flex flex-col items-center justify-center mx-auto p-8 bg-white rounded shadow-2x"
+          overlayClassName="overlay"
+        >
+          <h2 className="text-2xl text-center mb-4">Why leaving so soon?</h2>
+          <p className="text-center mb-4">Explore our offers before you go!</p>
+          <button
+            onClick={closeLeaveDialog}
+            className="bg-purple-900 rounded-xl w-[50%] text-white font-bold py-2 px-4"
+          >
+            Stay on Page
+          </button>
         </Modal>
       </div>
     </div>

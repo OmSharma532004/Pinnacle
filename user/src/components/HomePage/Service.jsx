@@ -83,7 +83,7 @@ const ServiceFeatures = () => {
 
   return (
     <div className="p-8 bg-white">
-      <div className="py-12">
+      <div className="py-7 pb-4">
         <div className="max-w-7xl bg-purple-900 rounded-xl py-4  mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl text-white mb-6">How It Works</h2>
           <div className="flex justify-center items-center mb-12">
