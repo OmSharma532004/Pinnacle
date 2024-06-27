@@ -181,11 +181,12 @@ const Footer = () => {
             </form>
           
           </div>
-          <div className=' flex bg-purple-950 gap-[40px] p-8 text-white  items-center justify-around flex-wrap w-full '>
+         <div className=' flex flex-col bg-purple-950 gap-[40px] p-8 text-white  items-center justify-around flex-wrap w-full '>
+         <div className=' flex bg-purple-950 gap-[40px] p-8 text-white  items-center justify-around flex-wrap w-full '>
           <div className="flex flex-col items-center justify-center ">
               <img src={logo2} alt="Logo" className=' w-[200px] md:w-[500px]' />
               <p className="text-lg mt-4">Contact us: 1234567890</p>
-              <p className="text-lg">Email: <a href="mailto:contact@buildworx.co.in" className="text-purple-800 hover:underline">contact@buildworx.co.in</a></p>
+              <p className="text-lg">Email: <a href="mailto:contact@buildworx.co.in" className="text-white hover:underline">contact@buildworx.co.in</a></p>
             </div>
           <div className=" md:flex md:flex-wrap items-center justify-around md:w-[50%] gap-[20px]  px-4">
            
@@ -213,7 +214,7 @@ const Footer = () => {
 
                                </ul>
           </div>
-        <div className=' flex flex-col items-center justify-center'>
+        <div className=' flex flex-col md:items-center md:justify-center'>
         <div className="mt-8  md:w-[200px]">
             <h2 className="text-2xl font-bold text-yellow-300 mb-4">Our Services</h2>
             <ul>
@@ -230,13 +231,23 @@ const Footer = () => {
   <a href="../../../public/Policy.pdf" target="_blank" className="hover:text-purple-600">Privacy Policy</a>
 </li>
 <li className="mb-2">
+  <a href="" target="_blank" className="hover:text-purple-600">Disclaimer Policy</a>
+</li>
+<li className="mb-2">
+  <a href="" target="_blank" className="hover:text-purple-600">Cancellation & Refunds</a>
+</li>
+<li className="mb-2">
+  <a href="" target="_blank" className="hover:text-purple-600">Affiliate Policy</a>
+</li>
+
+<li className="mb-2">
   <a href="../../../public/sitemap.pdf" target="_blank" className="hover:text-purple-600">Sitemap</a>
 </li>
             </ul>
           </div>
           <div className='mt-8 flex flex-col items-start justify-center  md:w-[200px]'>
           <h2 className="text-2xl font-bold text-yellow-300 mb-4">Get Connected</h2>
-          <ul className=' flex  flex-row items-start justify-center'>
+          <ul className=' flex flex-row md  '>
           <Link to="/" className="hover:text-purple-600"><FaFacebook style={{ fontSize: "2rem" }} className="ml-4" /></Link>
           <Link to="/" className="hover:text-purple-600"><FaInstagram style={{ fontSize: "2rem" }} className="ml-4" /></Link>
           <Link to="/" className="hover:text-purple-600"><FaLinkedin style={{ fontSize: "2rem" }} className="ml-4" /></Link>
@@ -250,6 +261,13 @@ const Footer = () => {
         </div>
       
           </div>
+          {/* //disclaimer */}
+          <div className="w-full flex flex-col items-center justify-center bg-purple-950 p-8 text-white">
+            <h1 className="text-2xl font-bold text-yellow-300 mb-4">Disclaimer</h1>
+            <p className="text-center">Buildworx endeavors to ensure that the information and data in this section is correct and complete, but does not accept liability for any error made or omission from this section. Buildworx shall not be liable for any claims or losses of any nature, arising directly or indirectly from use of the information or data on this section or unauthorized access to this section or otherwise howsoever arising, except to the extent required by law.
+                                        </p>
+                                        </div>
+         </div>
       
        
       </div>

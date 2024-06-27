@@ -229,7 +229,7 @@ function App() {
             onClick={closeLeaveDialog}
             className="bg-purple-900 rounded-xl w-[50%] text-white font-bold py-2 px-4"
           >
-            Stay on Page
+            Talk To Our Expert
           </button>
         </Modal>
       </div>
