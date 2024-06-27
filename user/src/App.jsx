@@ -179,6 +179,15 @@ function App() {
               className="mb-4 p-2 w-[70%] border-black border-2 rounded"
               required
             />
+             <label className="mb-2">Phone</label>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="mb-4 p-2 w-[70%] border-black border-2 rounded"
+              required
+            />
             <label className="mb-2">Email</label>
             <input
               type="email"
@@ -188,15 +197,7 @@ function App() {
               className="mb-4 w-[70%] border-black border-2 p-2 rounded"
               required
             />
-            <label className="mb-2">Phone</label>
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="mb-4 p-2 w-[70%] border-black border-2 rounded"
-              required
-            />
+           
             <label className="mb-2">City</label>
             <input
               type="text"
@@ -226,7 +227,12 @@ function App() {
           <h2 className="text-2xl text-center mb-4">Why leaving so soon?</h2>
           <p className="text-center mb-4">Explore our offers before you go!</p>
           <button
-            onClick={closeLeaveDialog}
+            onClick={()=>{
+              closeLeaveDialog();
+              openModal();
+            
+            }}
+
             className="bg-purple-900 rounded-xl w-[50%] text-white font-bold py-2 px-4"
           >
             Talk To Our Expert

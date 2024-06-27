@@ -190,13 +190,20 @@ const Footer = () => {
             </div>
           <div className=" md:flex md:flex-wrap items-center justify-around md:w-[50%] gap-[20px]  px-4">
            
-          <div className="mt-8 md:w-[200px]">
+        <div className=' flex flex-col items-center justify-center'>
+        <div className="mt-8 md:w-[200px]">
             <h2 className="text-2xl font-bold text-yellow-300 mb-4">Quick Links</h2>
             <ul className="mb-4">
               <li className="mb-2"><a href="/" className="hover:text-purple-600">Home</a></li>
               <li onClick={() => scrollToSection('section1')} className="cursor-pointer mb-2 hover:text-purple-600">About Us</li>
                               
               <li onClick={() => scrollToSection('footer')} className="cursor-pointer mb-2 hover:text-purple-600">Contact Us</li>
+              <li  className="cursor-pointer mb-2 hover:text-purple-600">Delhi</li>     
+          
+          <li  className="cursor-pointer mb-2 hover:text-purple-600">Noida</li>                          
+          <li  className="cursor-pointer mb-2 hover:text-purple-600">Faridabad</li>                          
+          <li  className="cursor-pointer mb-2 hover:text-purple-600">Gurugram</li>                          
+          <li  className="cursor-pointer mb-2 hover:text-purple-600">Ghaziabad</li>       
               <li onClick={() => scrollToSection('resources')} className="cursor-pointer mb-2 hover:text-purple-600">Resources</li>
               <li onClick={() => scrollToSection('resources')} className="cursor-pointer mb-2 hover:text-purple-600">Blogs</li>
               <li onClick={()=>{
@@ -205,21 +212,30 @@ const Footer = () => {
                                            Estimator
                                         </li>
 
-              <li  className="cursor-pointer mb-2 hover:text-purple-600">Delhi</li>     
-          
-              <li  className="cursor-pointer mb-2 hover:text-purple-600">Noida</li>                          
-              <li  className="cursor-pointer mb-2 hover:text-purple-600">Faridabad</li>                          
-              <li  className="cursor-pointer mb-2 hover:text-purple-600">Gurugram</li>                          
-              <li  className="cursor-pointer mb-2 hover:text-purple-600">Ghaziabad</li>                                                                       
+                                                                        
 
                                </ul>
           </div>
+          <div className='mt-8 flex flex-col items-start justify-center  md:w-[200px]'>
+          <h2 className="text-2xl font-bold text-yellow-300 mb-4">Get Connected</h2>
+          <ul className=' flex flex-row md  '>
+          <Link to="/" className="hover:text-purple-600"><FaFacebook style={{ fontSize: "2rem" }} className="ml-4" /></Link>
+          <Link to="/" className="hover:text-purple-600"><FaInstagram style={{ fontSize: "2rem" }} className="ml-4" /></Link>
+          <Link to="/" className="hover:text-purple-600"><FaLinkedin style={{ fontSize: "2rem" }} className="ml-4" /></Link>
+          <Link to="/" className="hover:text-purple-600"><FaTwitter style={{ fontSize: "2rem" }} className="ml-4" /></Link>
+          <Link to="/" className="hover:text-purple-600"><FaYoutube style={{ fontSize: "2rem" }} className="ml-4" /></Link>
+         </ul>
+           
+          </div>
+        </div>
         <div className=' flex flex-col md:items-center md:justify-center'>
         <div className="mt-8  md:w-[200px]">
             <h2 className="text-2xl font-bold text-yellow-300 mb-4">Our Services</h2>
             <ul>
-                <li className="mb-2 mt-2"><a href="/dashboard" className="hover:text-purple-600">Construction</a></li>
-
+            <li  className="cursor-pointer mb-2 hover:text-purple-600">Residential</li>   
+            <li  className="cursor-pointer mb-2 hover:text-purple-600">Commercial</li>
+            <li  className="cursor-pointer mb-2 hover:text-purple-600">Enterprise&PSU</li>
+            <li  className="cursor-pointer mb-2 hover:text-purple-600">SuperVision</li>
                 <li className="mb-2"><a href="/supervision" className="hover:text-purple-600">Consulting</a></li>
             </ul>
           </div>
@@ -239,23 +255,16 @@ const Footer = () => {
 <li className="mb-2">
   <a href="" target="_blank" className="hover:text-purple-600">Affiliate Policy</a>
 </li>
+<li className="mb-2">
+  <a href="" target="_blank" className="hover:text-purple-600">FAQs</a>
+</li>
 
 <li className="mb-2">
   <a href="../../../public/sitemap.pdf" target="_blank" className="hover:text-purple-600">Sitemap</a>
 </li>
             </ul>
           </div>
-          <div className='mt-8 flex flex-col items-start justify-center  md:w-[200px]'>
-          <h2 className="text-2xl font-bold text-yellow-300 mb-4">Get Connected</h2>
-          <ul className=' flex flex-row md  '>
-          <Link to="/" className="hover:text-purple-600"><FaFacebook style={{ fontSize: "2rem" }} className="ml-4" /></Link>
-          <Link to="/" className="hover:text-purple-600"><FaInstagram style={{ fontSize: "2rem" }} className="ml-4" /></Link>
-          <Link to="/" className="hover:text-purple-600"><FaLinkedin style={{ fontSize: "2rem" }} className="ml-4" /></Link>
-          <Link to="/" className="hover:text-purple-600"><FaTwitter style={{ fontSize: "2rem" }} className="ml-4" /></Link>
-          <Link to="/" className="hover:text-purple-600"><FaYoutube style={{ fontSize: "2rem" }} className="ml-4" /></Link>
-         </ul>
-           
-          </div>
+         
         </div>
           
         </div>
@@ -264,7 +273,7 @@ const Footer = () => {
           {/* //disclaimer */}
           <div className="w-full flex flex-col items-center justify-center bg-purple-950 p-8 text-white">
             <h1 className="text-2xl font-bold text-yellow-300 mb-4">Disclaimer</h1>
-            <p className="text-center">Buildworx endeavors to ensure that the information and data in this section is correct and complete, but does not accept liability for any error made or omission from this section. Buildworx shall not be liable for any claims or losses of any nature, arising directly or indirectly from use of the information or data on this section or unauthorized access to this section or otherwise howsoever arising, except to the extent required by law.
+            <p className="text-center">BuildWorX endeavors to ensure that the information and data in this section is correct and complete, but does not accept liability for any error made or omission from this section. BuildWorX shall not be liable for any claims or losses of any nature, arising directly or indirectly from use of the information or data on this section or unauthorized access to this section or otherwise howsoever arising, except to the extent required by law.
                                         </p>
                                         </div>
          </div>
