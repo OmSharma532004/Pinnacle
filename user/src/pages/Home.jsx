@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import homeImage from '../images/home.png';
 import top from '../images/Top.png';
 import design from '../images/design.png';
@@ -15,10 +15,12 @@ import Footer from "../components/HomePage/Footer";
 import WhatsAppButton from "../components/HomePage/WhatsAppButton";
 import Footer2 from "../components/HomePage/Footer2";
 import Resources from "../components/HomePage/Resources";
+import { FaArrowAltCircleUp } from "react-icons/fa";
 
 const Home = () => {
     const sectionsRef = useRef([]);
     const observedElements = useRef(new Set());
+    const [showBackToTop, setShowBackToTop] = useState(false);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -29,11 +31,24 @@ const Home = () => {
                             entry.target.classList.add('visible');
                             observedElements.current.add(entry.target);
                         }
-                    } else {
-                        // Optionally, you can remove the class if not intersecting, but only if it has not been added before
-                        // if (!observedElements.current.has(entry.target)) {
-                        //     entry.target.classList.remove('visible');
-                        // }
+                    }
+
+                    // Check visibility of the resources section
+                    const resourcesEntry = sectionsRef.current[3];
+                    if (resourcesEntry) {
+                        if (entry.target === resourcesEntry) {
+                            if (entry.isIntersecting) {
+                                setShowBackToTop(true);
+                            } 
+                        }
+                    }
+                    const ServiceStepsEntry = sectionsRef.current[1];
+                    if (ServiceStepsEntry) {
+                        if (entry.target === ServiceStepsEntry) {
+                            if (entry.isIntersecting) {
+                                setShowBackToTop(false);
+                            } 
+                        }
                     }
                 });
             },
@@ -54,30 +69,44 @@ const Home = () => {
         };
     }, []);
 
+    const scrollToTop = () => {
+        sectionsRef.current[0].scrollIntoView({ behavior: 'smooth' });
+       
+        window.scrollBy(0, -10000);
+    };
+
     return (
-        <div className="flex flex-col overflow-hidden  w-full items-center justify-center">
-            <div id="hero-section" className="w-full " ref={(el) => sectionsRef.current[0] = el}>
-                <HeroSection/>
+        <div className="flex flex-col overflow-hidden w-full items-center justify-center">
+            <div id="hero-section" className="w-full" ref={(el) => sectionsRef.current[0] = el}>
+                <HeroSection />
             </div>
             <div id="section1" className="w-full section" ref={(el) => sectionsRef.current[1] = el}>
-                <Section1/>
+                <Section1 />
             </div>
             <div id="service-steps" className="w-full section" ref={(el) => sectionsRef.current[2] = el}>
-                <ServiceSteps/>
+                <ServiceSteps />
             </div>
             <div id="resources" className="w-full section" ref={(el) => sectionsRef.current[3] = el}>
-                <Resources/>
+                <Resources />
             </div>
             <div id="service-highlights" className="w-full section" ref={(el) => sectionsRef.current[4] = el}>
-                <ServiceHighlights/>
+                <ServiceHighlights />
             </div>
             <div id="footer" className="w-full" ref={(el) => sectionsRef.current[5] = el}>
-                <Footer/>
+                <Footer />
             </div>
             <div className="w-full mt-4">
-                <WhatsAppButton /> {/* Add the WhatsAppButton component here */}
+                <WhatsAppButton />
             </div>
-            {/* Add Disclaimer at End */}
+            {showBackToTop && (
+                <button
+                    onClick={scrollToTop}
+                    className="fixed bottom-44 right-5 bg-purple-900 text-white p-2 rounded"
+                >
+                    <FaArrowAltCircleUp style={{fontSize:"2rem"}} />
+
+                </button>
+            )}
         </div>
     );
 };

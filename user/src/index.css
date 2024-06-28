@@ -48,3 +48,33 @@ html, body, #root {
 .animate-modal-slide-up {
   animation: modal-slide-up 0.3s ease-out;
 }
+
+
+.slider-wrapper {
+  position: relative;
+}
+
+.service-slide {
+  opacity: 0.5;
+  transform: scale(0.8);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.service-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slick-slide {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.slick-center .service-slide {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+}
+
+.slick-slide:not(.slick-center) .service-slide {
+  filter: blur(5px);
+  opacity: 0.5 !important;
+}

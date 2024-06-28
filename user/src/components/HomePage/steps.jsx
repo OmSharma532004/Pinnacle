@@ -5,10 +5,9 @@ import i2 from '../../assets/services/2.png';
 import i3 from '../../assets/services/3.png';
 import i4 from '../../assets/services/4.png';
 import Section2 from './section2';
-import { motion, AnimatePresence } from 'framer-motion';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useEffect, useRef } from 'react';
+
 
 const services = [
   {
@@ -38,78 +37,75 @@ const services = [
 ];
 
 const ServiceSteps = () => {
-  const [selectedService, setSelectedService] = useState(null);
-  const overlayRef = useRef();
+  const [sliderView, setSliderView] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const openServiceDetails = (service) => {
-    setSelectedService(service);
+  const handleCardClick = (index) => {
+    setSelectedIndex(index);
+    setSliderView(true);
   };
 
-  const closeServiceDetails = () => {
-    setSelectedService(null);
+  const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    centerMode: true,
+    centerPadding: '0',
+    initialSlide: selectedIndex,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        }
+      }
+    ],
+    beforeChange: (current, next) => setSelectedIndex(next),
   };
-
-  const handleClickOutside = (event) => {
-    if (overlayRef.current && !overlayRef.current.contains(event.target)) {
-      closeServiceDetails();
-    }
-  };
-
-  useEffect(() => {
-    if (selectedService) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [selectedService]);
 
   return (
-    <div className='bg-purple-900'>
-      <div className='flex flex-col items-center justify-around text-yellow-300 py-12 w-full'>
+    <div className="bg-purple-900">
+      <div className="flex flex-col items-center justify-around text-yellow-300 py-12 w-full">
         <h2 className="text-3xl text-white text-center mb-6">Our Services</h2>
-        <div className="w-[80%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-             
-              className="flex flex-col items-center p-6 bg-white text-purple-900 rounded-lg shadow-lg cursor-pointer "
-              onClick={() => openServiceDetails(service)}
-            >
-              <img src={service.imgSrc} alt={`Illustration for ${service.title}`} className="w-20 h-20 mb-4" />
-              <h3 className="text-lg sm:text-xl text-center">{service.title}</h3>
-            </motion.div>
-          ))}
-          <AnimatePresence>
-            {selectedService && (
-              <motion.div 
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 50 }}
-                className="absolute top-0 left-0 right-0 bottom-0 bg-white text-purple-900 rounded-lg shadow-lg p-6"
-                ref={overlayRef}
+        {!sliderView ? (
+          <div className="w-[80%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center p-6 bg-white text-purple-900 rounded-lg shadow-lg cursor-pointer"
+                onClick={() => handleCardClick(index)}
+                style={{ height: 'auto' }}
               >
-                <div className="flex flex-col md:flex-row">
-                  <div className="md:w-1/2 flex justify-center mb-4 md:mb-0">
-                    <img src={selectedService.imgSrc} alt={`Illustration for ${selectedService.title}`} className=" w-40 h-40" />
-                  </div>
-                  <div className="md:w-1/2 md:ml-4">
-                    <h3 className="text-2xl mb-4">{selectedService.title}</h3>
-                    <p className="text-lg mb-4">{selectedService.description}</p>
-                    <p className="text-gray-700">{selectedService.extraInfo}</p>
-                  </div>
-                  {/* Talk toOur Expert */}
-                
-
-                  
+                <img src={service.imgSrc} alt={`Illustration for ${service.title}`} className="w-full mb-4" />
+                <h3 className="text-lg sm:text-xl text-center mb-4">{service.title}</h3>
+                {/* <p className="text-center mb-4">{service.description}</p> */}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="w-[80%] slider-wrapper">
+            <Slider {...sliderSettings}>
+              {services.map((service, index) => (
+                <div key={index} className={`flexflex-col items-center p-4 bg-white text-purple-900 rounded-lg shadow-lg service-slide ${selectedIndex === index ? 'active' : ''}`}>
+                  <img src={service.imgSrc} alt={`Illustration for ${service.title}`} className="w-full mb-4" />
+                  <h3 className="text-lg sm:text-xl text-center mb-4">{service.title}</h3>
+                  <p className="text-center mb-4">{service.description}</p>
+                  <p className="text-center mb-4">{service.extraInfo}</p>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+              ))}
+            </Slider>
+          </div>
+        )}
       </div>
       <div id="section2" className="w-full">
         <Section2 />

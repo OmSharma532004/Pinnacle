@@ -190,7 +190,7 @@ const Footer = () => {
             </div>
           <div className=" md:flex md:flex-wrap items-center justify-around md:w-[50%] gap-[20px]  px-4">
            
-        <div className=' flex flex-col items-center justify-center'>
+        <div className=' flex flex-col items-start justify-center'>
         <div className="mt-8 md:w-[200px]">
             <h2 className="text-2xl font-bold text-yellow-300 mb-4">Quick Links</h2>
             <ul className="mb-4">
