@@ -128,7 +128,7 @@ function App() {
       <div className='flex -mb-[120px] flex-col items-center justify-center'>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home  />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/otp' element={<EnterOtp />} />
