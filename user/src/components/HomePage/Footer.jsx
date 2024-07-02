@@ -247,7 +247,7 @@ const Footer = () => {
   <a href="../../../public/Policy.pdf" target="_blank" className="hover:text-purple-600">Privacy Policy</a>
 </li>
 <li className="mb-2">
-  <a href="" target="_blank" className="hover:text-purple-600">Disclaimer Policy</a>
+  <a href="../../../public/disclaimer5.pdf" target="_blank" className="hover:text-purple-600">Disclaimer Policy</a>
 </li>
 <li className="mb-2">
   <a href="" target="_blank" className="hover:text-purple-600">Cancellation & Refunds</a>
