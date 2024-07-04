@@ -72,6 +72,34 @@ const Navbar = () => {
                                        
                                     </div>
                                 )}
+                                   {location.pathname === "/dashboard" && (
+                                    <div className='flex items-center justify-center flex-col md:flex-row md:gap-5'>
+                                         <li className="relative ">
+                                            <select
+                                                value={selectedCity}
+                                                onChange={handleCityChange}
+                                                className="cursor-pointer rounded-xl bg-white text-black h-9 text-lg flex items-center"
+                                            >
+                                                <option value="">Select City</option>
+                                                <option value="delhi">Delhi</option>
+                                                <option value="noida">Noida</option>
+                                                <option value="faridabad">Faridabad</option>
+                                                <option value="gurugram">Gurugram</option>
+                                            </select>
+                                        </li>
+                                        <li onClick={() => scrollToSection('service-steps')} className="cursor-pointer hover:text-yellow-400 text-lg">Services</li>
+                                        <li onClick={()=>{
+                                            window.location.href = '/dashboard';
+                                        }} className='cursor-pointer hover:text-yellow-400 text-lg'>
+                                           Estimator
+                                        </li>
+                                        <li onClick={() => scrollToSection('blogs')} className="cursor-pointer text-lg hover:text-yellow-400">Blog</li>
+                                        <li onClick={() => scrollToSection('resources')} className="cursor-pointer text-lg hover:text-yellow-400">Resources</li>
+                                        <li onClick={() => scrollToSection('footer')} className="cursor-pointer text-lg hover:text-yellow-400">Contact Us</li>
+                                        <li onClick={() => scrollToSection('section1')} className="cursor-pointer hover:text-yellow-400 text-lg">About Us</li>
+                                       
+                                    </div>
+                                )}
                             </div>
                             <div>
                                 {token == null ? (

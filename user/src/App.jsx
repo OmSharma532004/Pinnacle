@@ -132,7 +132,7 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/otp' element={<EnterOtp />} />
-          <Route path='/dashboard' element={<Estimate2 />} />
+          <Route path='/dashboard' element={<Home />} />
           <Route path='/profile' element={<UserProfile />} />
           <Route path='/update-password/:id' element={<UpdatePassword />} />
           <Route path='/reset-password' element={<ForgotPassword />} />

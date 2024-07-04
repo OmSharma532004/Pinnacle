@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import logo2 from '../../assets/logo.png';
 const apiUrl = import.meta.env.VITE_API_URL;
+import flag from '../../assets/flag.png';
 
 import { Link } from 'react-router-dom';
 import { FaInstagram } from "react-icons/fa";
@@ -185,7 +186,7 @@ const Footer = () => {
          <div className=' flex bg-purple-950 gap-[40px] p-8 text-white  items-center justify-around flex-wrap w-full '>
           <div className="flex flex-col items-center justify-center ">
               <img src={logo2} alt="Logo" className=' w-[200px] md:w-[500px]' />
-              <p className="text-lg mt-4">Contact us: 1234567890</p>
+              <p className="text-lg mt-4">Contact us: 8448830213</p>
               <p className="text-lg">Email: <a href="mailto:contact@buildworx.co.in" className="text-white hover:underline">contact@buildworx.co.in</a></p>
             </div>
           <div className=" md:flex md:flex-wrap items-center justify-around md:w-[50%] gap-[20px]  px-4">
@@ -236,13 +237,13 @@ const Footer = () => {
             <li  className="cursor-pointer mb-2 hover:text-purple-600">Commercial</li>
             <li  className="cursor-pointer mb-2 hover:text-purple-600">Enterprise&PSU</li>
             <li  className="cursor-pointer mb-2 hover:text-purple-600">SuperVision</li>
-                <li className="mb-2"><a href="/supervision" className="hover:text-purple-600">Consulting</a></li>
+                {/* <li className="mb-2"><a href="/supervision" className="hover:text-purple-600">Consulting</a></li> */}
             </ul>
           </div>
           <div className="mt-8  md:w-[200px]">
             <h2 className="text-2xl font-bold text-yellow-300 mb-4">Legal</h2>
             <ul>
-              <li className="mb-2">Copyright BuildWorX 2024, all rights reserved</li>
+              {/* <li className="mb-2">Copyright BuildWorX 2024, all rights reserved</li> */}
               <li className="mb-2">
   <a href="../../../public/Policy.pdf" target="_blank" className="hover:text-purple-600">Privacy Policy</a>
 </li>
@@ -272,9 +273,13 @@ const Footer = () => {
           </div>
           {/* //disclaimer */}
           <div className="w-full flex flex-col items-center justify-center bg-purple-950 p-8 text-white">
+           
             <h1 className="text-2xl font-bold text-yellow-300 mb-4">Disclaimer</h1>
+            <p className=' mb-4'>Copyright BuildWorX 2024, all rights reserved</p>
             <p className="text-center">BuildWorX endeavors to ensure that the information and data in this section is correct and complete, but does not accept liability for any error made or omission from this section. BuildWorX shall not be liable for any claims or losses of any nature, arising directly or indirectly from use of the information or data on this section or unauthorized access to this section or otherwise howsoever arising, except to the extent required by law.
+             
                                         </p>
+            <p className=' mt-4 flex items-center gap-2 text-lg '>Made In <img src={flag} width={40} />With Love</p>                            
                                         </div>
          </div>
       
