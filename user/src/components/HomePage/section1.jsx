@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Section1 = () => {
   return (
-    <div className="bg-white w-full p-[50px] pb-[100px] text-gray-800">
+    <div className="bg-white w-full p-[50px]  text-gray-800">
 
       
       <div className="max-w-6xl mx-auto">

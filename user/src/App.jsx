@@ -17,6 +17,7 @@ import SuperVisionForm from './pages/superVision';
 import './App.css';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
+import NewEstimate from './pages/NewEstimate';
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -130,6 +131,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home  />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/estimate' element={<NewEstimate />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/otp' element={<EnterOtp />} />
           <Route path='/dashboard' element={<Home />} />

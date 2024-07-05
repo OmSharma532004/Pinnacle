@@ -189,9 +189,9 @@ const Footer = () => {
               <p className="text-lg mt-4">Contact us: 8448830213</p>
               <p className="text-lg">Email: <a href="mailto:contact@buildworx.co.in" className="text-white hover:underline">contact@buildworx.co.in</a></p>
             </div>
-          <div className=" md:flex md:flex-wrap items-center justify-around md:w-[50%] gap-[20px]  px-4">
+          <div className=" md:flex md:flex-wrap items-center00px lg:h-[6] md:h-[650px] justify-around md:w-[50%] gap-[20px]  px-4">
            
-        <div className=' flex flex-col items-start justify-center'>
+        <div className=' flex flex-col h-[100%] items-start justify-center'>
         <div className="mt-8 md:w-[200px]">
             <h2 className="text-2xl font-bold text-yellow-300 mb-4">Quick Links</h2>
             <ul className="mb-4">
@@ -229,14 +229,14 @@ const Footer = () => {
            
           </div>
         </div>
-        <div className=' flex flex-col md:items-center md:justify-center'>
+        <div className=' flex flex-col h-[100%]  md:items-center md:justify-around'>
         <div className="mt-8  md:w-[200px]">
             <h2 className="text-2xl font-bold text-yellow-300 mb-4">Our Services</h2>
             <ul>
             <li  className="cursor-pointer mb-2 hover:text-purple-600">Residential</li>   
             <li  className="cursor-pointer mb-2 hover:text-purple-600">Commercial</li>
-            <li  className="cursor-pointer mb-2 hover:text-purple-600">Enterprise&PSU</li>
-            <li  className="cursor-pointer mb-2 hover:text-purple-600">SuperVision</li>
+            <li  className="cursor-pointer mb-2 hover:text-purple-600">Enterprise & PSU</li>
+            <li  className="cursor-pointer mb-2 hover:text-purple-600">Supervision</li>
                 {/* <li className="mb-2"><a href="/supervision" className="hover:text-purple-600">Consulting</a></li> */}
             </ul>
           </div>
@@ -250,9 +250,9 @@ const Footer = () => {
 <li className="mb-2">
   <a href="../../../public/disclaimer5.pdf" target="_blank" className="hover:text-purple-600">Disclaimer Policy</a>
 </li>
-<li className="mb-2">
+{/* <li className="mb-2">
   <a href="" target="_blank" className="hover:text-purple-600">Cancellation & Refunds</a>
-</li>
+</li> */}
 <li className="mb-2">
   <a href="" target="_blank" className="hover:text-purple-600">Affiliate Policy</a>
 </li>

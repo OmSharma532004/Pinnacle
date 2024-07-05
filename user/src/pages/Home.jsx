@@ -92,6 +92,7 @@ const Home = () => {
             <div id="service-highlights" className="w-full section" ref={(el) => sectionsRef.current[4] = el}>
                 <ServiceHighlights />
             </div>
+            
             <div id="footer" className="w-full" ref={(el) => sectionsRef.current[5] = el}>
                 <Footer />
             </div>
