@@ -1,9 +1,18 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import Ticker from '../components/HomePage/Ticker';
 
 function BookDemoForm() {
-    
-    const apiUrl = import.meta.env.VITE_API_URL;
+  const offers = [
+    "Get your free consultation today",
+    " Contact our team for preferred pricing",
+    "Early bird offers for July 2024 - get in touch with our team!",
+    "Get your free consultation today",
+    " Contact our team for preferred pricing",
+    "Early bird offers for July 2024 - get in touch with our team!",
+  ];
+
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,7 +27,6 @@ function BookDemoForm() {
   };
 
   const handleSubmit = async (e) => {
-    console.log('Submitting form data:', formData);
     e.preventDefault();
     const newErrors = {};
 
@@ -36,128 +44,116 @@ function BookDemoForm() {
 
     setErrors(newErrors);
 
-    // If no errors, proceed with form submission (replace with your backend logic)
     if (Object.keys(newErrors).length === 0) {
-        toast.loading("Sending Email...");
-    //   console.log('Submitting form data:', formData);
-      const response=await fetch(`${apiUrl}/sendMail`,{
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
+      toast.loading("Sending Email...");
+      const response = await fetch(`${apiUrl}/sendMail`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
         },
-        body:JSON.stringify({
-            name:formData.name,
-            email:formData.email,
-            phone:formData.phone,
-            message:formData.message
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message
         }),
-    });
-    const data= await response.json();
-    if(data.success){
+      });
+      const data = await response.json();
+      if (data.success) {
         toast.dismiss();
         toast.success('Thanks, Our team will contact you soon!')
-        console.log(data);
         setFormData({
-            name: '',
-            email: '',
-            phone: '',
-          });
-        
-          window.location.href='/'
-         
-    }
-    else{
+          name: '',
+          email: '',
+          phone: '',
+          message: ''
+        });
+
+        window.location.href = '/'
+      } else {
         toast.dismiss();
-        toast.success('Error sending mail')
-        console.log(data);
-        
-    
+        toast.error('Error sending mail')
+      }
     }
   };
-  
-}
 
   return (
-    <div className="container mx-auto mt-10">
-      <h2 className="text-3xl text-center font-semibold text-purple-800 mb-8">
-        Book a Free Consultation
-      </h2>
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-md mx-auto bg-white p-8 rounded shadow-md"
-      >
-        {/* Name Input */}
-        <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Name*</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-              errors.name ? 'border-red-500' : ''
-            }`}
-          />
-          {errors.name && <p className="text-red-500 text-xs italic">{errors.name}</p>}
-        </div>
-
-        {/* Email Input */}
-
-        <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email*</label>
-            <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
+    <div className="flex flex-col items-center justify-center mt-[50px]">
+      <section className="bg-white mt-5 p-10 w-full rounded-lg mb-12">
+        <h2 className="text-3xl font-semibold text-purple-800 mb-8 text-center">Book a Free Consultation</h2>
+        <form onSubmit={handleSubmit} className="flex-col flex items-center justify-around gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 w-full max-w-screen-lg">
+            <div className='flex flex-col items-start justify-center gap-2'>
+              <label className="text-purple-900 text-lg">Name</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
-                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                    errors.email ? 'border-red-500' : ''
-                }`}
-            />
-            {errors.email && <p className="text-red-500 text-xs italic">{errors.email}</p>}
-        </div>
-
-
-        {/* Phone Input */}
-        
-        <div className="mb-4">
-            <label htmlFor="phone" className="block text-gray-700 text-sm font-bold mb-2">Phone* </label>
-            <input
-                type="tel"
-                id="phone"
+                className="p-2 border rounded w-full"
+              />
+            </div>
+            <div className='flex flex-col items-start justify-center gap-2'>
+              <label className="text-purple-900 text-lg">Phone No</label>
+              <input
+                type="text"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                    errors.phone ? 'border-red-500' : ''
-                }`}
-            />
-            {errors.phone && <p className="text-red-500 text-xs italic">{errors.phone}</p>}
+                className="p-2 border rounded w-full"
+              />
+            </div>
+            <div className='flex flex-col items-start justify-center gap-2'>
+              <label className="text-purple-900 text-lg">Email</label>
+              <input
+                type="text"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="p-2 border rounded w-full"
+                list="citySuggestions"
+              />
+            </div>
+            <div className='flex flex-col items-start justify-center gap-2'>
+              <label className="text-purple-900 text-lg">Message</label>
+              <input
+                type="text"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                className="p-2 border rounded w-full"
+              />
+            </div>
+          </div>
+          <div>
+            <button type="submit" className="bg-purple-800 text-white p-2 px-4 rounded">Submit</button>
+          </div>
+        </form>
+        <div className='flex flex-col items-center justify-center w-full mt-[40px]'>
+          <p className="text-3xl text-purple-900">"Building your dreams with precision and quality."</p>
+          <p className="text-3xl text-purple-900">"Your vision, our expertise."</p>
         </div>
-
-        {/* Message Input */}
-        <div className="mb-4">
-          <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">Message*</label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
+      </section>
+      <div className="py-6 text-xl absolute bottom-0 w-full bg-purple-900 bg-opacity-90 text-white">
+        <Ticker messages={offers} />
+      </div>
+      <section className="pb-10 mt-[100px] p-5 w-screen">
+        <h2 className="text-4xl text-center font-semibold text-black mb-12">Success Stories</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 container mx-auto">
+          <div className="bg-white p-8 rounded-lg custom-card transform transition duration-300 hover:scale-105">
+            <h3 className="text-xl font-semibold mb-4 text-purple-800">Ranveer and Ria's Dream Home</h3>
+            <p className="text-gray-700">Ranveer and Ria, a happy old couple, got their dream house constructed by BuildWorX. They wanted a cozy place to spend their golden years with their grandchildren. BuildWorX delivered a perfect home where they now enjoy their retirement, surrounded by the laughter of their grandchildren.</p>
+          </div>
+          <div className="bg-white p-8 rounded-lg custom-card transform transition duration-300 hover:scale-105">
+            <h3 className="text-xl font-semibold mb-4 text-purple-800">Yash and Reema's Urban Retreat</h3>
+            <p className="text-gray-700">Yash and Reema, a young couple in the fast-paced city, had no time to oversee the construction of their new home. They entrusted the project to BuildWorX, who managed everything from start to finish. Now, they have a beautiful urban retreat where they can unwind after their busy days.</p>
+          </div>
+          <div className="bg-white p-8 rounded-lg custom-card transform transition duration-300 hover:scale-105">
+            <h3 className="text-xl font-semibold mb-4 text-purple-800">Raj's Holiday Home</h3>
+            <p className="text-gray-700">Raj, an NRI residing in the US, dreamed of having a holiday home in Delhi. He outsourced the entire turnkey project to BuildWorX. From planning to execution, BuildWorX handled it all, and now Raj has a perfect getaway spot in India where he can relax during his visits.</p>
+          </div>
         </div>
-
-        <div className="flex items-center justify-center">
-          <button
-            type="submit"
-            className="bg-purple-800 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
+      </section>
     </div>
   );
 }

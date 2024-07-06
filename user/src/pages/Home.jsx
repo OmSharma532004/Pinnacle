@@ -21,6 +21,7 @@ const Home = () => {
     const sectionsRef = useRef([]);
     const observedElements = useRef(new Set());
     const [showBackToTop, setShowBackToTop] = useState(false);
+    const [errors,setErrors] = useState({});
 
     useEffect(() => {
         const observer = new IntersectionObserver(
