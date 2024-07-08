@@ -17,7 +17,7 @@ import SuperVisionForm from './pages/superVision';
 import './App.css';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
-import NewEstimate from './pages/NewEstimate';
+import NewEstimate from './pages/Estimator/NewEstimate';
 
 function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);

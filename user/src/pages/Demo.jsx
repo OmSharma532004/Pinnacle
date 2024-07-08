@@ -115,7 +115,7 @@ function BookDemoForm() {
               />
             </div>
             <div className='flex flex-col items-start justify-center gap-2'>
-              <label className="text-purple-900 text-lg">Message</label>
+              <label className="text-purple-900 text-lg">Location</label>
               <input
                 type="text"
                 name="message"
