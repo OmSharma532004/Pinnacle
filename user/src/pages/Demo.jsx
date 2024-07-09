@@ -134,7 +134,7 @@ function BookDemoForm() {
           <p className="text-3xl text-purple-900">"Your vision, our expertise."</p>
         </div>
       </section>
-      <div className="py-6 text-xl absolute bottom-0 w-full bg-purple-900 bg-opacity-90 text-white">
+      <div className="py-6 text-xl opacity-0 md:opacity-100 lg:opacity-100 absolute bottom-0 w-full bg-purple-900 bg-opacity-90 text-white">
         <Ticker messages={offers} />
       </div>
       <section className="pb-10 mt-[100px] p-5 w-screen">
