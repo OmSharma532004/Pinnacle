@@ -89,7 +89,7 @@ const Navbar = () => {
                                         </li>
                                         <li onClick={() => scrollToSection('service-steps')} className="cursor-pointer hover:text-yellow-400 text-lg">Services</li>
                                         <li onClick={()=>{
-                                            window.location.href = '/dashboard';
+                                            window.location.href = '/estimate';
                                         }} className='cursor-pointer hover:text-yellow-400 text-lg'>
                                            Estimator
                                         </li>

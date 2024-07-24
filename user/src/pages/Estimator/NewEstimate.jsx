@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Footer from '../../components/HomePage/Footer';
+import WhatsAppButton from '../../components/HomePage/WhatsAppButton';
 
 const ConstructionCostCalculator = () => {
     const [estimate, setEstimate] = useState(null);
@@ -83,7 +85,8 @@ const ConstructionCostCalculator = () => {
     };
 
     return (
-        <div className="p-8 flex flex-col items-center justify-center w-full bg-gray-100">
+       <div>
+         <div className="p-8 mb-[50px] flex flex-col mt-[90px] items-center justify-center w-full ">
             <h1 className="text-5xl text-purple-900 font-light mb-6">Construction Cost Calculator</h1>
             <p className='mb-6 text-lg'>Fill out the form below to get an estimate of house construction costs. Speak to our technical expert for more accurate pricing.</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 w-full max-w-screen-lg">
@@ -146,7 +149,7 @@ const ConstructionCostCalculator = () => {
             {errors.location && <p className="text-red-500 mb-4">{errors.location}</p>}
 
             {estimate && (
-                <div className="w-full flex flex-col items-center justify-center">
+                <div className="w-full mb-[50px] flex flex-col items-center justify-center">
                     <h2 className="text-5xl mt-4 mb-8 text-purple-900 font-light text-center">Your Cost Estimate</h2>
                     <h2 className="text-3xl mt-4 mb-8 text-purple-900 text-center font-light">Please Select Your Plan</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
@@ -188,7 +191,13 @@ const ConstructionCostCalculator = () => {
                     </div>
                 </div>
             )}
+          
         </div>
+        <Footer />
+        <div className="w-full mt-4">
+                <WhatsAppButton />
+            </div>
+       </div>
     );
 };
 
