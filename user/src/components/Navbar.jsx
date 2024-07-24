@@ -33,7 +33,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="bg-purple-900 text-white border-b-4 border-yellow-500 text-xl w-screen p-4">
+            <nav className="bg-purple-900 z-10 fixed top-0 text-white border-b-4 border-yellow-500 text-xl w-screen p-4">
                 <div className="container mx-auto flex items-center justify-between">
                     <Link to={"/"} className="hover:text-yellow-400">
                         <div><img src={logo} width={200} /></div>

@@ -82,7 +82,7 @@ const ServiceSteps = () => {
 
   return (
     <div className="my-8 px-4 sm:px-8 lg:px-16">
-      <h2 className="text-3xl font-bold text-center mb-8">
+      <h2 className="text-5xl font-light text-center mb-8">
         Explore Our <span className="text-purple-800">Services</span>
       </h2>
 
@@ -91,7 +91,7 @@ const ServiceSteps = () => {
           <div
             key={index}
             onClick={() => handleFilter(item)}
-            className={`cursor-pointer px-4 py-2 m-2 text-sm rounded-lg ${
+            className={`cursor-pointer px-4 py-2 m-2 text-xl rounded-lg ${
               activeFilter === item ? 'bg-purple-800 text-white' : 'bg-gray-200 text-gray-700'
             }`}
           >
@@ -111,16 +111,16 @@ const ServiceSteps = () => {
           onTouchEnd={handleTouchEnd}
         >
           {filteredServices.length > 0 && service && (
-            <div className="flex flex-col justify-center items-center text-center gap-4">
+            <div className="flex flex-col font-light justify-center items-center text-center gap-4">
               <div className="flex justify-center mb-4">
                 {service.icon}
               </div>
               <div>
                 <h4 className="text-2xl">{service.title}</h4>
-                <p className="mt-2 text-lg text-gray-600">
+                <p className="mt-2 text-xl text-gray-600">
                   {service.description}
                 </p>
-                <p className="mt-2 text-lg text-gray-500">
+                <p className="mt-2 text-xl text-gray-500">
                   {service.extraInfo}
                 </p>
               </div>

@@ -111,10 +111,10 @@ const Footer = () => {
                 </ul>
               </div>
             )}
-            <h2 className="text-3xl  text-purple-800 text-center mb-6">Contact Us</h2>
-            <form onSubmit={handleSubmit} className="space-y-6 md:min-w-[500px] mb-[50px]">
+            <h2 className="text-5xl font-light  text-purple-800 text-center  mb-6">Contact Us</h2>
+            <form onSubmit={handleSubmit} className="space-y-6 text-xl font-light md:w-[80vw] mb-[50px]">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium">Name*</label>
+                <label htmlFor="name" className="block  ">Name*</label>
                 <input
                   type="text"
                   id="name"
@@ -126,7 +126,7 @@ const Footer = () => {
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium">Email ID*</label>
+                <label htmlFor="email" className="block ">Email ID*</label>
                 <input
                   type="email"
                   id="email"
@@ -138,7 +138,7 @@ const Footer = () => {
                 />
               </div>
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium">Mobile Number*</label>
+                <label htmlFor="phone" className="block ">Mobile Number*</label>
                 <input
                   type="tel"
                   id="mobile"
@@ -151,7 +151,7 @@ const Footer = () => {
               </div>
               {/* city */}
               <div>
-                <label htmlFor="city" className="block text-sm font-medium">City*</label>
+                <label htmlFor="city" className="block ">City*</label>
                 <input
                   type="text"
                   id="city"
@@ -164,7 +164,7 @@ const Footer = () => {
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium">Comment*</label>
+                <label htmlFor="message" className="block ">Comment*</label>
                 <textarea
                   id="comment"
                   name="message"
@@ -186,7 +186,7 @@ const Footer = () => {
          <div className=' flex bg-purple-950 gap-[40px] p-8 text-white  items-center justify-around flex-wrap w-full '>
           <div className="flex flex-col items-center justify-center ">
               <img src={logo2} alt="Logo" className=' w-[200px] md:w-[500px]' />
-              <p className="text-lg mt-4">Contact us: 8448830213</p>
+              <p className="text-lg mt-4">Contact us: 9958827520</p>
               <p className="text-lg">Email: <a href="mailto:contact@buildworx.co.in" className="text-white hover:underline">contact@buildworx.co.in</a></p>
             </div>
           <div className=" md:flex md:flex-wrap items-center00px lg:h-[6] md:h-[650px] justify-around md:w-[50%] gap-[20px]  px-4">

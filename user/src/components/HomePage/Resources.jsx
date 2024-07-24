@@ -39,16 +39,16 @@ const Resources = () => {
 
   return (
     <div className='flex flex-col bg-white items-center justify-around w-full'>
-      <h2 className="text-4xl mb-9 text-purple-900 text-center">Resources</h2>
+      <h2 className="text-5xl font-light mb-9 text-purple-900 text-center">Resources</h2>
       <div className="w-[80%] grid grid-cols-1 md:grid-cols-2 gap-4">
         {resources.map((resource, index) => (
           <div key={index} className="flex items-start p-4 bg-white text-purple-900 ">
-            <div className="text-4xl mr-4 bg-purple-900 text-yellow-300 p-4">
+            <div className="text-4xl mr-4  text-purple-900 p-4">
               {resource.icon}
             </div>
-            <div>
-              <h3 className="text-lg sm:text-xl">{resource.title}</h3>
-              <p className="text-sm sm:text-base">{resource.description}</p>
+            <div className=' font-light'>
+              <h3 className="text-2xl sm:text-2xl">{resource.title}</h3>
+              <p className="text-xl sm:text-xl">{resource.description}</p>
             </div>
           </div>
         ))}

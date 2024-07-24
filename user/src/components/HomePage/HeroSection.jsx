@@ -25,11 +25,11 @@ const HeroSection = () => {
       <img src={image1} alt="BuildWorX" className="w-full h-full object-cover" />
       <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-0 md:bg-opacity-0 text-white">
         <div className="w-full lg:ml-9 md:ml-9 mx-auto text-start py-20 px-10">
-          <h1 className="text-6xl mb-4">
+          <h1 className="text-5xl mb-4">
             Build<b className="text-yellow-300 font-light">WorX</b>
           </h1>
-          <p className="mb-4 w-[40%]">Turning Visions into Reality, constructing excellence</p>
-          <ul className="mb-4">
+          <p className="mb-4 w-[40%] text-lg">Turning Visions into Reality, constructing excellence</p>
+          <ul className="mb-4 text-lg">
             <li>100+ Executed Projects</li>
             <li>200+ Audit Checks</li>
             <li>100% Customer Satisfaction</li>

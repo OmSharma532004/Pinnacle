@@ -31,6 +31,7 @@ function App() {
   });
   const [errors, setErrors] = useState({});
   const apiUrl = import.meta.env.VITE_API_URL;
+  let leaveEventListenerAdded = false;
 
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
@@ -108,13 +109,19 @@ function App() {
   const handleMouseLeave = (e) => {
     if (e.clientY <= 0) {
       setLeaveDialogIsOpen(true);
+      document.removeEventListener('mouseleave', handleMouseLeave);
     }
   };
 
   useEffect(() => {
-    document.addEventListener('mouseleave', handleMouseLeave);
+    if (!leaveEventListenerAdded) {
+      document.addEventListener('mouseleave', handleMouseLeave);
+      leaveEventListenerAdded = true;
+    }
+    
     return () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
+      leaveEventListenerAdded = false;
     };
   }, []);
 
@@ -129,7 +136,7 @@ function App() {
       <div className='flex -mb-[120px] flex-col items-center justify-center'>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Home  />} />
+          <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/estimate' element={<NewEstimate />} />
           <Route path='/signup' element={<Signup />} />
@@ -146,7 +153,9 @@ function App() {
           </div>} />
         </Routes>
         <button
-          onClick={openModal}
+          onClick={() => {
+            window.location.href = "/demo"
+          }}
           className="bg-yellow-400 hover:bg-purple-500 hover:text-white text-black py-4 md:py-5 md:w-[100px] w-[80px] md:px-5 fixed rounded top-1/2 right-0 transform -translate-y-1/2 z-10"
           style={{ backdropFilter: 'blur(10px)' }}
         >
@@ -159,17 +168,15 @@ function App() {
           className="modal md:w-[40%] w-[80%] flex flex-col items-center justify-center mx-auto p-8 bg-white rounded shadow-2x"
           overlayClassName="overlay"
         >
-          {
-            Object.keys(errors).length > 0 && (
-              <div className="text-red-700 px-4 py-3 rounded relative" role="alert">
-                <ul>
-                  {Object.values(errors).map((error, index) => (
-                    <li key={index}>{error}</li>
-                  ))}
-                </ul>
-              </div>
-            )
-          }
+          {Object.keys(errors).length > 0 && (
+            <div className="text-red-700 px-4 py-3 rounded relative" role="alert">
+              <ul>
+                {Object.values(errors).map((error, index) => (
+                  <li key={index}>{error}</li>
+                ))}
+              </ul>
+            </div>
+          )}
           <h2 className="text-2xl text-center mb-4">Talk to Our Expert</h2>
           <form onSubmit={handleSubmit} className="flex items-center md:w-[90%] justify-center flex-col">
             <label className="mb-2">Name</label>
@@ -181,7 +188,7 @@ function App() {
               className="mb-4 p-2 w-[70%] border-black border-2 rounded"
               required
             />
-             <label className="mb-2">Phone</label>
+            <label className="mb-2">Phone</label>
             <input
               type="tel"
               name="phone"
@@ -199,7 +206,6 @@ function App() {
               className="mb-4 w-[70%] border-black border-2 p-2 rounded"
               required
             />
-           
             <label className="mb-2">City</label>
             <input
               type="text"
@@ -229,12 +235,10 @@ function App() {
           <h2 className="text-2xl text-center mb-4">Why leaving so soon?</h2>
           <p className="text-center mb-4">Explore our offers before you go!</p>
           <button
-            onClick={()=>{
+            onClick={() => {
               closeLeaveDialog();
               openModal();
-            
             }}
-
             className="bg-purple-900 rounded-xl w-[50%] text-white font-bold py-2 px-4"
           >
             Talk To Our Expert

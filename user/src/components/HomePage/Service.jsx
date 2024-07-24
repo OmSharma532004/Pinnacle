@@ -104,12 +104,12 @@ const ServiceFeatures = () => {
           <div className="flex flex-col md:flex-row justify-center items-center mb-8">
             <div className="w-full md:w-1/3 flex flex-col items-center">
               {/* <img src={steps[currentStepIndex].image} alt={`Illustration for ${steps[currentStepIndex].title}`} className="w-4/5 mb-4 object-contain" /> */}
-              <div className="bg-white p-5 rounded-xl border-2 border-purple-900 flex flex-col items-center text-center">
-                <h3 className="text-xl text-purple-900 font-semibold">{steps[currentStepIndex].title}</h3>
-                <p className="text-sm text-purple-900">{steps[currentStepIndex].description}</p>
+              <div className="bg-white p-5 font-light rounded-xl border-2 border-purple-900 flex flex-col items-center text-center">
+                <h3 className="text-2xl text-purple-900 ">{steps[currentStepIndex].title}</h3>
+                <p className="text-xl text-purple-900">{steps[currentStepIndex].description}</p>
                 {
                   steps[currentStepIndex].code&&
-                  <div className="mt-4 bg-purple-900 p-4 text-white rounded-lg">
+                  <div className="mt-4 bg-purple-900 p-4 text-xl text-white rounded-lg">
                     {steps[currentStepIndex].code}
                   </div>
                 }
@@ -129,10 +129,10 @@ const ServiceFeatures = () => {
           <h2 className="text-3xl text-center text-black mt-12 mb-8">Why Choose BuildWorX</h2>
           <div className="flex items-center justify-center flex-wrap gap-4">
             {features.map((feature, index) => (
-              <div key={index} className="p-4 md:p-2 w-[200px] h-[250px] lg:p-4 border bg-white transition-all duration-200 hover:scale-105 border-purple-950 rounded-lg shadow-lg mb-4 md:mb-2 lg:mb-4">
+              <div key={index} className="p-4 md:p-2 font-light w-[200px] h-[300px] lg:p-4 border bg-white transition-all duration-200 hover:scale-105 border-purple-950 rounded-lg shadow-lg mb-4 md:mb-2 lg:mb-4">
                 <div className="flex justify-center mb-4">{feature.icon}</div>
-                <h3 className="mb-2 text-center text-lg">{feature.title}</h3>
-                <p className="text-center">{feature.description}</p>
+                <h3 className="mb-2 text-center text-2xl">{feature.title}</h3>
+                <p className="text-center text-xl">{feature.description}</p>
               </div>
             ))}
           </div>

@@ -3,7 +3,7 @@ import whatsappLogo from './whatsapp-logo.svg'; // Add your WhatsApp logo here
 
 const WhatsAppButton = () => {
   const handleWhatsAppLogin = () => {
-    const phoneNumber = "8448830213";
+    const phoneNumber = "9958827520";
     const message = "Hello, I would like to get in touch with you.";
     const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
     window.location.href = url;
