@@ -2,7 +2,7 @@ import React from 'react';
 
 const PrivacyPolicy = () => {
   return (
-    <div className="container mx-auto mt-[100px] px-4 py-8">
+    <div className="container mx-auto  px-4 py-8">
       <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
       <p>Last Updated On :</p>
       <p>BuildWorX Private Limited ("we," "us," "our") operates https://buildworx.co.in/ (the “Site”) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website including any other media form, media channel, mobile website, or connected thereto (collectively, the “Site”). Your information helps us understand and serve you better. No information regarding personal details of its users and members is rented or sold to any third parties whatsoever. Please read this privacy policy carefully. If you disagree with the terms outlined in this privacy policy, we advise you to refrain from using the site.</p>

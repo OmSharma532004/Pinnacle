@@ -159,6 +159,7 @@ function App() {
       <CookieConsent onConsent={handleConsent} />
       <div className='flex -mb-[120px] flex-col items-center justify-center'>
         <Navbar />
+        <div className=' mt-[90px]'></div>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
             <Route path='/' element={<Home />} />

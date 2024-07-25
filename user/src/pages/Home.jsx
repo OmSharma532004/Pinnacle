@@ -27,7 +27,7 @@ const Home = () => {
     };
 
     return (
-        <div className="flex flex-col overflow-hidden mt-[92px] w-full items-center justify-center">
+        <div className="flex flex-col overflow-hidden w-full items-center justify-center">
             <div id="hero-section" className="w-full" ref={(el) => sectionsRef.current[0] = el}>
                 <HeroSection />
             </div>

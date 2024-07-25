@@ -2,7 +2,7 @@ import React from 'react';
 
 const Sitemap = () => {
   return (
-    <div className="container mx-auto mt-[100px] px-4 py-8">
+    <div className="container mx-auto  px-4 py-8">
       <h1 className="text-3xl font-bold mb-4">Website Sitemap</h1>
       <ul className="list-disc list-inside space-y-4">
         <li>

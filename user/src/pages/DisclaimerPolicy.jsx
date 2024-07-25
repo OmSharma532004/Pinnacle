@@ -2,7 +2,7 @@ import React from 'react';
 
 const DisclaimerPolicy = () => {
   return (
-    <div className="container mx-auto mt-[100px] px-4 py-8">
+    <div className="container mx-auto  px-4 py-8">
       <h1 className="text-3xl font-bold mb-4">Disclaimer Policy</h1>
       <p>This Disclaimer Policy (the “Policy”) applies to BuildWorx, headquartered in New Delhi, India and outlines the terms and conditions that govern your use of our Site. By accessing or using the Site, you agree to comply with and be bound by this Policy. If you do not agree with this Policy, please do not use the Site.</p>
       <p className="mt-4">This disclaimer policy is designed to provide clarity on the terms of use for our website and to protect BuildWorx from potential liabilities. We encourage you to read it carefully and contact us if you have any questions.</p>
