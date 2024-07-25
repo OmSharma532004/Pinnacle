@@ -36,7 +36,7 @@ const Navbar = () => {
             <nav className="bg-purple-900 z-10 fixed top-0 text-white border-b-4 border-yellow-500 text-xl w-screen p-4">
                 <div className="container mx-auto flex items-center justify-between">
                     <Link to={"/"} className="hover:text-yellow-400">
-                        <div><img src={logo} width={200} /></div>
+                        <div><img src={logo} alt='logo' width={200} /></div>
                     </Link>
                     <button className="md:hidden text-2xl" onClick={toggleMenu}>
                         {isOpen ? <FaTimes /> : <FaBars />}
@@ -61,7 +61,7 @@ const Navbar = () => {
                                         </li>
                                         <li onClick={() => scrollToSection('service-steps')} className="cursor-pointer hover:text-yellow-400 text-lg">Services</li>
                                         <li onClick={()=>{
-                                            window.location.href = '/dashboard';
+                                            window.location.href = '/estimate';
                                         }} className='cursor-pointer hover:text-yellow-400 text-lg'>
                                            Estimator
                                         </li>

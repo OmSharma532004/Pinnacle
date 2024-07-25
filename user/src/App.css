@@ -66,16 +66,6 @@
 }
 
 
-.section {
-  opacity: 0;
-  transform: translateY(100px);
-  transition: all 1s ease-out;
-}
-
-.section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 @keyframes ticker {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-100%); }

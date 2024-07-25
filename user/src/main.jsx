@@ -7,6 +7,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import rootReducer from './reducer/index'
 import { Provider } from 'react-redux'
 import { Toaster } from "react-hot-toast";
+import { HelmetProvider } from 'react-helmet-async'
 
 
 const store= configureStore({
@@ -17,7 +18,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <BrowserRouter>
   <React.StrictMode>
+    <HelmetProvider>
     <App />
+    </HelmetProvider>
+   
     <Toaster/>
   </React.StrictMode>,
   </BrowserRouter>

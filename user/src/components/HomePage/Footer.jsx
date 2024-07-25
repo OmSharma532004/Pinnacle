@@ -245,10 +245,10 @@ const Footer = () => {
             <ul>
               {/* <li className="mb-2">Copyright BuildWorX 2024, all rights reserved</li> */}
               <li className="mb-2">
-  <a href="../../../public/Policy.pdf" target="_blank" className="hover:text-purple-600">Privacy Policy</a>
+  <a href="/privacy" target="_blank" className="hover:text-purple-600">Privacy Policy</a>
 </li>
 <li className="mb-2">
-  <a href="../../../public/disclaimer5.pdf" target="_blank" className="hover:text-purple-600">Disclaimer Policy</a>
+  <a href="/disclaimer" target="_blank" className="hover:text-purple-600">Disclaimer Policy</a>
 </li>
 {/* <li className="mb-2">
   <a href="" target="_blank" className="hover:text-purple-600">Cancellation & Refunds</a>
@@ -261,7 +261,7 @@ const Footer = () => {
 </li>
 
 <li className="mb-2">
-  <a href="../../../public/sitemap.pdf" target="_blank" className="hover:text-purple-600">Sitemap</a>
+  <a href="/sitemap" target="_blank" className="hover:text-purple-600">Sitemap</a>
 </li>
             </ul>
           </div>
@@ -274,7 +274,7 @@ const Footer = () => {
           {/* //disclaimer */}
           <div className="w-full flex flex-col items-center justify-center bg-purple-950 p-8 text-white">
            
-            <h1 className="text-2xl font-bold text-yellow-300 mb-4">Disclaimer</h1>
+            <h3 className="text-2xl font-bold text-yellow-300 mb-4">Disclaimer</h3>
             <p className=' mb-4'>Copyright BuildWorX 2024, all rights reserved</p>
             <p className="text-center">BuildWorX endeavors to ensure that the information and data in this section is correct and complete, but does not accept liability for any error made or omission from this section. BuildWorX shall not be liable for any claims or losses of any nature, arising directly or indirectly from use of the information or data on this section or unauthorized access to this section or otherwise howsoever arising, except to the extent required by law.
              

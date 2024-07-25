@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import homeImage from '../images/home.png';
 import top from '../images/Top.png';
 import design from '../images/design.png';
@@ -19,60 +19,10 @@ import { FaArrowAltCircleUp } from "react-icons/fa";
 
 const Home = () => {
     const sectionsRef = useRef([]);
-    const observedElements = useRef(new Set());
     const [showBackToTop, setShowBackToTop] = useState(false);
-    const [errors,setErrors] = useState({});
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        if (!observedElements.current.has(entry.target)) {
-                            entry.target.classList.add('visible');
-                            observedElements.current.add(entry.target);
-                        }
-                    }
-
-                    // Check visibility of the resources section
-                    const resourcesEntry = sectionsRef.current[3];
-                    if (resourcesEntry) {
-                        if (entry.target === resourcesEntry) {
-                            if (entry.isIntersecting) {
-                                setShowBackToTop(true);
-                            } 
-                        }
-                    }
-                    const ServiceStepsEntry = sectionsRef.current[1];
-                    if (ServiceStepsEntry) {
-                        if (entry.target === ServiceStepsEntry) {
-                            if (entry.isIntersecting) {
-                                setShowBackToTop(false);
-                            } 
-                        }
-                    }
-                });
-            },
-            { threshold: 0.1 }
-        );
-
-        // Ensure sectionsRef is populated with valid DOM elements
-        const sections = sectionsRef.current.filter(section => section); // Filter out undefined/null elements
-
-        sections.forEach((section) => {
-            observer.observe(section);
-        });
-
-        return () => {
-            sections.forEach((section) => {
-                observer.unobserve(section);
-            });
-        };
-    }, []);
 
     const scrollToTop = () => {
         sectionsRef.current[0].scrollIntoView({ behavior: 'smooth' });
-       
         window.scrollBy(0, -10000);
     };
 
@@ -94,23 +44,22 @@ const Home = () => {
                 <ServiceHighlights />
             </div>
             <section className="pb-10 font-light p-5 w-screen">
-        <h2 className="text-5xl text-center font-light text-black mb-12">Success Stories</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 container mx-auto">
-          <div className="bg-white p-8 rounded-lg custom-card transform transition duration-300 hover:scale-105">
-            <h3 className="text-xl  mb-4 text-purple-800">Ranveer and Ria's Dream Home</h3>
-            <p className="text-gray-700">Ranveer and Ria, a happy old couple, got their dream house constructed by BuildWorX. They wanted a cozy place to spend their golden years with their grandchildren. BuildWorX delivered a perfect home where they now enjoy their retirement, surrounded by the laughter of their grandchildren.</p>
-          </div>
-          <div className="bg-white p-8 rounded-lg custom-card transform transition duration-300 hover:scale-105">
-            <h3 className="text-xl mb-4 text-purple-800">Yash and Reema's Urban Retreat</h3>
-            <p className="text-gray-700">Yash and Reema, a young couple in the fast-paced city, had no time to oversee the construction of their new home. They entrusted the project to BuildWorX, who managed everything from start to finish. Now, they have a beautiful urban retreat where they can unwind after their busy days.</p>
-          </div>
-          <div className="bg-white p-8 rounded-lg custom-card transform transition duration-300 hover:scale-105">
-            <h3 className="text-xl mb-4 text-purple-800">Raj's Holiday Home</h3>
-            <p className="text-gray-700">Raj, an NRI residing in the US, dreamed of having a holiday home in Delhi. He outsourced the entire turnkey project to BuildWorX. From planning to execution, BuildWorX handled it all, and now Raj has a perfect getaway spot in India where he can relax during his visits.</p>
-          </div>
-        </div>
-      </section>
-            
+                <h2 className="text-5xl text-center font-light text-black mb-12">Success Stories</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 container mx-auto">
+                    <div className="bg-white p-8 rounded-lg custom-card">
+                        <h3 className="text-xl mb-4 text-purple-800">Ranveer and Ria's Dream Home</h3>
+                        <p className="text-gray-700">Ranveer and Ria, a happy old couple, got their dream house constructed by BuildWorX. They wanted a cozy place to spend their golden years with their grandchildren. BuildWorX delivered a perfect home where they now enjoy their retirement, surrounded by the laughter of their grandchildren.</p>
+                    </div>
+                    <div className="bg-white p-8 rounded-lg custom-card">
+                        <h3 className="text-xl mb-4 text-purple-800">Yash and Reema's Urban Retreat</h3>
+                        <p className="text-gray-700">Yash and Reema, a young couple in the fast-paced city, had no time to oversee the construction of their new home. They entrusted the project to BuildWorX, who managed everything from start to finish. Now, they have a beautiful urban retreat where they can unwind after their busy days.</p>
+                    </div>
+                    <div className="bg-white p-8 rounded-lg custom-card">
+                        <h3 className="text-xl mb-4 text-purple-800">Raj's Holiday Home</h3>
+                        <p className="text-gray-700">Raj, an NRI residing in the US, dreamed of having a holiday home in Delhi. He outsourced the entire turnkey project to BuildWorX. From planning to execution, BuildWorX handled it all, and now Raj has a perfect getaway spot in India where he can relax during his visits.</p>
+                    </div>
+                </div>
+            </section>
             <div id="footer" className="w-full" ref={(el) => sectionsRef.current[5] = el}>
                 <Footer />
             </div>
@@ -122,8 +71,7 @@ const Home = () => {
                     onClick={scrollToTop}
                     className="fixed bottom-44 right-5 bg-purple-900 text-white p-2 rounded"
                 >
-                    <FaArrowAltCircleUp style={{fontSize:"2rem"}} />
-
+                    <FaArrowAltCircleUp style={{ fontSize: "2rem" }} />
                 </button>
             )}
         </div>

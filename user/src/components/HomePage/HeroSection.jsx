@@ -1,4 +1,6 @@
 import React from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import image1 from './image.png';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
@@ -10,19 +12,23 @@ Modal.setAppElement('#root');
 const HeroSection = () => {
   const offers = [
     "Get your free consultation today",
-    " Contact our team for preferred pricing",
+    "Contact our team for preferred pricing",
     "Early bird offers for July 2024 - get in touch with our team!",
-    " Supervision and 200+ audit checks for structural projects - get in touch with our team!",
+    "Supervision and 200+ audit checks for structural projects - get in touch with our team!",
     "Get your free consultation today",
-    " Contact our team for preferred pricing",
+    "Contact our team for preferred pricing",
     "Early bird offers for July 2024 - get in touch with our team!",
-    " Supervision and 200+ audit checks for structural projects - get in touch with our team!",
-    
+    "Supervision and 200+ audit checks for structural projects - get in touch with our team!",
   ];
 
   return (
     <div className="relative w-full h-[500px]">
-      <img src={image1} alt="BuildWorX" className="w-full h-full object-cover" />
+      <LazyLoadImage
+        src={image1}
+        alt="BuildWorX"
+        effect="blur"
+        className="w-full h-full object-cover"
+      />
       <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-0 md:bg-opacity-0 text-white">
         <div className="w-full lg:ml-9 md:ml-9 mx-auto text-start py-20 px-10">
           <h1 className="text-5xl mb-4">

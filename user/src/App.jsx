@@ -1,25 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { gapi } from 'gapi-script';
 import Modal from 'react-modal';
 import toast from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import Login from './pages/login';
-import Signup from './pages/signin';
-import EnterOtp from './pages/enterOtp';
-import Estimate2 from './pages/Estimate2';
-import UserProfile from './pages/userProfile';
-import UpdatePassword from './pages/updatePassword';
-import ForgotPassword from './pages/enterEmail';
-import BookDemoForm from './pages/Demo';
-import SuperVisionForm from './pages/superVision';
+import MetaTags from './components/MetaTag';
+import CookieConsent from './components/CookieConsent/CookieConsent';
 import './App.css';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import NewEstimate from './pages/Estimator/NewEstimate';
+
+const Login = lazy(() => import('./pages/login'));
+const Signup = lazy(() => import('./pages/signin'));
+const EnterOtp = lazy(() => import('./pages/enterOtp'));
+const NewEstimate = lazy(() => import('./pages/Estimator/NewEstimate'));
+const UserProfile = lazy(() => import('./pages/userProfile'));
+const UpdatePassword = lazy(() => import('./pages/updatePassword'));
+const ForgotPassword = lazy(() => import('./pages/enterEmail'));
+const BookDemoForm = lazy(() => import('./pages/Demo'));
+const SuperVisionForm = lazy(() => import('./pages/superVision'));
+const DisclaimerPolicy = lazy(() => import('./pages/DisclaimerPolicy'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const Sitemap = lazy(() => import('./pages/Sitemap'));
 
 function App() {
+  const [cookieConsent, setCookieConsent] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [leaveDialogIsOpen, setLeaveDialogIsOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -32,6 +36,24 @@ function App() {
   const [errors, setErrors] = useState({});
   const apiUrl = import.meta.env.VITE_API_URL;
   let leaveEventListenerAdded = false;
+
+  const handleConsent = (consentType) => {
+    setCookieConsent(consentType);
+    if (consentType === 'all') {
+      // Load Google Analytics script
+      (function() {
+        var ga = document.createElement('script');
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-1PB9CQV093';
+        document.head.appendChild(ga);
+        ga.onload = function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'YOUR_TRACKING_ID');
+        };
+      })();
+    }
+  };
 
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
@@ -133,25 +155,32 @@ function App() {
 
   return (
     <div>
+      <MetaTags/>
+      <CookieConsent onConsent={handleConsent} />
       <div className='flex -mb-[120px] flex-col items-center justify-center'>
         <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/estimate' element={<NewEstimate />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/otp' element={<EnterOtp />} />
-          <Route path='/dashboard' element={<Home />} />
-          <Route path='/profile' element={<UserProfile />} />
-          <Route path='/update-password/:id' element={<UpdatePassword />} />
-          <Route path='/reset-password' element={<ForgotPassword />} />
-          <Route path='/demo' element={<BookDemoForm />} />
-          <Route path='/supervision' element={<SuperVisionForm />} />
-          <Route path='*' element={<div className='flex flex-col items-center bg-gray-700 text-white justify-center h-screen w-screen'>
-            <h1 className='text-3xl'>404</h1>
-            <h2 className='text-4xl'>Page not found</h2>
-          </div>} />
-        </Routes>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/estimate' element={<NewEstimate />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/otp' element={<EnterOtp />} />
+            <Route path='/dashboard' element={<Home />} />
+            <Route path='/profile' element={<UserProfile />} />
+            <Route path='/update-password/:id' element={<UpdatePassword />} />
+            <Route path='/reset-password' element={<ForgotPassword />} />
+            <Route path='/demo' element={<BookDemoForm />} />
+            <Route path='/supervision' element={<SuperVisionForm />} />
+            <Route path='/disclaimer' element={<DisclaimerPolicy />} />
+            <Route path='/privacy' element={<PrivacyPolicy/>} />
+            <Route path='/sitemap' element={<Sitemap />} />
+            <Route path='*' element={<div className='flex flex-col items-center bg-gray-700 text-white justify-center h-screen w-screen'>
+              <h1 className='text-3xl'>404</h1>
+              <h2 className='text-4xl'>Page not found</h2>
+            </div>} />
+          </Routes>
+        </Suspense>
         <button
           onClick={() => {
             window.location.href = "/demo"
