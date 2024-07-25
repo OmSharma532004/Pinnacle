@@ -1,7 +1,7 @@
 import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import image1 from './image.png';
+import image1 from './image.webp';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import Ticker from './Ticker'; // Import the custom Ticker component
@@ -27,7 +27,7 @@ const HeroSection = () => {
         src={image1}
         alt="BuildWorX"
         effect="blur"
-        className="w-full h-full object-cover"
+        className="w-[1440px] h-[500px] object-cover"
       />
       <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-0 md:bg-opacity-0 text-white">
         <div className="w-full lg:ml-9 md:ml-9 mx-auto text-start py-20 px-10">
