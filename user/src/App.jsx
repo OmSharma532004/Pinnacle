@@ -8,6 +8,9 @@ import Home from './pages/Home';
 import MetaTags from './components/MetaTag';
 import CookieConsent from './components/CookieConsent/CookieConsent';
 import './App.css';
+import ResidentialPage from './pages/Residential';
+import CommercialPage from './pages/Commercial';
+import SupervisionPage from './pages/SupervisionPage';
 
 const Login = lazy(() => import('./pages/login'));
 const Signup = lazy(() => import('./pages/signin'));
@@ -176,6 +179,9 @@ function App() {
             <Route path='/disclaimer' element={<DisclaimerPolicy />} />
             <Route path='/privacy' element={<PrivacyPolicy/>} />
             <Route path='/sitemap' element={<Sitemap />} />
+            <Route path='/residential' element={<ResidentialPage/>} />
+            <Route path='/commercial' element={<CommercialPage/>} />
+            <Route path='/supervisionPage' element={<SupervisionPage/>} />
             <Route path='*' element={<div className='flex flex-col items-center bg-gray-700 text-white justify-center h-screen w-screen'>
               <h1 className='text-3xl'>404</h1>
               <h2 className='text-4xl'>Page not found</h2>

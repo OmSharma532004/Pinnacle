@@ -233,10 +233,25 @@ const Footer = () => {
         <div className="mt-8  md:w-[200px]">
             <h2 className="text-2xl font-bold text-yellow-300 mb-4">Our Services</h2>
             <ul>
-            <li  className="cursor-pointer mb-2 hover:text-purple-600">Residential</li>   
-            <li  className="cursor-pointer mb-2 hover:text-purple-600">Commercial</li>
-            <li  className="cursor-pointer mb-2 hover:text-purple-600">Enterprise & PSU</li>
-            <li  className="cursor-pointer mb-2 hover:text-purple-600">Supervision</li>
+            <li
+            onClick={()=>{
+              window.location.href = '/residential';
+            }}
+            className="cursor-pointer mb-2 hover:text-purple-600">Residential</li>   
+            <li 
+             onClick={()=>{
+              window.location.href = '/commercial';
+            }}
+            className="cursor-pointer mb-2 hover:text-purple-600">Commercial</li>
+            {/* <li 
+             onClick={()=>{
+              window.location.href = '/residential';
+            }} className="cursor-pointer mb-2 hover:text-purple-600">Enterprise & PSU</li> */}
+            <li 
+             onClick={()=>{
+              window.location.href = '/supervisionPage';
+            }}
+            className="cursor-pointer mb-2 hover:text-purple-600">Supervision</li>
                 {/* <li className="mb-2"><a href="/supervision" className="hover:text-purple-600">Consulting</a></li> */}
             </ul>
           </div>
