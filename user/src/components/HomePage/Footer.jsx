@@ -206,7 +206,9 @@ const Footer = () => {
           <li  className="cursor-pointer mb-2 hover:text-purple-600">Gurugram</li>                          
           <li  className="cursor-pointer mb-2 hover:text-purple-600">Ghaziabad</li>       
               <li onClick={() => scrollToSection('resources')} className="cursor-pointer mb-2 hover:text-purple-600">Resources</li>
-              <li onClick={() => scrollToSection('resources')} className="cursor-pointer mb-2 hover:text-purple-600">Blogs</li>
+              <li onClick={() => 
+              window.location.href = '/blogs'
+            } className="cursor-pointer mb-2 hover:text-purple-600">Blogs</li>
               <li onClick={()=>{
                                             window.location.href = '/dashboard';
                                         }} className='cursor-pointer hover:text-purple-600 mb-2 text-lg'>
@@ -243,10 +245,10 @@ const Footer = () => {
               window.location.href = '/commercial';
             }}
             className="cursor-pointer mb-2 hover:text-purple-600">Commercial</li>
-            {/* <li 
+            <li 
              onClick={()=>{
               window.location.href = '/residential';
-            }} className="cursor-pointer mb-2 hover:text-purple-600">Enterprise & PSU</li> */}
+            }} className="cursor-pointer mb-2 hover:text-purple-600">Enterprise & PSU</li>
             <li 
              onClick={()=>{
               window.location.href = '/supervisionPage';

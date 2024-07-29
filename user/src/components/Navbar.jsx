@@ -65,7 +65,9 @@ const Navbar = () => {
                                         }} className='cursor-pointer hover:text-yellow-400 text-lg'>
                                            Estimator
                                         </li>
-                                        <li onClick={() => scrollToSection('blogs')} className="cursor-pointer text-lg hover:text-yellow-400">Blog</li>
+                                        <li onClick={() =>
+                                        window.location.href = '/blogs'
+                                        } className="cursor-pointer text-lg hover:text-yellow-400">Blog</li>
                                         <li onClick={() => scrollToSection('resources')} className="cursor-pointer text-lg hover:text-yellow-400">Resources</li>
                                         <li onClick={() => scrollToSection('footer')} className="cursor-pointer text-lg hover:text-yellow-400">Contact Us</li>
                                         <li onClick={() => scrollToSection('section1')} className="cursor-pointer hover:text-yellow-400 text-lg">About Us</li>
@@ -93,7 +95,7 @@ const Navbar = () => {
                                         }} className='cursor-pointer hover:text-yellow-400 text-lg'>
                                            Estimator
                                         </li>
-                                        <li onClick={() => scrollToSection('blogs')} className="cursor-pointer text-lg hover:text-yellow-400">Blog</li>
+                                        <li onClick={() =>  window.location.href = '/blogs'} className="cursor-pointer text-lg hover:text-yellow-400">Blog</li>
                                         <li onClick={() => scrollToSection('resources')} className="cursor-pointer text-lg hover:text-yellow-400">Resources</li>
                                         <li onClick={() => scrollToSection('footer')} className="cursor-pointer text-lg hover:text-yellow-400">Contact Us</li>
                                         <li onClick={() => scrollToSection('section1')} className="cursor-pointer hover:text-yellow-400 text-lg">About Us</li>
@@ -134,7 +136,12 @@ const Navbar = () => {
                             {location.pathname === "/" && (
                                 <>
                                     <li onClick={() => scrollToSection('service-steps')} className="cursor-pointer hover:text-yellow-400">Services</li>
-                                    <li onClick={() => scrollToSection('blogs')} className="cursor-pointer hover:text-yellow-400">Blogs</li>
+                                    <li onClick={()=>{
+                                            window.location.href = '/estimate';
+                                        }} className='cursor-pointer hover:text-yellow-400'>
+                                           Estimator
+                                        </li>
+                                    <li onClick={() =>  window.location.href = '/blogs'} className="cursor-pointer hover:text-yellow-400">Blogs</li>
                                     <li onClick={() => scrollToSection('resources')} className="cursor-pointer hover:text-yellow-400">Resources</li>
                                     <li onClick={() => scrollToSection('footer')} className="cursor-pointer hover:text-yellow-400">Contact Us</li>
                                     <li onClick={() => scrollToSection('section1')} className="cursor-pointer hover:text-yellow-400">About Us</li>

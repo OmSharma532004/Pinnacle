@@ -153,10 +153,10 @@ const SupervisionPage = () => {
             Our Supervision and Audit Services Include:
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className=" flex my-[40px] md:flex-row lg:flex-row flex-col items-start justify-center gap-8">
             <div className="flex flex-col items-center">
               <FaSearch className="text-6xl text-purple-800 mb-4" />
-              <h4 className="text-xl md:text-2xl">Regular Site Inspections</h4>
+              <h4 className="text-xl md:text-2xl">Regular Inspections</h4>
               <p className="mt-2 text-lg md:text-xl text-gray-600 text-center">
                 Frequent on-site visits to monitor ongoing work and ensure compliance with quality standards.
               </p>

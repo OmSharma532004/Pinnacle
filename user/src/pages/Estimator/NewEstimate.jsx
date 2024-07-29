@@ -179,9 +179,11 @@ const ConstructionCostCalculator = () => {
                                             )
                                         }
                                     </ul>
-                                    <p className="text-4xl font-light mb-4">
+                                    <p className="text-4xl font-light ">
                                         ₹{item.totalCost.toFixed(2)}
+
                                     </p>
+                                    <p className=' text-lg  ' >Estimated Cost</p>
                                     <div className="text-center">
                                         <a href="tel:+918448830213" className="px-6 py-2  bg-orange-500 text-white rounded inline-block">Call For Construction</a>
                                     </div>

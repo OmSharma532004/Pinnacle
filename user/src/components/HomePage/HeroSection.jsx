@@ -13,12 +13,15 @@ const HeroSection = () => {
   const offers = [
     "Get your free consultation today",
     "Contact our team for preferred pricing",
-    "Early bird offers for July 2024 - get in touch with our team!",
-    "Supervision and 200+ audit checks for structural projects - get in touch with our team!",
+    "For early bird offers, please get in touch with us",
+    
     "Get your free consultation today",
     "Contact our team for preferred pricing",
-    "Early bird offers for July 2024 - get in touch with our team!",
-    "Supervision and 200+ audit checks for structural projects - get in touch with our team!",
+    "For early bird offers, please get in touch with us",
+    "Get your free consultation today",
+    "Contact our team for preferred pricing",
+    "For early bird offers, please get in touch with us",
+  
   ];
 
   return (
