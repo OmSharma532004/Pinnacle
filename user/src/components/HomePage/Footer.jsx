@@ -274,7 +274,7 @@ const Footer = () => {
   <a href="" target="_blank" className="hover:text-purple-600">Affiliate Policy</a>
 </li>
 <li className="mb-2">
-  <a href="" target="_blank" className="hover:text-purple-600">FAQs</a>
+  <a href="/faq" target="_blank" className="hover:text-purple-600">FAQs</a>
 </li>
 
 <li className="mb-2">
