@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaClipboardCheck, FaHardHat, FaSearch, FaBullhorn, FaListAlt, FaTools, FaClock, FaFileAlt } from 'react-icons/fa';
+import { FaClipboardCheck, FaHardHat, FaSearch, FaBullhorn, FaListAlt, FaTools, FaClock, FaFileAlt, FaUser } from 'react-icons/fa';
 import {FaHandshake} from 'react-icons/fa';
 import Footer from '../components/HomePage/Footer';
+import { MdSupervisorAccount } from "react-icons/md";
+
 const whyBuildWorxSupervision = [
   {
     title: "Expert Oversight",
@@ -86,7 +88,7 @@ const SupervisionPage = () => {
           </div>
           <div>
             <div className="flex flex-col items-center">
-              <FaSearch className="text-6xl md:text-8xl text-purple-800" />
+              <FaUser  className="text-6xl md:text-9xl text-purple-800" />
             </div>
           </div>
         </div>

@@ -144,6 +144,11 @@ const ConstructionCostCalculator = () => {
             >
                 Estimate Cost
             </button>
+            <p className=' text-sm'>
+            *By submitting this form, I confirm that I have read and agreed to accept BuildWorX's <b className=' text-purple-700' onClick={()=>{
+                window.location.href = '/privacy'
+            }}>privacy policy</b>
+            </p>
 
             {errors.phoneNo && <p className="text-red-500 mb-4">{errors.phoneNo}</p>}
             {errors.location && <p className="text-red-500 mb-4">{errors.location}</p>}
