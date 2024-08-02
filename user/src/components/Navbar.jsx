@@ -8,6 +8,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedCity, setSelectedCity] = useState('');
     const auth = useSelector(state => state.auth);
+    const [isDrop,setDrop] = useState(false);   
     const token = auth.token;
     const location = useLocation();
 
@@ -44,7 +45,7 @@ const Navbar = () => {
                     <ul className="hidden md:flex  items-center justify-between w-[75%]">
                         <div className="flex flex-row items-center justify-between w-[100%]">
                             <div>
-                                {location.pathname === "/" && (
+                                {location.pathname === "/" ? (
                                     <div className='flex items-center justify-center flex-col md:flex-row md:gap-5'>
                                          <li className="relative ">
                                             <select
@@ -59,8 +60,17 @@ const Navbar = () => {
                                                 <option value="gurugram">Gurugram</option>
                                             </select>
                                         </li>
-                                        <li onClick={() => scrollToSection('service-steps')} className="cursor-pointer hover:text-yellow-400 text-lg">Services</li>
-                                        <li onClick={()=>{
+                                        <li className="relative group">
+          <a href="#" className="">Services</a>
+          <ul className="absolute left-1/2 transform -translate-x-1/2 top-7 hidden group-hover:flex flex-col bg-white text-lg text-gray-800 shadow-lg rounded-md w-56">
+            <li><a href="/residential" className="block px-4 py-2 hover:bg-purple-500 hover:text-white">Residential</a></li>
+            <li><a href="/commercial" className="block px-4 py-2 hover:bg-purple-500 hover:text-white">Commercial</a></li>
+            <li><a href="/residential" className="block px-4 py-2 hover:bg-purple-500 hover:text-white">Enterprise</a></li>
+            <li><a href="/supervisionPage" className="block px-4 py-2 hover:bg-purple-500 hover:text-white">Supervision</a></li>
+
+
+          </ul>
+        </li>   <li onClick={()=>{
                                             window.location.href = '/estimate';
                                         }} className='cursor-pointer hover:text-yellow-400 text-lg'>
                                            Estimator
@@ -73,6 +83,46 @@ const Navbar = () => {
                                         <li onClick={() => scrollToSection('section1')} className="cursor-pointer hover:text-yellow-400 text-lg">About Us</li>
                                        
                                     </div>
+                                ):(
+                                    <>
+                                     <div className='flex items-center justify-center flex-col md:flex-row md:gap-10'>
+                                         <li className="relative ">
+                                            <select
+                                                value={selectedCity}
+                                                onChange={handleCityChange}
+                                                className="cursor-pointer rounded-xl bg-white text-black h-9 text-lg flex items-center"
+                                            >
+                                                <option value="">Select City</option>
+                                                <option value="delhi">Delhi</option>
+                                                <option value="noida">Noida</option>
+                                                <option value="faridabad">Faridabad</option>
+                                                <option value="gurugram">Gurugram</option>
+                                            </select>
+                                        </li>
+                                        <li className="relative group">
+          <a href="#" className="">Services</a>
+          <ul className="absolute left-1/2 transform -translate-x-1/2 top-7 hidden group-hover:flex flex-col bg-white text-lg text-gray-800 shadow-lg rounded-md w-56">
+            <li><a href="/residential" className="block px-4 py-2 hover:bg-purple-500 hover:text-white">Residential</a></li>
+            <li><a href="/commercial" className="block px-4 py-2 hover:bg-purple-500 hover:text-white">Commercial</a></li>
+            <li><a href="/residential" className="block px-4 py-2 hover:bg-purple-500 hover:text-white">Enterprise</a></li>
+            <li><a href="/supervisionPage" className="block px-4 py-2 hover:bg-purple-500 hover:text-white">Supervision</a></li>
+
+
+          </ul>
+        </li>   <li onClick={()=>{
+                                            window.location.href = '/estimate';
+                                        }} className='cursor-pointer hover:text-yellow-400 text-lg'>
+                                           Estimator
+                                        </li>
+                                        <li onClick={() =>
+                                        window.location.href = '/blogs'
+                                        } className="cursor-pointer text-lg hover:text-yellow-400">Blog</li>
+                                        <li onClick={() => 
+                                        window.location.href = '/demo'
+                                        } className="cursor-pointer text-lg hover:text-yellow-400">Contact Us</li>
+                                        
+                                    </div>
+                                    </>
                                 )}
                                    {location.pathname === "/dashboard" && (
                                     <div className='flex items-center justify-center flex-col md:flex-row md:gap-5'>
@@ -89,7 +139,17 @@ const Navbar = () => {
                                                 <option value="gurugram">Gurugram</option>
                                             </select>
                                         </li>
-                                        <li onClick={() => scrollToSection('service-steps')} className="cursor-pointer hover:text-yellow-400 text-lg">Services</li>
+                                        <li className="relative group">
+          <a href="#" className="">Services</a>
+          <ul className="absolute left-1/2 transform -translate-x-1/2 top-7 hidden group-hover:flex flex-col bg-white text-lg text-gray-800 shadow-lg rounded-md w-56">
+            <li><a href="/residential" className="block px-4 py-2 hover:bg-purple-500 hover:text-white">Residential</a></li>
+            <li><a href="/commercial" className="block px-4 py-2 hover:bg-purple-500 hover:text-white">Commercial</a></li>
+            <li><a href="/residential" className="block px-4 py-2 hover:bg-purple-500 hover:text-white">Enterprise</a></li>
+            <li><a href="/supervisionPage" className="block px-4 py-2 hover:bg-purple-500 hover:text-white">Supervision</a></li>
+
+
+          </ul>
+        </li> 
                                         <li onClick={()=>{
                                             window.location.href = '/estimate';
                                         }} className='cursor-pointer hover:text-yellow-400 text-lg'>
@@ -133,9 +193,21 @@ const Navbar = () => {
                     <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={closeMenu}></div>
                     <div className="fixed top-0 right-0 text-xl flex flex-col items-center w-[40%] text-center h-full bg-purple-800 text-white p-4 z-50">
                         <ul className="flex flex-col gap-4">
-                            {location.pathname === "/" && (
+                            {location.pathname === "/" ? (
                                 <>
-                                    <li onClick={() => scrollToSection('service-steps')} className="cursor-pointer hover:text-yellow-400">Services</li>
+                                    <li onClick={() => {
+                                        setDrop(!isDrop);
+                                    }} className="cursor-pointer hover:text-yellow-400">Services</li>
+                                    {
+                                        isDrop && (
+                                            <div className="flex flex-col bg-white text-purple-900 p-4 gap-4">
+                                                <li onClick={() => window.location.href = '/residential'} className="cursor-pointer hover:text-yellow-400">Residential</li>
+                                                <li onClick={() => window.location.href = '/commercial'} className="cursor-pointer hover:text-yellow-400">Commercial</li>
+                                                <li onClick={() => window.location.href = '/residential'} className="cursor-pointer hover:text-yellow-400">Enterprise</li>
+                                                <li onClick={() => window.location.href = '/supervisionPage'} className="cursor-pointer hover:text-yellow-400">Supervision</li>
+                                            </div>
+                                        )
+                                    }
                                     <li onClick={()=>{
                                             window.location.href = '/estimate';
                                         }} className='cursor-pointer hover:text-yellow-400'>
@@ -159,6 +231,44 @@ const Navbar = () => {
                                         </select>
                                     </li>
                                 </>
+                            ):(
+                                <>
+               <li onClick={() => {
+                                        setDrop(!isDrop);
+                                    }} className="cursor-pointer hover:text-yellow-400">Services</li>
+                                    {
+                                        isDrop && (
+                                            <div className="flex bg-white text-purple-900 p-4 flex-col gap-4">
+                                                <li onClick={() => window.location.href = '/residential'} className="cursor-pointer hover:text-yellow-400">Residential</li>
+                                                <li onClick={() => window.location.href = '/commercial'} className="cursor-pointer hover:text-yellow-400">Commercial</li>
+                                                <li onClick={() => window.location.href = '/residential'} className="cursor-pointer hover:text-yellow-400">Enterprise</li>
+                                                <li onClick={() => window.location.href = '/supervisionPage'} className="cursor-pointer hover:text-yellow-400">Supervision</li>
+                                            </div>
+                                        )
+                                    }
+                                <li onClick={()=>{
+                                        window.location.href = '/estimate';
+                                    }} className='cursor-pointer hover:text-yellow-400'>
+                                       Estimator
+                                    </li>
+                                <li onClick={() =>  window.location.href = '/blogs'} className="cursor-pointer hover:text-yellow-400">Blogs</li>
+
+                                <li onClick={() => window.location.href = '/'} className="cursor-pointer hover:text-yellow-400">Contact Us</li>
+
+                                <li className="relative">
+                                    <select
+                                        value={selectedCity}
+                                        onChange={handleCityChange}
+                                        className="cursor-pointer rounded-xl bg-white text-black p-4 text-lg flex items-center"
+                                    >
+                                        <option value="">Select City</option>
+                                        <option value="delhi">Delhi</option>
+                                        <option value="noida">Noida</option>
+                                        <option value="faridabad">Faridabad</option>
+                                        <option value="gurugram">Gurugram</option>
+                                    </select>
+                                </li>
+                            </>
                             )}
                             {token == null ? (
                                 <>

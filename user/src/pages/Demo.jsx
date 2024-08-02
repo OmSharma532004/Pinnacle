@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import Ticker from '../components/HomePage/Ticker';
+import Footer from '../components/HomePage/Footer';
 
 function BookDemoForm() {
   const offers = [
@@ -78,8 +79,8 @@ function BookDemoForm() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center mt-[50px]">
-      <section className="bg-white mt-5 p-10 w-full rounded-lg mb-12">
+    <div className="flex flex-col items-center justify-center mt-5">
+      <section className="bg-white  p-10 w-full rounded-lg mb-12">
         <h2 className="text-3xl font-semibold text-purple-800 mb-8 text-center">Book a Free Consultation</h2>
         <form onSubmit={handleSubmit} className="flex-col flex items-center justify-around gap-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 w-full max-w-screen-lg">
@@ -129,7 +130,7 @@ function BookDemoForm() {
             <button type="submit" className="bg-purple-800 text-white p-2 px-4 rounded">Submit</button>
           </div>
         </form>
-        <div className='flex flex-col items-center justify-center w-full mt-[40px]'>
+        <div className='flex flex-col items-center justify-center w-full md:mt-[80px] mt-[40px]'>
           <p className="text-3xl text-purple-900">"Building your dreams with precision and quality."</p>
           <p className="text-3xl text-purple-900">"Your vision, our expertise."</p>
         </div>
@@ -137,7 +138,7 @@ function BookDemoForm() {
       <div className="py-6 text-xl opacity-0 md:opacity-100 lg:opacity-100 absolute bottom-0 w-full bg-purple-900 bg-opacity-90 text-white">
         <Ticker messages={offers} />
       </div>
-      <section className="pb-10 mt-[100px] p-5 w-screen">
+      <section className="pb-10 md:mt-[120px] lg:mt-[120px] p-5 w-screen">
         <h2 className="text-4xl text-center font-semibold text-black mb-12">Success Stories</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 container mx-auto">
           <div className="bg-white p-8 rounded-lg custom-card transform transition duration-300 hover:scale-105">
@@ -163,6 +164,7 @@ function BookDemoForm() {
         >
                Call Us +91 9958827520
         </button>
+        <Footer/>
     </div>
   );
 }
