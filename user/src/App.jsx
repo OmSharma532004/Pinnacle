@@ -48,13 +48,13 @@ function App() {
       // Load Google Analytics script
       (function() {
         var ga = document.createElement('script');
-        ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-1PB9CQV093';
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-LEF3BV4929';
         document.head.appendChild(ga);
         ga.onload = function() {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'YOUR_TRACKING_ID');
+          gtag('config', 'G-LEF3BV4929');
         };
       })();
     }
@@ -228,22 +228,22 @@ function App() {
               className="mb-4 p-2 w-[70%] border-black border-2 rounded"
               required
             />
-            <label className="mb-2">Phone</label>
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="mb-4 p-2 w-[70%] border-black border-2 rounded"
-              required
-            />
             <label className="mb-2">Email</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="mb-4 w-[70%] border-black border-2 p-2 rounded"
+              className="mb-4 p-2 w-[70%] border-black border-2 rounded"
+              required
+            />
+            <label className="mb-2">Phone</label>
+            <input
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="mb-4 p-2 w-[70%] border-black border-2 rounded"
               required
             />
             <label className="mb-2">City</label>
@@ -253,36 +253,36 @@ function App() {
               value={formData.city}
               onChange={handleChange}
               className="mb-4 p-2 w-[70%] border-black border-2 rounded"
-              required
             />
-            <div className="flex w-[50%] justify-end">
-              <button
-                type="submit"
-                className="bg-purple-900 rounded-xl w-[100%] mt-[20px] text-white font-bold py-2 px-4 mr-2"
-              >
-                Submit
-              </button>
-            </div>
+            <label className="mb-2">Comment</label>
+            <textarea
+              name="comment"
+              value={formData.comment}
+              onChange={handleChange}
+              className="mb-4 p-2 w-[70%] border-black border-2 rounded"
+            />
+            <button type="submit" className="bg-yellow-400 hover:bg-purple-500 hover:text-white text-black font-bold py-2 px-4 rounded">
+              Submit
+            </button>
           </form>
         </Modal>
         <Modal
           isOpen={leaveDialogIsOpen}
           onRequestClose={closeLeaveDialog}
-          contentLabel="Leave Page Dialog"
-          className="modal md:w-[40%] w-[80%] flex flex-col items-center justify-center mx-auto p-8 bg-white rounded shadow-2x"
+          contentLabel="Leave Modal"
+          className="modal w-[40%] flex flex-col items-center justify-center mx-auto p-8 bg-white rounded shadow-2x"
           overlayClassName="overlay"
         >
-          <h2 className="text-2xl text-center mb-4">Why leaving so soon?</h2>
-          <p className="text-center mb-4">Explore our offers before you go!</p>
-          <button
-            onClick={() => {
-              closeLeaveDialog();
-              openModal();
-            }}
-            className="bg-purple-900 rounded-xl w-[50%] text-white font-bold py-2 px-4"
-          >
-            Talk To Our Expert
-          </button>
+          <h2 className="text-2xl mb-4">Don't Leave Yet!</h2>
+          <p className="mb-4">Please fill in the form before leaving.</p>
+          <div className="flex justify-between">
+            <button onClick={closeLeaveDialog} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">
+              Stay
+            </button>
+            <button onClick={closeLeaveDialog} className="bg-yellow-400 hover:bg-purple-500 text-black font-bold py-2 px-4 rounded">
+              Leave
+            </button>
+          </div>
         </Modal>
       </div>
     </div>
