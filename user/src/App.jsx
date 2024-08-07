@@ -273,16 +273,17 @@ function App() {
           className="modal w-[40%] flex flex-col items-center justify-center mx-auto p-8 bg-white rounded shadow-2x"
           overlayClassName="overlay"
         >
-          <h2 className="text-2xl mb-4">Don't Leave Yet!</h2>
-          <p className="mb-4">Please fill in the form before leaving.</p>
-          <div className="flex justify-between">
-            <button onClick={closeLeaveDialog} className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2">
-              Stay
-            </button>
-            <button onClick={closeLeaveDialog} className="bg-yellow-400 hover:bg-purple-500 text-black font-bold py-2 px-4 rounded">
-              Leave
-            </button>
-          </div>
+          <h2 className="text-2xl mb-4">Why leaving so soon?</h2>
+          <p className="mb-4">Explore our offers before you go!</p>
+          <button
+            onClick={() => {
+              closeLeaveDialog();
+              openModal();
+            }}
+            className="bg-purple-900 rounded-xl w-[50%] text-white font-bold py-2 px-4"
+          >
+            Talk To Our Expert
+          </button>
         </Modal>
       </div>
     </div>
